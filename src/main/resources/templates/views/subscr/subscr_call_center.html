@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "static/inc/side.html"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_c_center.png" /> &nbsp;&nbsp; <b>고객센터</b>
+			</div>
+
+			<div class="fb_cc container_top_explain">
+				<span><b>1 : 1 문의하기</b></span>문의 사항을 남겨주시면 계정 메일로 답변 드리겠습니다.
+			</div>
+
+			<section class="call_center_ask_area"><textarea id="input_text"></textarea></section>
+
+			<div class="fb_cc container_bottom_btn">
+				<button type="button" id="send_btn" class="default w200 h40" disabled="disabled">작성완료</button>
+			</div>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+
+</body>
+</th:block>
+</html>
+
+<script>
+	// textarea 텍스트 입력 시 보내기 버튼 활성화
+	$(function() {
+		$("#input_text").on("keyup", function() {
+			let flag = true;
+			flag = $(this).val().length > 0 ? false : true;
+			$("#send_btn").attr("disabled", flag);
+		});
+	});
+</script>
