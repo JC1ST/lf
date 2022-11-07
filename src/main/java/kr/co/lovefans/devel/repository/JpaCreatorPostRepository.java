@@ -43,7 +43,7 @@ public class JpaCreatorPostRepository implements CreatorPostRepository{
 
     @Override
     public List<PostDto> findPostByCpMiSeq(Long slvmiseq) {
-
+//수정필요
         QCreatorPostDto post = QCreatorPostDto.creatorPostDto;
         QSubListDto sub = QSubListDto.subListDto;
 
