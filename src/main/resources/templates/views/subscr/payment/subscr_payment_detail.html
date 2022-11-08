@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "static/inc/side.html"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_payment.png" /> &nbsp;&nbsp; <b>결재</b>
+			</div>
+
+			<div class="fb_ss tab_area">
+				<a href="subscr_payment.html" th:href="@{/subs/payment(key=${session.session})}">귀하의 카드</a>
+				<a href="subscr_payment_detail.html" th:href="@{/subs/payment/detail(key=${session.session})}" class="selected">거래 내역</a>
+			</div>
+
+			<!-- 거래내역 -->
+			<article class="aritcle_border_container">
+				<section class="fb_sc payment_detail">
+					<img src="/img/icon_income.png" />
+					<div class="fb_bc">
+						<span>10,000 결재완료</span>
+						<h5>2022년 12월 25일</h5>
+					</div>
+				</section>
+			</article>
+			<br>
+
+			<!-- 거래내역 -->
+			<article class="aritcle_border_container">
+				<section class="fb_sc payment_detail">
+					<img src="/img/icon_income.png" />
+					<div class="fb_bc">
+						<span class="warning">결제실패</span>
+						<h5>2022년 12월 25일</h5>
+					</div>
+				</section>
+			</article>
+			<br>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+
+</body>
+</th:block>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<?php include "/inc/topper.html"; ?>
+
+	<article class="body_container">
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/logo_icon.png" /> &nbsp;&nbsp; <b>Regist</b>&nbsp;Creator
+			</div>
+			<div class="fb_cc container_top_explain">
+				<span><b>Step 1 :</b></span>크리에이터가 되기위한 기본 정보 입력 영역 입니다. 모든 항목을 빠짐없이 작성해 주세요.
+			</div>
+
+			<article class="aritcle_border_container">
+				<section class="fb_bc reg">
+					<div class="fb_sc w30"><img src="/img/icon_check.png" class="checker" /><b>Lovefans 페이지 이름</b></div>
+					<div class="w60"><input type="text" class="inpModule"></div>
+				</section>
+				<section class="fb_bc reg">
+					<div class="fb_sc w30"><img src="/img/icon_check.png" class="checker" /><b>Lovefans 페이지 URL</b></div>
+					<div class="fb_sc w60"><span>lovefans.co.kr/</span> &nbsp; <input type="text" class="inpModule"></div>
+				</section>
+				<section class="fb_bc reg">
+					<div class="fb_sc w30"><img src="/img/icon_check.png" class="checker" /><b>무엇을 창작하고 있나요?</b></div>
+					<div class="w60"><input type="text" class="inpModule"></div>
+				</section>
+			</article>
+
+			<br />
+
+			<article class="aritcle_border_container">
+				<section class="fb_bc reg">
+					<div class="fb_c_cs w30">
+						<div><img src="/img/icon_check.png" class="checker" /><b>프로필사진</b></div>
+						<p>가로 256px 세로 256px 크기의 사진을 권장합니다.</p>
+					</div>
+					<div class="w60">
+						<figure class="profile">
+							<div class="fb_c_cc">
+								<img src="/img/icon_photo.png" class="icon" />
+								<span>업로드</span>
+							</div>
+						</figure>
+						<input type="file" id="profile_pic" class="inpModule" />
+					</div>
+				</section>
+				<section class="fb_bc reg">
+					<div class="fb_c_cs w30">
+						<div><img src="/img/icon_check.png" class="checker" /><b>페이지 커버 사진</b></div>
+						<p>가로 1600px 세로 400px 이상의 사진을 권장합니다.</p>
+					</div>
+					<div class="w60">
+						<figure>
+							<div class="fb_c_cc">
+								<img src="/img/icon_photo.png" class="icon" />
+								<span>업로드</span>
+								<span>JPG, JPEG, PNG 또는 GIF 파일</span>
+							</div>
+						</figure>
+						<input type="file" id="page_cover_pic" class="inpModule" />
+					</div>
+				</section>
+			</article>
+
+			<br />
+
+			<article class="aritcle_border_container">
+				<section class="fb_c_ss reg">
+					<div>
+						<div><img src="/img/icon_check.png" class="checker" /><b>Lovefans 페이지 인사말</b></div>
+						 <p>방문자가 크리에이터 페이지에 들어올 때 가장 먼저 보게 되는 페이지 영역 입니다. 매력적인 소개를 작성해 구독자 가입을 유도하세요.</p>
+					</div><br>
+					<textarea class="inpModule"></textarea>
+				</section>
+			</article>
+
+			<div class="fb_cc container_bottom_btn">
+				<button type="button" class="default w200 h40" disabled onclick="location.href='regist_creator_step2.html';"
+						th:onclick="|location.href='@{/subs/regist/creator/step2}'|">다음단계</button>
+			</div>
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer.html"; ?>
+</body>
+</html>
+
+<script>
+	$(function() {
+		/*입력란의 내용 입력 확인*/
+		$(".inpModule").on("propertychange paste input", function() {
+			var val_result = $(this).val();
+			if(typeof val_result != "undefined" && val_result != null && val_result != "") {
+				$(this).parents(".reg").find(".checker").css("filter", "saturate(100%)");
+				check_val_all();
+			} 
+			else {
+				$(this).parents(".reg").find(".checker").css("filter", "saturate(0%) brightness(1.6)");
+				$(".container_bottom_btn > button").prop("disabled", true);
+			}
+		});
+
+		/*프로필사진, 페이지커버사진 업로드 클릭*/
+		$("figure").on("click", function() {
+			$(this).siblings("input[type=file]").trigger("click");
+		});
+		$("input[type=file]").on("change", function() {
+			var targetID = $(this).attr("id");
+			if(this.files && this.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var tag_result = "<img src='" + e.target.result + "' />"
+					$("#" + targetID).siblings("figure").empty();
+					$("#" + targetID).siblings("figure").append(tag_result);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+
+		function check_val_all() {
+			for(let i = 0; i < $(".inpModule").length; i++) {
+				var val_result = $(".inpModule").eq(i).val().trim();
+				if(val_result == "") { return false; }
+			}
+			$(".container_bottom_btn > button").prop("disabled", false);
+		}
+	});
+</script>

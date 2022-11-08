@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "static/inc/side.html"; ?>
+		
+		<section class="contents_container">
+			<br><br>
+			<div class="fb_cc container_top_title">
+				<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+			</div>
+
+			<div class="fb_cc container_top_explain">
+				<span><b>Creator Page Name</b></span>에 대한 구독회원 등록 결재하기
+			</div>
+
+			<div class="fb_cc mem_pay_area">결재모듈 붙이는 곳</div>
+
+			<div class="fb_cs men_pay_btm_text">lovefans는 크리에이터를 대신해 결제 금액을 환불하지 않습니다</div>
+
+			<div class="fb_cs container_bottom_btn">
+				<button type="button" class="w200 h35 default" onclick="location.href='mem_be.html';"
+						th:onclick="|location.href='@{/subs/mem/be(key=${session.session})}'|">등급보기</button>
+			</div>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+
+</body>
+</th:block>
+</html>

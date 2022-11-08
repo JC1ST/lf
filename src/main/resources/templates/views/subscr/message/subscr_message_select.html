@@ -17,7 +17,7 @@
 				<div class="message_select_explain">
 					대화 메시지를 보낼 크리에이터를 선택해 주세요
 					<button type="button" id="btn_check" class="w100 h30 defaultLight" onclick="location.href='subscr_message_view.html';"
-							th:onclick="|location.href='@{/subs/message/view}'|" disabled="disabled">확인</button>
+							th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|" disabled="disabled">확인</button>
 				</div>
 
 				<input type="text" class="sech2" placeholder="메시지 상대 검색" />
