@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<!-- <?php include "static/inc/side.html"; ?>-->
+
+		<section class="contents_container">
+			<div class="contents_box fb_cs">
+				<!-- 구독중인 크리에이터 목록 -->
+				<article class="creator_banner_area subscribe">
+					<div class="creator_banner_area_title fb_cc">구독중인 크리에이터</div>
+					<div class="creator_banner_group">
+						
+						<!-- 베너 -->
+						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page.html';"
+								 th:onclick="|location.href='@{/subs/creatorpage}'|" >
+							<div>
+								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+								<section>
+									<span class="fb_sc"><img src="/img/icon_channel.png" /></span>
+									<span class="fb_sc">
+										Nick Name
+									</span>
+									<span class="fb_sc">
+										Creator Page Name
+									</span>
+								</section>
+							</div>
+						</article>
+
+						<!-- 베너 -->
+						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page.html';"
+								 th:onclick="|location.href='@{/subs/creatorpage}'|" >
+							<div>
+								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+								<section>
+									<span class="fb_sc"><img src="/img/icon_channel.png" /></span>
+									<span class="fb_sc">Nick Name</span>
+									<span class="fb_sc">Creator Page Name</span>
+								</section>
+							</div>
+						</article>
+
+						<!-- 베너 -->
+						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page.html';"
+								 th:onclick="|location.href='@{/subs/creatorpage}'|" >
+							<div>
+								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+								<section>
+									<span class="fb_sc"><img src="/img/icon_channel.png" /></span>
+									<span class="fb_sc">Nick Name</span>
+									<span class="fb_sc">Creator Page Name</span>
+								</section>
+							</div>
+						</article>
+					</div>
+				</article>
+				
+				<!-- 포스트 영역 -->
+				<section class="post_area">
+					<br>
+					<article class="post">
+						<th:block th:each="model:${postList.iterator()}">
+							<figure><img src="/img/sample_post_img.jpg" /></figure>
+							<section class="post_slider_screen">
+								<div class="post_slider_body">
+									<img src="/img/mainPic_positive.jpg" />
+									<img src="/img/sample_creator1.jpg" />
+									<img src="/img/sample_post_img.jpg" />
+									<img src="/img/sample_bg2.jpg" />
+									<img src="/img/sample_post_img.jpg" />
+								</div>
+								<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+								<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+							</section>
+							<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+
+							<section class="linker" onclick="location.href='creator_page_detail.html';"
+									 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+								<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+								<p class="post_txt_area" th:text="${model.getCpContent()}">
+								</p>
+								<div class="post_read_more">더읽기</div>
+							</section>
+
+							<div class="post_tag_area">
+								<span>#TAG</span>
+								<span>#TAG</span>
+								<span>#TAG</span>
+							</div>
+							<div class="post_like_area fb_sc">
+								<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+							</div>
+						</th:block>
+					</article>
+					<!-- 포스트 -->
+<!--					<article class="post">-->
+<!--						<figure><img src="/img/sample_post_img.jpg" /></figure>-->
+<!--						<section class="post_slider_screen">-->
+<!--							<div class="post_slider_body">-->
+<!--								<img src="/img/mainPic_positive.jpg" />-->
+<!--								<img src="/img/sample_creator1.jpg" />-->
+<!--								<img src="/img/sample_post_img.jpg" />-->
+<!--								<img src="/img/sample_bg2.jpg" />-->
+<!--								<img src="/img/sample_post_img.jpg" />-->
+<!--							</div>-->
+<!--							<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+<!--							<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+<!--						</section>-->
+<!--						<div class="post_date_area">2022년 4월5일 오전 1:16</div>-->
+<!--						-->
+<!--						<section class="linker" onclkick="location.href='creator_page_detail.html';"-->
+<!--								 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">-->
+<!--							<p class="post_title_area">포스트 제목</p>-->
+<!--							<p class="post_txt_area">-->
+<!--								오늘은 CSS의 display   x라는 속성에 대해 알아보겠습니다.-->
+<!--								코딩을 나름 오래하신 분들조차 의외로 이 속성은 잘 모르고 안쓰시는데 그럴 법도 한 게 예전에는-->
+<!--							</p>-->
+<!--							<div class="post_read_more">더읽기</div>-->
+<!--						</section>-->
+<!--						-->
+<!--						<div class="post_tag_area">-->
+<!--							<span>#TAG</span>-->
+<!--							<span>#TAG</span>-->
+<!--							<span>#TAG</span>-->
+<!--						</div>-->
+<!--						<div class="post_like_area fb_sc">-->
+<!--							<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>-->
+<!--							<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>-->
+<!--							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--							<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>-->
+<!--						</div>-->
+<!--						&lt;!&ndash; 베너 &ndash;&gt;-->
+<!--						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page.html';"-->
+<!--								 th:onclick="|location.href='@{/subs/creatorpage}'|" >-->
+<!--							<div>-->
+<!--								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
+<!--								<section>-->
+<!--									<span class="fb_sc"><img src="/img/icon_channel.png" /></span>-->
+<!--									<span class="fb_sc">Nick Name</span>-->
+<!--									<span class="fb_sc">Creator Page Name</span>-->
+<!--									<div>-->
+<!--										<span>이미지 10</span>-->
+<!--										<span>동영상 10</span>-->
+<!--										<span>링크 10</span>-->
+<!--									</div>-->
+<!--								</section>-->
+<!--							</div>-->
+<!--						</article>-->
+<!--					</article>-->
+
+<!--					&lt;!&ndash; 포스트 &ndash;&gt;-->
+<!--					<article class="post">-->
+<!--						<figure>-->
+<!--							<div class="fb_c_cc">-->
+<!--								<img src="/img/icon_lock.png" />-->
+<!--								<p>구독자가 되어<br>포스트 잠금을 히제하고 내용을 확인하세요</p>-->
+<!--								<button type="button" class="w200 h35 bright" onclick="location.href='mem_be.html';"-->
+<!--										th:onclick="|location.href='@{/subs/mem/be}'|" >구독하기</button>-->
+<!--							</div>-->
+<!--							<img src="/img/sample_post_img.jpg" />-->
+<!--						</figure>-->
+<!--						<div class="fb_sc post_date_area">2022년 4월5일 오전 1:16 <span class="fb_sc"><img src="/img/icon_lock.png" /> &nbsp; 잠금</span></div>-->
+<!--						<p class="post_title_area">포스트 제목</p>-->
+<!--						<div class="post_tag_area">-->
+<!--							<span>#TAG</span>-->
+<!--							<span>#TAG</span>-->
+<!--							<span>#TAG</span>-->
+<!--						</div>-->
+<!--						<div class="post_like_area fb_sc">-->
+<!--							<div class="fb_sc"><img src="/img/icon_heart.png" /> &nbsp;&nbsp; 좋아요 00개</div>-->
+<!--							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--							<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>-->
+<!--						</div>-->
+<!--						&lt;!&ndash; 베너 &ndash;&gt;-->
+<!--						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"-->
+<!--								 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|">-->
+<!--							<div>-->
+<!--								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
+<!--								<section>-->
+<!--									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>-->
+<!--									<span class="fb_sc">Nick Name</span>-->
+<!--									<span class="fb_sc">Creator Page Name</span>-->
+<!--									<div>-->
+<!--										<span>이미지 10</span>-->
+<!--										<span>동영상 10</span>-->
+<!--										<span>링크 10</span>-->
+<!--									</div>-->
+<!--								</section>-->
+<!--							</div>-->
+<!--						</article>-->
+<!--					</article>-->
+
+				</section>
+				
+				<!-- 추천 크리에이터 목록 -->
+				<article class="creator_banner_area recommand">
+					<div class="creator_banner_area_title fb_cc">추천 크리에이터</div>
+					<div class="creator_banner_control fb_sc">
+						<img src="/img/icon_reload.png" />
+						<img src="/img/arrow.png" />
+						<img src="/img/arrow.png" />
+					</div>
+					<div class="creator_banner_group">
+						
+						<!-- 베너 -->
+						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"
+								 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|" th:each="creator : ${creatorList}">
+							<div>
+								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+								<section>
+									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>
+									<span class="fb_sc">Nick Name</span>
+									<span class="fb_sc" th:text="${creator.getCiPageNm()}">Creator Page Name</span>
+								</section>
+							</div>
+						</article>
+
+						<!-- 베너 -->
+<!--						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"-->
+<!--								 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|">-->
+<!--							<div>-->
+<!--								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
+<!--								<section>-->
+<!--									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>-->
+<!--									<span class="fb_sc">Nick Name</span>-->
+<!--									<span class="fb_sc">Creator Page Name</span>-->
+<!--								</section>-->
+<!--							</div>-->
+<!--						</article>-->
+
+						<!-- 베너 -->
+<!--						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"-->
+<!--								 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|">-->
+<!--							<div>-->
+<!--								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
+<!--								<section>-->
+<!--									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>-->
+<!--									<span class="fb_sc">Nick Name</span>-->
+<!--									<span class="fb_sc">Creator Page Name</span>-->
+<!--								</section>-->
+<!--							</div>-->
+<!--						</article>-->
+
+					</div>
+					<!-- 베너 페이징 -->
+					<div class="creator_banner_paging fb_cc">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</article>
+			</div>		
+		</section>
+	</article>
+
+	<article id="viewer_container">
+		<div class="viewer_imgArea"></div>
+		<div class="viewer_numArea"><span class="viewer_nowNum">1</span> / <span class="viewer_totalNum">6</span></div>
+		<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
+		<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+		<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+	</article>
+	
+	<!-- FOOTER -->
+<!--	<?php include_once "static/inc/footer.html"; ?>-->
+
+</body>
+</th:block>
+</html>
+
+<script>
+	// 포스트 이미지 클릭시 이미지 보기 화면
+	// 이미지 띄우는 것 까지만 구현 세부 동작은 구현 하지 않았음.
+	$(function() {
+		$(".post > figure > img, .post_slider_body img").on("click", function() {
+			$(".body_container").hide();
+			$("footer").hide();
+			$("#viewer_container").css("display", "flex");
+
+			var test = [];
+			$(".viewer_imgArea").empty();
+
+			test.push($(".post > figure > img").attr("src"));
+			if($(".post_slider_body img").length) {
+				$(".post_slider_body img").each(function(){
+					test.push($(this).attr("src"));
+				});
+			}
+			let imgSrc = "<img src='" + $(this).attr("src") + "'>";
+			$(".viewer_imgArea").append(imgSrc);
+		});
+
+		$("#viewer_container .close").on("click", function() {
+			$("#viewer_container").hide();
+			$(".body_container").show();
+			$("footer").show();
+		});
+	});
+</script>
