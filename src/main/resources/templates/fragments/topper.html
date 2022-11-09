@@ -18,7 +18,10 @@
 	</div>
 	<h5>세션확인용 회원번호 <span th:text="${session.session}"></span></h5><br>
 	<th:block th:if="${session.session != null}">
-	<button type="button" onclick="location.href='/members/logout';">로그아웃버튼</button>
+		<button type="button" onclick="location.href='/members/logout';">로그아웃</button> <!--로그인 버튼 만들기-->
+	</th:block>
+	<th:block th:if="${session.session == null}">
+		<button type="button" onclick="location.href='/login';">로그인</button>
 	</th:block>
 	<!-- 로그인 전 -->
 	<!-- <div><a href="login.html">로그인</a></div> -->
