@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_message.png" /> &nbsp;&nbsp; <b>메시지</b>
+			</div>
+
+			<div class="fb_ss tab_area">
+				<a href="creator_message_c_list" class="selected">크리에이터 메시지함</a>
+				<a href="creator_message_s_list">구독자 메시지함</a>
+			</div>
+
+			<div class="message_find">
+				<input type="text" class="sech2" placeholder="메시지 상대 검색" />
+				<div class="fb_cc">
+					<span class="selected">전체</span>
+					<span>읽지않음</span>
+					<img src="/img/icon_message_add.png" onclick="location.href='creator_message_c_select'" />
+				</div>
+			</div>
+
+			<!-- 메시지 목록 --><!--스크립트로 변경-->
+			<article class="aritcle_border_container">
+				<div class="message_list" onclick="location.href='creator_message_c_view';">
+					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
+					<section>
+						<span>Creator Nick Name OR Page Name</span>
+						<p>서로 주고받은 메시지 최종 내용이 표시됩니다. </p>
+						<h5>2022년 12월 25일</h5>
+					</section>
+					<div class="fb_cc badge"><b>N</b></div>
+				</div>
+			</article>
+			<br />
+			
+			<!-- 메시지 목록 -->
+			<article class="aritcle_border_container">
+				<div class="message_list" onclick="location.href='creator_message_c_view';">
+					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
+					<section>
+						<span>Creator Nick Name OR Page Name</span>
+						<p>서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. </p>
+						<h5>2022년 12월 25일</h5>
+					</section>
+					<!-- <div class="fb_cc badge"><b>N</b></div> -->
+				</div>
+			</article>
+			<br />
+
+			<div id="message_add_btn" class="fb_cc" onclick="location.href='creator_message_c_select';">
+				<img src="/img/icon_message_add.png" />
+			</div>
+
+			<!--더보기 기능 추가 필요-->
+			<div class="fb_cs container_bottom_btn" style="height:35px;">
+				<button type="button" class="w200 h35 lightBlue">더보기</button>
+			</div>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>
+
+
+<!-- 우측 하단 파란색 메시지 작성하기 버튼 관련 스크립트 스크롤이 길어지면 하단으로 붙어서 따라 다니도록 한다.
+     또한 반응형 모바일 사이즈로 변동 되었을 때에도 화면 우측 하단에서 스크롤을 따라 다닌다  -->
+<script>
+	$(function() {
+		let screen_width = screen.availWidth;
+		let screen_height = screen.availHeight;
+
+		let target_element = $(".aritcle_border_container:last-of-type");
+		let target_pos = target_element.offset();
+		
+		let stdX = target_pos.left + target_element.width();
+		let stdY = target_pos.top + target_element.height();
+		
+		if((stdY + 100) >= screen_height) {
+			$("#message_add_btn").css("position", "sticky")
+			$("#message_add_btn").css("bottom", "30px");
+		}
+		else {
+			$("#message_add_btn").css("position", "absolute");
+			$("#message_add_btn").css("top", (stdY-20) + "px");
+		}
+		$("#message_add_btn").css("left", (stdX - 70) + "px");
+
+		$(window).on("resize", function(){
+			let screen_width = screen.availWidth;
+			let screen_height = screen.availHeight;
+
+			let target_element = $(".aritcle_border_container:last-of-type");
+			let target_pos = target_element.offset();
+			
+			let stdX = target_pos.left + target_element.width();
+			let stdY = target_pos.top + target_element.height();
+
+			if((stdY + 100) >= screen_height) {
+				$("#message_add_btn").css("position", "sticky");
+				$("#message_add_btn").css("bottom", "30px");
+			}
+			else {
+				$("#message_add_btn").css("position", "absolute");
+				$("#message_add_btn").css("top", (stdY-20) + "px");
+			}
+			$("#message_add_btn").css("left", (stdX - 70) + "px");
+		});
+	});
+</script>

@@ -26,10 +26,10 @@
 	<!-- 로그인 후 -->
 	<div class="fb_sc web_header_btns">
 		<th:block th:if="${session.kind == 'C'}">
-		<a th:href="@{/creator/creators/creator_mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
+		<a th:href="@{/creators/creator_mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
 		</th:block>
 		<th:block th:if="${session.kind == 'V'}">
-			<a href="/subs/mypage" th:href="@{/subs/mypage}"><img src="/img/icon_mypage.png" /></a>
+			<a href="/subs/mypage" th:href="@{/subs/mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
 		</th:block>
 		<figure class="fb_cc profile">
 			<!-- 프로필 이미지가 없을 때 -->

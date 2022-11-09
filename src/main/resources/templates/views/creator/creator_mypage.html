@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<!--<?php include "/inc/head.html"; ?>-->
+<body>
+	<!--<?php include "/inc/topper.html"; ?>-->
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side.html"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_mypage.png" /> &nbsp;&nbsp; <b>마이페이지</b>
+			</div>
+
+			<article class="aritcle_border_container" style="margin-bottom:100px;">
+
+				<!-- 프로필 사진 -->
+				<section class="mypage_section">
+					<div>
+						<section class="fb_sc"><img src="/img/icon_mypage.png" />프로필 사진</section>
+						<section class="fb_sc">
+							<figure class="fb_cc profile">
+								<img src="/img/sample_img.jpg">
+							</figure>
+							<input type="file" id="profile_pic" />
+							<div class="fb_cc modifies_btns">
+								<button type="button" id="profile_pic_modify" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+							</div>
+							<div class="profile_pic_btns">
+								<button type="button" id="profile_pic_accept" class="w80 h30 defaultLight">적용</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" id="profile_pic_cancel" class="w80 h30 cancel">취소</button>
+							</div>
+						</section>
+					</div>
+				</section>
+
+				<!-- 활동상태 -->
+				<section class="mypage_section">
+					<div>
+						<section class="fb_sc"><img src="/img/icon_mypage.png" />활동상태</section>
+						<section class="fb_sc">
+							<div class="context" th:switch="${creator.getCiState()}">
+								<p th:case="'0'">신청</p>
+								<p th:case="'1'">완료</p>
+								<p th:case="'2'">정지</p>
+							</div>
+							<!--<div class="context" th:if="${creator.getCiState() == '0'}">신청</div>
+							<div class="context" th:if="${creator.getCiState() == '1'}">완료</div>
+							<div class="context" th:if="${creator.getCiState() == '2'}">정지</div>-->
+							<div class="fb_cc modifies_btns">
+								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+							</div>
+							<img src="/img/arrow_m.png" />
+						</section>
+					</div>
+					<div class="opt">
+						<span class="creator">크리에이터 페이지 중지</span>
+						<p>
+							내 활동 상태가 구독자로 전환됩니다.<br />
+							후원자가 크리에이터 페이지를 볼 수 없으며 후원 청구도 일시중지됩니다.<br /> 
+							나중에 페이지를 재개할 때를 대비해 후원을 포함한 크리에이터 페이지의 콘텐츠와 후원자 정보를 보관합니다.
+						</p>
+						<form action="/creators/update" method="post">
+						<div>
+							<input type="hidden" id="ciState" name="ciState" value="2" />
+							<input type="hidden" id="miKind" name="miKind" value="V" />
+							<button class="w80 h30 point">확인</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="button" class="w80 h30 cancel">취소</button>
+						</div>
+						<br />
+						</form>
+					</div>
+				</section>
+
+				<!-- 설정닉네임 -->
+				<section class="mypage_section">
+					<div>
+						<section class="fb_sc"><img src="/img/icon_mypage.png" />설정 닉네임</section>
+						<section class="fb_sc">
+							<div class="context" th:text="${member.getMiNick()}"></div>
+							<div class="fb_cc modifies_btns">
+								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+							</div>
+							<img src="/img/arrow_m.png" />
+						</section>
+					</div>
+					<div class="opt">
+						<form action="/creators/update" method="post">
+							<input type="text" id="miNick" name="miNick" placeholder="변경할 닉네임을 입력하세요"/>
+							<br/><br/>
+							<div>
+								<button class="w80 h30 defaultLight">수정</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="reset" class="w80 h30 cancel">취소</button>
+							</div>
+							<br/>
+						</form>
+					</div>
+				</section>
+
+				<!-- 계정이메일 -->
+				<section class="mypage_section">
+					<div>
+						<section class="fb_sc"><img src="/img/icon_mypage.png" />계정 이메일</section>
+						<section class="fb_sc">
+							<div class="context" th:text="${member.getMiId()}"></div>
+							<div class="fb_cc modifies_btns">
+								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+							</div>
+							<img src="/img/arrow_m.png" />
+						</section>
+					</div>
+					<div class="opt">
+						<!-- 직접 입력한 이메일 계정 사용시 나타난다. -->
+						<span>현재 직접 입력한 이메일 계정 사용중</span>
+						<br /><br />
+						<input type="password" placeholder="현재비밀번호 입력" />
+						<br />
+						<input type="password" placeholder="새 비밀번호 입력" />
+						<br />
+						<input type="password" placeholder="새 비밀번호 재입력" />
+						<br /><br />
+						<div>
+							<button type="button" class="w150 h30 defaultLight">비밀번호 업데이트</button>
+						</div>
+
+						<!-- 네이버 계정으로 사용시 나타난다 -->
+						<div class="fb_sc"><img src="/img/social_logo_n.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">네이버 계정 사용중</span></div>
+						
+						<!-- 카카오 계정으로 사용시 나타난다 -->
+						<div class="fb_sc"><img src="/img/social_logo_k.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">카카오 계정 사용중</span></div>
+						
+						<!-- 트위터 계정으로 사용시 나타난다 -->
+						<div class="fb_sc"><img src="/img/social_logo_t.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">트위터 계정 사용중</span></div>
+						
+						<!-- 구글 계정으로 사용시 나타난다 -->
+						<div class="fb_sc"><img src="/img/social_logo_g.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">구글 계정 사용중</span></div>
+						<br />
+					</div>
+				</section>
+
+				<!-- 수익지급계좌 -->
+				<section class="mypage_section">
+					<div>
+						<section class="fb_sc"><img src="/img/icon_mypage.png" />수익 지급 계좌</section>
+						<section class="fb_sc">
+							<div class="context" th:text="${creator.ciBank}"></div>
+							<div class="fb_cc modifies_btns">
+								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+							</div>
+							<img src="/img/arrow_m.png" />
+						</section>
+					</div>
+					<div class="opt">
+						<button type="button" class="w150 h30 defaultLight">계좌 변경</button>
+					</div>
+				</section>
+
+				<!-- 내 요금제 -->
+				<section class="mypage_section">
+					<div>
+						<section class="fb_sc"><img src="/img/icon_mypage.png" />내 요금제</section>
+						<section class="fb_sc">
+							<div class="context" th:switch="${creator.getCiPriceKind()}">
+								<p th:case="'1'">현재 사용하는 요금제 : <span>Lite</span> &nbsp; <span>(수수료 5%)</span></p>
+								<p th:case="'2'">현재 사용하는 요금제 : <span>Pro</span> &nbsp; <span>(수수료 11%)</span></p>
+								<p th:case="'3'">현재 사용하는 요금제 : <span>Premium</span> &nbsp; <span>(수수료 12%)</span></p>
+							</div>
+							<!--<div th:if="${creator.ciPriceKind == '1'}">현재 사용하는 요금제 : <span>Lite</span> &nbsp; <span>(수수료 5%)</span></div>
+							<div th:if="${creator.ciPriceKind == '2'}">현재 사용하는 요금제 : <span>Pro</span> &nbsp; <span>(수수료 11%)</span></div>
+							<div th:if="${creator.ciPriceKind == '3'}">현재 사용하는 요금제 : <span>Premium</span> &nbsp; <span>(수수료 12%)</span></div>-->
+							<div class="fb_cc modifies_btns">
+								<button class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+							</div>
+							<img src="/img/arrow_m.png" />
+						</section>
+					</div>
+					<div class="opt">
+						<form> <!--데이터 넘겨서 요금제 update 구현 필요-->
+							<section>
+								<div class="fb_sc ratePlan">
+									<div class="fb_cc"><img src="/img/icon_check.png" /></div> Lite
+								</div>
+								<p>수수료 5% • 팬들로부터 정기 후원을 받을 수 있는 간단한 기능</p>
+								<input type="radio" name="payType" />
+							</section>
+							<section>
+								<div class="fb_sc ratePlan">
+									<div class="fb_cc selected"><img src="/img/icon_check.png" /></div> Pro
+								</div>
+								<p>수수료 11% • 멤버십 관리를 도와주는 다양한 기능</p>
+								<input type="radio" name="payTypeRadio" />
+							</section>
+							<section>
+								<div class="fb_sc ratePlan">
+									<div class="fb_cc"><img src="/img/icon_check.png" /></div> Premium
+								</div>
+								<p>수수료 12% • 크리에이티브 비즈니스 전용</p>
+								<input type="radio" name="payType" />
+							</section>
+						</form>
+						<div>
+							<button type="button" class="w80 h30 defaultLight">변경</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="button" class="w80 h30 cancel">취소</button>
+						</div>
+					</div>
+				</section>
+
+			</article>
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<!--<?php include_once "/inc/footer.html"; ?>-->
+</body>
+</th:block>
+</html>
+
+<script>
+	$(function(){
+
+		/*정보 수정 아이콘 클릭 - 프로필사진은 제외*/
+		$(".mypage_section:not(:first-of-type) .modifies_btns button").on("click", function() {
+			$(this).parent().hide();
+			$(this).parent().next().show();
+			$(this).parents(".mypage_section").children(".opt").css("height", "auto");
+			$(this).parents(".mypage_section").children(".opt").slideDown();
+		});
+
+		/*수정 화면 내에 있는 취소 버튼클릭*/
+		$(".cancel").on("click", function() {
+			$(this).parents(".opt").slideUp();
+			$(this).parents(".mypage_section").find(".modifies_btns").show();
+			$(this).parents(".mypage_section").find("img[src*='arrow_m']").hide();
+		});
+
+		/*수정 화면시 나타나는 우측 끝 화살표 아이콘 클릭*/
+		$("img[src*='arrow_m']").on("click", function() {
+			$(this).hide();
+			$(this).siblings(".modifies_btns").show();
+			$(this).parents(".mypage_section").children(".opt").slideUp();
+		});
+
+		/*프로필사진 수정 클릭*/
+		$("#profile_pic_modify").on("click", function() {
+			$("#profile_pic").trigger("click");
+		});
+		$("#profile_pic").on("change", function() {
+			var targetID = $(this).attr("id");
+			if(this.files && this.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var tag_result = "<img style='position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover' src='" + e.target.result + "' />"
+					$("#" + targetID).siblings("figure").append(tag_result);
+					$("#" + targetID).siblings(".modifies_btns").hide();
+					$("#" + targetID).siblings(".profile_pic_btns").show();
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+
+
+		/*프로필 사진 적용*/
+		$("#profile_pic_accept").on("click", function() {
+			$("#profile_pic").siblings(".modifies_btns").show();
+			$("#profile_pic").siblings(".profile_pic_btns").hide();
+		});
+
+		/*프로필 사진 취소*/
+		$("#profile_pic_cancel").on("click", function() {
+			$(".mypage_section figure img").remove();
+			$("#profile_pic").siblings(".modifies_btns").show();
+			$("#profile_pic").siblings(".profile_pic_btns").hide();
+		});
+
+		/*요금제 체크박스 선택*/
+		$(".ratePlan > div").on("click", function() {
+			$(".ratePlan > div").removeClass("selected");
+			$(this).addClass("selected");
+			$(this).siblings("input").trigger("click");
+		});
+	});
+</script>

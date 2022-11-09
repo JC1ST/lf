@@ -3,6 +3,7 @@ package kr.co.lovefans.devel.controller;
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.CreatorPostDto;
 import kr.co.lovefans.devel.domain.Member;
+import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.dto.PostDto;
 import kr.co.lovefans.devel.service.CreatorPostService;
 import kr.co.lovefans.devel.service.CreatorService;
@@ -42,10 +43,10 @@ public class SubsController {
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
 
-        List<CreatorInfoDto> creatorList = subscrService.findAll();
+        List<MemberDto> List = subscrService.findAll();
         List<PostDto> postList = creatorPostService.findPostByCpMiSeq((Long) session.getAttribute("session"));
-
-        model.addAttribute("creatorList", creatorList);
+        System.out.println(postList);
+        model.addAttribute("creatorList", List);
         model.addAttribute("postList", postList);
 
 //        사이드 메뉴 관련
@@ -70,7 +71,7 @@ public class SubsController {
 
     // 구독자 마이 페이지
     @GetMapping("/mypage")
-    public String mypage(HttpSession session, Model model) {
+    public String mypage(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/subscr_mypage";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -93,7 +94,7 @@ public class SubsController {
 
     // 알림 - 구독자 알림 페이지
     @GetMapping("/alarm")
-    public String alarm(HttpSession session, Model model) {
+    public String alarm(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/subscr_alarm";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -117,11 +118,11 @@ public class SubsController {
 
     // 메시지 - 구독자 메시지 목록 보기 페이지
     @GetMapping("/message/list")
-    public String list(HttpSession session, Model model) {
+    public String list(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/message/subscr_message_list";
 
-        List<CreatorInfoDto> creatorList = subscrService.findAll();
-        model.addAttribute("creatorList", creatorList);
+//        List<CreatorInfoDto> creatorList = subscrService.findAll();
+//        model.addAttribute("creatorList", creatorList);
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
         if (memberInfo.isEmpty()) return "redirect:/login";
@@ -144,11 +145,11 @@ public class SubsController {
 
     // 구독자가 메시지를 보낼 크리에이터 선택 페이지
     @GetMapping("/message/select")
-    public String select(HttpSession session, Model model) {
+    public String select(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/message/subscr_message_select";
 
-        List<CreatorInfoDto> creatorList = subscrService.findAll();
-        model.addAttribute("creatorList", creatorList);
+//        List<CreatorInfoDto> creatorList = subscrService.findAll();
+//        model.addAttribute("creatorList", creatorList);
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
         if (memberInfo.isEmpty()) return "redirect:/login";
@@ -171,11 +172,11 @@ public class SubsController {
 
     // 크리에이터와의 메시지 내용 보기 및 메시지 보내기 페이지
     @GetMapping("/message/view")
-    public String view(HttpSession session, Model model) {
+    public String view(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/message/subscr_message_view";
 
-        List<CreatorInfoDto> creatorList = subscrService.findAll();
-        model.addAttribute("creatorList", creatorList);
+//        List<CreatorInfoDto> creatorList = subscrService.findAll();
+//        model.addAttribute("creatorList", creatorList);
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
         if (memberInfo.isEmpty()) return "redirect:/login";
@@ -198,7 +199,7 @@ public class SubsController {
 
     // 구독채널 - 구독중인 크리에이터 목록 보기 페이지
     @GetMapping("/channel")
-    public String channel(HttpSession session, Model model) {
+    public String channel(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/subscr_channel";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -222,7 +223,7 @@ public class SubsController {
 
     // 결재 - 구독자가 등록한 결재 카드 보기
     @GetMapping("/payment")
-    public String payment(HttpSession session, Model model) {
+    public String payment(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/payment/subscr_payment";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -246,7 +247,7 @@ public class SubsController {
 
     // 구독자가 결재한 내역을 간단히 보여주는 페이지
     @GetMapping("/payment/detail")
-    public String detail(HttpSession session, Model model) {
+    public String detail(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/payment/subscr_payment_detail";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -270,7 +271,7 @@ public class SubsController {
 
     // 고객센터 - 구독자가 문의사항을 남김
     @GetMapping("/callcenter")
-    public String callcenter(HttpSession session, Model model) {
+    public String callcenter(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/subscr_call_center";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -319,7 +320,7 @@ public class SubsController {
 
     // 크리에이터 페이지 구독하기(등급선택)
     @GetMapping("/mem/be")
-    public String be(HttpSession session, Model model) {
+    public String be(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/member/mem_be";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -342,7 +343,7 @@ public class SubsController {
 
     // 구독에 대한 결재하기
     @GetMapping("/mem/pay")
-    public String pay(HttpSession session, Model model) {
+    public String pay(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/member/mem_pay";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));

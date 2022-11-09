@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_income.png" /> &nbsp;&nbsp; <b>소득</b>
+			</div>
+
+			<div class="fb_cc" style="width:800px; height:500px; margin: auto; background-color: #e4eaef; font-size:1.6rem; text-align:center;">
+				총수입금<br>(프로그램 단에서 처리)
+			</div>
+
+			<br /><br />
+
+			<div class="fb_cc cMain_income">
+				<section>
+					<span class="fb_cs">월수입</span>
+					<span class="fb_ce">₩ 12,345,678</span>
+				</section>
+				<section>
+					<span class="fb_cs">청구시도 금액</span>
+					<span class="fb_ce">₩ 12,345,678</span>
+				</section>
+				<section>
+					<span class="fb_cs">결제거부</span>
+					<span class="fb_ce negative">₩ 12,345,678</span>
+				</section>
+				<section>
+					<span class="fb_cs">총 환불금액</span>
+					<span class="fb_ce negative">₩ 12,345,678</span>
+				</section>
+				<section>
+					<span class="fb_cs">결제 수수료</span>
+					<span class="fb_ce">₩ 12,345,678</span>
+				</section>
+				<section>
+					<span class="fb_cs">플랫폼 수수료</span>
+					<span class="fb_ce">₩ 12,345,678</span>
+				</section>
+			</div>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_subscr.png" /> &nbsp;&nbsp; <b>구독자</b>
+			</div>
+
+			<div class="fb_bc subscr_find">
+			</div>
+
+			<div class="fb_sc container_top_explain">
+				<img src="/img/icon_blocked_subscr.png" />
+				<div>
+					<span><b>Blocked Subscriber : &nbsp;</b></span>
+					총 &nbsp; <span>00</span> &nbsp; 명
+				</div>
+			</div>
+
+			<!-- 목록표 -->
+			<article class="subscr_table">
+				<!-- 목록이 없을때 -->
+				<!-- <section>
+					<div>
+						<article class="fb_c_cc">
+							<div class="fb_cc">!</div>
+							차단된 사용자가 없습니다.
+						</article>
+					</div>
+				</section> -->
+
+				<!-- 목록이 있을때 -->
+				<section class="th_sec">
+					<div>닉네임</div>
+					<div>이메일</div>
+					<div>차단된 날짜</div>
+					<div>차단사유</div>
+				</section>
+
+				<section>
+					<div class="nickName">nickName</div>
+					<div class="email">nickName@nick.com</div>
+					<div class="blockDay">2022-12-25</div>
+					<div class="reason">개 변태짓</div>
+				</section>
+
+				<section>
+					<div class="nickName">nickName</div>
+					<div class="email">nickName@nick.com</div>
+					<div class="blockDay">2022-12-25</div>
+					<div class="reason">개 변태짓</div>
+				</section>
+			</article>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>
+
+
+<script>
+	$(function() {
+		//
+	});
+</script>
