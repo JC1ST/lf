@@ -98,7 +98,7 @@
 					<h4>My Post</h4>
 					<div>
 						<!--total 개수 긁어오기 필요, length로 하면 될거 같음-->
-						<section class="fb_bc"><span>Total : 0 개</span><a href="./page/creator_page" class="fb_cc">more</a></section>
+						<section class="fb_bc"><span>Total : 0 개</span><a th:href="@{/creators/page/creator_page(key=${session.session})}" class="fb_cc">more</a></section>
 
 						<!-- 포스트 목록 --><!--포스트 반복문 구성 필요 - th:each-->
 						<article class="fb_sc" onclick="location.href='./page/creator_page_detail';">

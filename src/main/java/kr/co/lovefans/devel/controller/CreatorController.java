@@ -66,10 +66,12 @@ public class CreatorController {
 
     /*creator main page*/
     @GetMapping("creators/creator_main")
-    public String creator_main(HttpSession session, Model model) {
+    public String creator_main(HttpSession session, HttpServletRequest request, Model model) {
         Optional<CreatorInfoDto> creatorInfo = creatorService.findOne((Long) session.getAttribute("session"));
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
 
+        session.setAttribute("creator", creatorService.findOne((Long) session.getAttribute("session")).get());
+        session.setAttribute("member", memberService.findOne((Long) session.getAttribute("session")).get());
 
         model.addAttribute("creator", creatorInfo.get());
         model.addAttribute("member", memberInfo.get());
