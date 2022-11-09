@@ -1,7 +1,10 @@
 package kr.co.lovefans.devel.controller;
 
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
+import kr.co.lovefans.devel.domain.CreatorPostDto;
 import kr.co.lovefans.devel.domain.Member;
+import kr.co.lovefans.devel.dto.PostDto;
+import kr.co.lovefans.devel.service.CreatorPostService;
 import kr.co.lovefans.devel.service.CreatorService;
 import kr.co.lovefans.devel.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,11 +24,13 @@ public class CreatorController {
 
     private final CreatorService creatorService;
     private final MemberService memberService;
+    private final CreatorPostService creatorPostService;
 
     @Autowired
-    public CreatorController(CreatorService creatorService, MemberService memberService) {
+    public CreatorController(CreatorService creatorService, MemberService memberService, CreatorPostService creatorPostService) {
         this.creatorService = creatorService;
         this.memberService = memberService;
+        this.creatorPostService = creatorPostService;
     }
     /*creator new 완벽히 구현 x*/
     @GetMapping("creators/new")
@@ -66,13 +71,17 @@ public class CreatorController {
 
     /*creator main page*/
     @GetMapping("creators/creator_main")
-    public String creator_main(HttpSession session, Model model) {
+    public String creator_main(HttpSession session, HttpServletRequest request, Model model) {
         Optional<CreatorInfoDto> creatorInfo = creatorService.findOne((Long) session.getAttribute("session"));
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
+        List<CreatorPostDto> postList =  creatorPostService.findBycpMiSeq((Long) session.getAttribute("session"));
 
+        session.setAttribute("creator", creatorService.findOne((Long) session.getAttribute("session")).get());
+        session.setAttribute("member", memberService.findOne((Long) session.getAttribute("session")).get());
 
         model.addAttribute("creator", creatorInfo.get());
         model.addAttribute("member", memberInfo.get());
+        model.addAttribute("postList", postList);
 
         return "views/creator/creator_main";
     }
