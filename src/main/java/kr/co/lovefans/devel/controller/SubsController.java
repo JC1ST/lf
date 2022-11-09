@@ -422,7 +422,7 @@ public class SubsController {
 
         model.addAttribute("creator",creator);
 
-        return "creator_page_mode0";
+        return "views/subscr/creator/creator_page_mode0";
     }
 
     // 비구독자, 비회원이 보는 크리에이터 포스트 보기 화면
@@ -442,7 +442,7 @@ public class SubsController {
             System.out.println(a.getCpContent());
         }
 
-        return "creator_page_mode0_post";
+        return "views/subscr/creator/creator_page_mode0_post";
     }
 
     @PostMapping("/creatorpage/mode0/post/more")
