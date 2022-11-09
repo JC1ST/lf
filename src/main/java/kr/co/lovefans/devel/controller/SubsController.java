@@ -45,7 +45,7 @@ public class SubsController {
 
         List<MemberDto> List = subscrService.findAll();
         List<PostDto> postList = creatorPostService.findPostByCpMiSeq((Long) session.getAttribute("session"));
-        System.out.println(postList);
+
         model.addAttribute("creatorList", List);
         model.addAttribute("postList", postList);
 
@@ -320,7 +320,7 @@ public class SubsController {
 
     // 크리에이터 페이지 구독하기(등급선택)
     @GetMapping("/mem/be")
-    public String be(HttpSession session, Model model, @RequestParam("key") Long key) {
+    public String be(HttpSession session, Model model) {
         String go = "views/subscr/member/mem_be";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -343,7 +343,7 @@ public class SubsController {
 
     // 구독에 대한 결재하기
     @GetMapping("/mem/pay")
-    public String pay(HttpSession session, Model model, @RequestParam("key") Long key) {
+    public String pay(HttpSession session, Model model) {
         String go = "views/subscr/member/mem_pay";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
