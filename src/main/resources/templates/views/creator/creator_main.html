@@ -102,18 +102,18 @@
 
 						<!-- 포스트 목록 --><!--포스트 반복문 구성 필요 - th:each-->
 						<th:block th:each="model:${postList}">
-						<article class="fb_sc" onclick="location.href='./page/creator_page_detail';">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
-							<div>
-								<!--제목, 일자, 좋아요/댓글 개수 긁어오기 필요-->
-								<h5 th:text="${model.getCpTitle()}">포스트 제목</h5>
-								<p th:text="${model.getCpRegdt()}">2022년 12월 15일 오후 08:09</p>
-								<div class="fb_sc likeArea">
-									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 <th:block th:text="${model.getCpVoteCnt()}" /> 개</div>
-									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
+							<article class="fb_sc" th:onclick="|location.href='@{/creators/page/creator_page_detail(key=${session.session})}'|">
+								<figure><img src="/img/sample_post_img.jpg" /></figure>
+								<div>
+									<!--제목, 일자, 좋아요/댓글 개수 긁어오기 필요-->
+									<h5 th:text="${model.getCpTitle()}">포스트 제목</h5>
+									<p th:text="${model.getCpRegdt()}">2022년 12월 15일 오후 08:09</p>
+									<div class="fb_sc likeArea">
+										<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 <th:block th:text="${model.getCpVoteCnt()}" /> 개</div>
+										<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
+									</div>
 								</div>
-							</div>
-						</article>
+							</article>
 						</th:block>
 
 						<!--&lt;!&ndash; 포스트 목록 &ndash;&gt;
