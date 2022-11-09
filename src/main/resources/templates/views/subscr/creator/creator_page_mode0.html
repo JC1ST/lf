@@ -3,11 +3,11 @@
 	  layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
-<body>
+	<body>
 	<article class="body_container">
 		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
 		<?php include "static/inc/side.html"; ?>
-		
+
 		<section class="contents_container_nopad">
 			<div class="cpage_head">
 				<div><img src="/img/sample_bg.jpg" /></div>
@@ -15,7 +15,7 @@
 					<figure>
 						<img src="/img/sample_img.jpg" />
 					</figure>
-					<div>Creaotr Page Name</div>
+					<div th:text="${creator.getCiPageNm()}"></div>
 					<div>창작분야 : 비디오 포토</div>
 				</div>
 			</div>
@@ -33,12 +33,12 @@
 						<img src="/img/icon_level_top.png" />
 						<div class="perksName">무료 구독자 (Free)</div>
 						<div class="perksPrice"><span>₩ 0</span> / 월</div>
-						
+
 						<p>기본 사진을 무료로 마음껏 감상 하세요.</p>
-						
+
 						<div class="fb_sc perks">구독자 전용 업데이트</div>
 						<div class="fb_sc perks">무료 구독자 전용 창작물 제공</div>
-						
+
 						<section class="fb_cc mem_be_btns">
 							<button type="button" class="w150 h35 lightBlue" onclick="location.href='mem_pay.html';"
 									th:onclick="|location.href='@{/subs/mem/pay(key=${session.session})}'|">가입하기</button>
@@ -50,12 +50,12 @@
 						<img src="/img/icon_level_top.png" />
 						<div class="perksName">공식 구독자 (Official)</div>
 						<div class="perksPrice"><span>₩ 10,000</span> / 월</div>
-						
+
 						<p>기본 사진을 무료로 마음껏 감상 하세요.</p>
-						
+
 						<div class="fb_sc perks">구독자 전용 업데이트</div>
 						<div class="fb_sc perks">공식 구독자 전용 창작물 제공</div>
-						
+
 						<section class="fb_cc mem_be_btns">
 							<button type="button" class="w150 h35 lightBlue" onclick="location.href='mem_pay.html';"
 									th:onclick="|location.href='@{/subs/mem/pay(key=${session.session})}'|">가입하기</button>
@@ -67,12 +67,12 @@
 						<img src="/img/icon_level_top.png" />
 						<div class="perksName">VIP 구독자 (VIP)</div>
 						<div class="perksPrice"><span>₩ 50,000</span> / 월</div>
-						
+
 						<p>기본 사진을 무료로 마음껏 감상 하세요.</p>
-						
+
 						<div class="fb_sc perks">구독자 전용 업데이트</div>
 						<div class="fb_sc perks">VIP 전용 창작물 제공</div>
-						
+
 						<section class="fb_cc mem_be_btns">
 							<button type="button" class="w150 h35 lightBlue" onclick="location.href='mem_pay.html';"
 									th:onclick="|location.href='@{/subs/mem/pay(key=${session.session})}'|">가입하기</button>
@@ -101,7 +101,7 @@
 							<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
 						</section>
 						<div class="post_date_area">2022년 4월5일 오전 1:16</div>
-						
+
 						<section class="linker" onclick="location.href='creator_page_detail.html';"
 								 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
 							<p class="post_title_area">포스트 제목</p>
@@ -111,7 +111,7 @@
 							</p>
 							<div class="post_read_more">더읽기</div>
 						</section>
-						
+
 						<div class="post_tag_area">
 							<span>#TAG</span>
 							<span>#TAG</span>
@@ -153,7 +153,7 @@
 					<!-- 포스트 더보기 버튼 -->
 					<div class="fb_cc container_bottom_btn">
 						<button type="button" class="lightBlue w_all h40" onclick="location.href='creator_page_mode0_post.html';"
-								th:onclick="|location.href='@{/subs/creatorpage/mode0/post(key=${session.session})}'|">포스트 00건 모두보기</button>
+								th:onclick="|location.href='@{/subs/creatorpage/mode0/post(key=${creator.getCiMiSeq()})}'|">포스트 00건 모두보기</button>
 					</div>
 				</section>
 			</article>
@@ -168,7 +168,7 @@
 		<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
 		<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
 	</article>
-	
+
 	<!-- FOOTER -->
 	<?php include_once "static/inc/footer.html"; ?>
 </body>
