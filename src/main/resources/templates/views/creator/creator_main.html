@@ -98,23 +98,25 @@
 					<h4>My Post</h4>
 					<div>
 						<!--total 개수 긁어오기 필요, length로 하면 될거 같음-->
-						<section class="fb_bc"><span>Total : 0 개</span><a th:href="@{/creators/page/creator_page(key=${session.session})}" class="fb_cc">more</a></section>
+						<section class="fb_bc"><span>Total : <th:block th:text="${#lists.size(postList)}"/> 개</span><a th:href="@{/creators/page/creator_page(key=${session.session})}" class="fb_cc">more</a></section>
 
 						<!-- 포스트 목록 --><!--포스트 반복문 구성 필요 - th:each-->
+						<th:block th:each="model:${postList}">
 						<article class="fb_sc" onclick="location.href='./page/creator_page_detail';">
 							<figure><img src="/img/sample_post_img.jpg" /></figure>
 							<div>
 								<!--제목, 일자, 좋아요/댓글 개수 긁어오기 필요-->
-								<h5>포스트 제목</h5>
-								<p>2022년 12월 15일 오후 08:09</p>
+								<h5 th:text="${model.getCpTitle()}">포스트 제목</h5>
+								<p th:text="${model.getCpRegdt()}">2022년 12월 15일 오후 08:09</p>
 								<div class="fb_sc likeArea">
-									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 0 개</div>
+									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 <th:block th:text="${model.getCpVoteCnt()}" /> 개</div>
 									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
 								</div>
 							</div>
 						</article>
+						</th:block>
 
-						<!-- 포스트 목록 -->
+						<!--&lt;!&ndash; 포스트 목록 &ndash;&gt;
 						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
 							<figure><img src="/img/sample_post_img.jpg" /></figure>
 							<div>
@@ -127,7 +129,7 @@
 							</div>
 						</article>
 
-						<!-- 포스트 목록 -->
+						&lt;!&ndash; 포스트 목록 &ndash;&gt;
 						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
 							<figure><img src="/img/sample_post_img.jpg" /></figure>
 							<div>
@@ -140,7 +142,7 @@
 							</div>
 						</article>
 
-						<!-- 포스트 목록 -->
+						&lt;!&ndash; 포스트 목록 &ndash;&gt;
 						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
 							<figure><img src="/img/sample_post_img.jpg" /></figure>
 							<div>
@@ -153,7 +155,7 @@
 							</div>
 						</article>
 
-						<!-- 포스트 목록 -->
+						&lt;!&ndash; 포스트 목록 &ndash;&gt;
 						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
 							<figure><img src="/img/sample_post_img.jpg" /></figure>
 							<div>
@@ -164,7 +166,7 @@
 									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
 								</div>
 							</div>
-						</article>
+						</article>-->
 
 					</div>
 				</section>
