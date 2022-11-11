@@ -31,10 +31,12 @@ public class SubsPostCustomRepositoryImpl implements SubsPostCustomRepository{
         QSubListDto sub = QSubListDto.subListDto;
 
         List<PostDto> result = query
-                .select(Projections.bean(PostDto.class,post.cpMiSeq,post.cpTitle,post.cpContent,post.cpTag,post.cpLink,post.cpRegdt,sub.slCMiSeq,sub.slVMiSeq))
+                .select(Projections.bean(PostDto.class,post.cpMiSeq,post.cpTitle,post.cpContent,post.cpTag,post.cpLink,post.cpRegdt,sub.subListDtoId.slCMiSeq,sub.subListDtoId.slVMiSeq))
                 .from(sub)
-                .leftJoin(post).on(post.cpMiSeq.eq(sub.slCMiSeq))
-                .where(sub.slVMiSeq.eq(slvmiseq))
+                .leftJoin(post).on(post.cpMiSeq.eq(sub.subListDtoId.slCMiSeq))
+                .where(sub.subListDtoId.slVMiSeq.eq(slvmiseq))
+                .orderBy(post.cpRegdt.desc())
+                .limit(5)
                 .fetch();
 
 
