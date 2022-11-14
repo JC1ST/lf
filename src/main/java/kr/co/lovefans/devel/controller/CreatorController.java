@@ -83,6 +83,12 @@ public class CreatorController {
         model.addAttribute("member", memberInfo.get());
         model.addAttribute("postList", postList);
 
+        if(postList.size() < 5) {
+            model.addAttribute("count", postList.size());
+        } else {
+            model.addAttribute("count", 5);
+        }
+
         return "views/creator/creator_main";
     }
 
@@ -257,7 +263,16 @@ public class CreatorController {
     }
 
     @GetMapping("creators/page/creator_page_detail")
-    public String creator_page_detail(@RequestParam("key") Long key) {
+    public String creator_page_detail(@RequestParam("key") Long key, Model model, HttpSession session) {
+        List<CreatorPostDto> postList =  creatorPostService.findBycpMiSeq((Long) session.getAttribute("session"));
+
+        model.addAttribute("postList", postList);
+
+        if(postList.size() < 5) {
+            model.addAttribute("count", postList.size());
+        } else {
+            model.addAttribute("count", 5);
+        }
 
         return "views/creator/page/creator_page_detail";
     }
