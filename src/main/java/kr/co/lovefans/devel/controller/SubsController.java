@@ -5,6 +5,7 @@ import kr.co.lovefans.devel.domain.CreatorPostDto;
 import kr.co.lovefans.devel.domain.Member;
 import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.dto.PostDto;
+import kr.co.lovefans.devel.dto.SubCreDto;
 import kr.co.lovefans.devel.service.CreatorPostService;
 import kr.co.lovefans.devel.service.CreatorService;
 import kr.co.lovefans.devel.service.MemberService;
@@ -45,9 +46,11 @@ public class SubsController {
 
         List<MemberDto> List = subscrService.findAll();
         List<PostDto> postList = creatorPostService.findPostByCpMiSeq((Long) session.getAttribute("session"));
+        List<SubCreDto> creList = subscrService.findCre();
 
         model.addAttribute("creatorList", List);
         model.addAttribute("postList", postList);
+        model.addAttribute("creList", creList);
 
 //        사이드 메뉴 관련
         model.addAttribute("mainMenu", true);

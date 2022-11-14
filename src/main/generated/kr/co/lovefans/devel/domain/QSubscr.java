@@ -19,7 +19,7 @@ public class QSubscr extends EntityPathBase<Subscr> {
 
     public static final QSubscr subscr = new QSubscr("subscr");
 
-    public final NumberPath<Integer> slcMiSeq = createNumber("slcMiSeq", Integer.class);
+    public final NumberPath<Long> slcMiSeq = createNumber("slcMiSeq", Long.class);
 
     public final NumberPath<Integer> slcslSeq = createNumber("slcslSeq", Integer.class);
 
@@ -31,7 +31,7 @@ public class QSubscr extends EntityPathBase<Subscr> {
 
     public final StringPath slState = createString("slState");
 
-    public final NumberPath<Integer> slvMiSeq = createNumber("slvMiSeq", Integer.class);
+    public final NumberPath<Long> slvMiSeq = createNumber("slvMiSeq", Long.class);
 
     public QSubscr(String variable) {
         super(Subscr.class, forVariable(variable));

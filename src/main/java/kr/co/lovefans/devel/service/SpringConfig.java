@@ -17,12 +17,15 @@ public class SpringConfig {
     private final CreatorPostRepository creatorPostRepository;
 //    private final SubListRepository subListRepository;
 
+    private final AdminRepository adminRepository;
+
     @Autowired
-    public SpringConfig(SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository) {
+    public SpringConfig(SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, AdminRepository adminRepository) {
         this.subsPostCustomRepository = subsPostCustomRepository;
         this.memberRepository = memberRepository;
         this.creatorRepository = creatorRepository;
         this.creatorPostRepository = creatorPostRepository;
+        this.adminRepository = adminRepository;
     }
 //    private DataSource dataSource;
 
@@ -48,6 +51,12 @@ public class SpringConfig {
     public CreatorPostService creatorPostService(){
 
         return new CreatorPostService(creatorPostRepository, subsPostCustomRepository);
+    }
+
+    @Bean
+    public AdminService adminService() {
+
+        return new AdminService(adminRepository);
     }
 
 //    @Bean

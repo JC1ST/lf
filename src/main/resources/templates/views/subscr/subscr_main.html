@@ -17,15 +17,15 @@
 						
 						<!-- 베너 -->
 						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page.html';"
-								 th:onclick="|location.href='@{/subs/creatorpage}'|" >
+								 th:onclick="|location.href='@{/subs/creatorpage(key=${c.getCiMiSeq()})}'|" th:each="c: ${creList.iterator()}">
 							<div>
 								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
 								<section>
 									<span class="fb_sc"><img src="/img/icon_channel.png" /></span>
-									<span class="fb_sc">
+									<span class="fb_sc" th:text="${c.getMiNick()}">
 										Nick Name
 									</span>
-									<span class="fb_sc">
+									<span class="fb_sc" th:text="${c.getCiPageNm()}">
 										Creator Page Name
 									</span>
 								</section>

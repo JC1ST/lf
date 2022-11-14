@@ -1,0 +1,115 @@
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<!--Fragment 선언-->
+<th:block th:fragment="adminMenusFragment">
+
+
+<aside class="fb_cs admin_menu_area">
+	<div class="fb_cc"><a th:href="@{/}"><img src="/img/logo.png" /></a></div>
+
+	<ul>
+		<li class="big_menu">• 회원 관리</li>
+		<li>
+			<a href="mem_all_list.html" th:href="@{/admin/mem_all_list}"
+			   th:if="${memAllList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+			- 전체 회원 리스트
+			</a>
+			<a href="mem_all_list.html" th:href="@{/admin/mem_all_list}"
+			   th:unless="${memAllList}" th:style="${'color: #242529;'}">
+				- 전체 회원 리스트
+			</a>
+		</li>
+		<li>
+			<a href="mem_c_list.html" th:href="@{/admin/mem_c_list}"
+			   th:if="${memCList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				- 크리에이터
+			</a>
+			<a href="mem_c_list.html" th:href="@{/admin/mem_c_list}"
+			   th:unless="${memCList}" th:style="${'color: #242529;'}">
+				- 크리에이터
+			</a>
+		</li>
+		<li>
+			<a href="mem_s_list.html" th:href="@{/admin/mem_s_list}"
+			   th:if="${memSList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				- 구독자
+			</a>
+			<a href="mem_s_list.html" th:href="@{/admin/mem_s_list}"
+			   th:unless="${memSList}" th:style="${'color: #242529;'}">
+				- 구독자
+			</a>
+		</li>
+
+		<br />
+
+		<li class="big_menu">• 포스트 관리</li>
+		<li>
+			<a href="post_list.html" th:href="@{/admin/post_list}"
+			   th:if="${postList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				- 포스트 리스트
+			</a>
+			<a href="post_list.html" th:href="@{/admin/post_list}"
+			   th:unless="${postList}" th:style="${'color: #242529;'}">
+				- 포스트 리스트
+			</a>
+		</li>
+
+		<br />
+
+		<li class="big_menu">• 결제 관리</li>
+		<li>
+			<a href="payment_list.html" th:href="@{/admin/pay_list}"
+			   th:if="${payList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				- 결제 리스트
+			</a>
+			<a href="payment_list.html" th:href="@{/admin/pay_list}"
+			   th:unless="${payList}" th:style="${'color: #242529;'}">
+				- 결제 리스트
+			</a>
+		</li>
+		<li>
+			<a href="statistics.html" th:href="@{/admin/pay_statistics}"
+			   th:if="${payStatistics}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				- 매출 통계
+			</a>
+			<a href="statistics.html" th:href="@{/admin/pay_statistics}"
+			   th:unless="${payStatistics}" th:style="${'color: #242529;'}">
+				- 매출 통계
+			</a>
+		</li>
+
+		<br />
+
+		<li class="big_menu">• 입출금 관리</li>
+		<li>
+			<a href="deposit_list.html" th:href="@{/admin/deposit_list}"
+			   th:if="${depositList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				- 입출금 리스트
+			</a>
+			<a href="deposit_list.html" th:href="@{/admin/deposit_list}"
+			   th:unless="${depositList}" th:style="${'color: #242529;'}">
+				- 입출금 리스트
+			</a>
+		</li>
+
+		<br />
+
+		<li class="big_menu">
+			<a href="one_board_list.html" th:href="@{/admin/one_board_list}"
+			   th:if="${oneBoardList}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				• 1:1 게시판
+			</a>
+			<a href="one_board_list.html" th:href="@{/admin/one_board_list}"
+			   th:unless="${oneBoardList}" th:style="${'color: #242529;'}">
+				• 1:1 게시판
+			</a>
+		</li>
+
+		<br />
+
+		<li class="big_menu">• 공지 게시판</li>
+	</ul>
+</aside>
+
+
+</th:block>
+</html>

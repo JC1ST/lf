@@ -16,11 +16,11 @@ public class Subscr {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     // 크리에이터 회원 고유번호
     @Column(name = "sl_c_mi_seq")
-    private Integer slcMiSeq;
+    private Long slcMiSeq;
 
     // 구독자 회원 고유번호
     @Column(name = "sl_v_mi_seq")
-    private Integer slvMiSeq;
+    private Long slvMiSeq;
 
     // Y:구독, N:구독했으나 크리에이터가 차단시킴
     @Column(name = "sl_state")

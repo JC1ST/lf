@@ -9,12 +9,13 @@
 .admin_menu_area li {display: flex; justify-content: flex-start; align-items: center; height: 40px;}
 .admin_menu_area li.big_menu {font-family: notokr-bold; padding-left: 20px;}
 .admin_menu_area li:not(.big_menu) {padding-left: 35px;}
+.admin_menu_area li a:hover {color: #00b0f0;}
 .admin_menu_area li.selected a {/*pointer-events: none;*/ color: #00b0f0; font-family: notokr-bold;}
 
 .admin_contents_area {display: table-cell; height: 100%; min-height: 100%; padding: 0 30px;  border-left: solid 1px #e8eaed;}
 
-.admin_contnets_head {width: 100%; height: 80px;}
-.admin_contnets_head p {margin-left: auto; font-size: 2.2rem; font-family: notokr-bold;}
+.admin_contnets_head {width: 100%; height: 80px; text-align: center;}
+.admin_contnets_head p {font-size: 2.2rem; font-family: notokr-bold;}
 .admin_contnets_head p span {color: #00b0f0;}
 .admin_contnets_head > div {margin-left: auto; font-size: 1.6rem; font-family: notokr-bold;}
 
@@ -29,6 +30,7 @@
 .admin_contents_area table {width: 100%; border-collapse: collapse; font-size: 1.5rem; text-align: center; border-radius: 5px; border-style: hidden; overflow: hidden; margin-bottom: 15px;}
 
 .admin_list_tb {box-shadow: 0 0 0 1px #c4cad1;}
+.admin_list_tb td > tdLink:hover {color: #ffb000; }
 .admin_list_tb th, .admin_list_tb td {height: 45px; border: solid 1px #c4cad1; }
 .admin_list_tb th {color: white; background-color: #00b0f0; font-family: notokr-thin; }
 .admin_list_tb tr:nth-child(odd) {background-color: #f6f7f9;}
