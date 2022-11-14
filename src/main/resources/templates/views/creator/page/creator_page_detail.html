@@ -18,24 +18,24 @@
 						<figure class="profile">
 							<img src="/img/sample_img.jpg" />
 						</figure>
-						<span>Creaotr Page Name</span>
+						<span th:text="${session.creator.getCiPageNm()}">Creaotr Page Name</span>
 					</div>
 				</div>
 
 				<div class="fb_bs cpage_body_group">
 					<section class="post_area">
 						<!-- 포스트 내용 detail-->
+						<!--<th:block th:each="model:${postList}">-->
+						<th:block th:each="i:${#numbers.sequence(1, postList.size())}">
 						<article class="post">
-							<!-- 사진들 -->
-							<figure class="detail"><img src="/img/sample_post_img.jpg" /></figure>
-							<figure class="detail"><img src="/img/sample_creator1.jpg" /></figure>
-							<figure class="detail"><img src="/img/sample_bg.jpg" /></figure>
-							<figure class="detail"><img src="/img/sample_creator2.jpg" /></figure>
+							<!-- 사진들 --><!--한번에 올린 사진을 같이 나오게까지는 구현되지 않음-->
+							<figure class="detail"><img th:src="${postList.get(postList.size() - i).getCpImg()}" /></figure>
+							<!--<figure class="detail"><img th:src="${model.getCpImg()}" /></figure>-->
 							
-							<div class="post_date_area">2022년 4월5일 오전 1:16</div>
+							<div class="post_date_area" th:text="${#dates.format(postList.get(postList.size() - i).getCpRegdt(), 'yyyy년 MM월 dd일 HH:mm')}">2022년 4월5일 오전 1:16</div>
 
-							<p class="post_title_area">포스트 제목</p>
-							<p class="post_txt_area">
+							<p class="post_title_area" th:text="${postList.get(postList.size() - i).getCpTitle()}">포스트 제목</p>
+							<p class="post_txt_area" th:text="${postList.get(postList.size() - i).getCpContent()}">
 								포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용
 							</p>
 							<div class="fb_sc post_read_more"><img src="/img/icon_file.png" /><a href="">chumbu_file.jpg</a></div>
@@ -57,13 +57,13 @@
 								<!-- 페이지 운영 크리에이터 이외의 접속자는 Like 버튼이 나타난다 -->
 								<!-- <button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button> -->
 								
-								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 <th:block th:text="${postList.get(postList.size() - i).getCpVoteCnt()}"/> 개</div>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
 							</div>
 
 							<section class="post_reply_area">
-								<!-- 댓글 1 -->
+								<!-- 댓글 1 --><!--댓글 부분 미구현-->
 								<article class="fb_bs">
 									<figure class="profile"><span>N</span></figure>
 									<div>
@@ -112,6 +112,7 @@
 								</div>
 							</section>
 						</article>
+						</th:block>
 
 						<!-- 포스트 목록 버튼 -->
 						<div class="fb_cc container_bottom_btn">
@@ -123,18 +124,50 @@
 						<!-- 등급안내 -->
 						<section class="tier_info">
 							<div class="fb_cc">나의등급</div>
+							<article th:switch="${session.creator.getCiPriceKind()}">
+								<th:block th:case="'1'">
+									<div>Lite</div>
+									<div><span>₩ 10000</span> / 월</div>
+									<div>기본 기능</div>
+								</th:block>
+								<th:block th:case="'2'">
+									<div>Pro</div>
+									<div><span>₩ 20000</span> / 월</div>
+									<div>멤버쉽 관리 지원</div>
+								</th:block>
+								<th:block th:case="'3'">
+									<div>Premium</div>
+									<div><span>₩ 30000</span> / 월</div>
+									<div>크리에이티브 비즈니스 전용</div>
+								</th:block>
+							</article>
+						</section>
+						<!--<section class="tier_info">
+							<div class="fb_cc">나의등급</div>
 							<article>
 								<div>무료 구독자(Free)</div>
 								<div><span>₩ 0</span> / 월</div>
-								<div>기본 사진을 무료로 마음껏 감상 하세요.</div>	
+								<div>기본 사진을 무료로 마음껏 감상 하세요.</div>
 							</article>
-						</section>
+						</section>-->
 
 						<!-- 최근포스트 -->
 						<section class="recent_post">
 							<div class="fb_cc">최근 포스트</div>
 							<!-- 최근 포스트 목록 -->
-							<article class="fb_sc">
+							<th:block th:with="count = ${count}"></th:block>
+							<th:block th:each="i:${#numbers.sequence(1, count)}">
+								<article class="fb_sc">
+									<img th:src="${postList.get(postList.size() - i).getCpImg()}" />
+									<!--<img src="/img/sample_post_img.jpg" />-->
+									<div>
+										<div th:text="${postList.get(postList.size() - i).getCpTitle()}">포스트 제목</div>
+										<span th:text="${#dates.format(postList.get(postList.size() - i).getCpRegdt(), 'yyyy년 MM월 dd일 HH:mm')}">2022년 12월 15일 오후 08:09</span>
+									</div>
+								</article>
+							</th:block>
+
+							<!--<article class="fb_sc">
 								<img src="/img/sample_post_img.jpg" />
 								<div>
 									<div>포스트 제목</div>
@@ -164,15 +197,7 @@
 									<div>포스트 제목</div>
 									<span>2022년 12월 15일 오후 08:09</span>
 								</div>
-							</article>
-
-							<article class="fb_sc">
-								<img src="/img/sample_post_img.jpg" />
-								<div>
-									<div>포스트 제목</div>
-									<span>2022년 12월 15일 오후 08:09</span>
-								</div>
-							</article>
+							</article>-->
 						</section>
 					</div>
 				</div>
