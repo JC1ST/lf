@@ -10,7 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
+    private final CreateSubLevelRepository createSubLevelRepository;
     private final SubsPostCustomRepository subsPostCustomRepository;
+    private final SubsCustomRepository subsCustomRepository;
+    private final SubscrRepository subscrRepository;
 
     private final MemberRepository memberRepository;
     private final CreatorRepository creatorRepository;
@@ -18,8 +21,11 @@ public class SpringConfig {
     private final SubListRepository subListRepository;
 
     @Autowired
-    public SpringConfig(SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, SubListRepository subListRepository) {
+    public SpringConfig(CreateSubLevelRepository createSubLevelRepository, SubsPostCustomRepository subsPostCustomRepository, SubsCustomRepository subsCustomRepository, SubscrRepository subscrRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, SubListRepository subListRepository) {
+        this.createSubLevelRepository = createSubLevelRepository;
         this.subsPostCustomRepository = subsPostCustomRepository;
+        this.subsCustomRepository = subsCustomRepository;
+        this.subscrRepository = subscrRepository;
         this.memberRepository = memberRepository;
         this.creatorRepository = creatorRepository;
         this.creatorPostRepository = creatorPostRepository;
@@ -43,7 +49,7 @@ public class SpringConfig {
     @Bean
     public CreatorService creatorService(){
 
-        return new CreatorService(creatorRepository, memberRepository);
+        return new CreatorService(createSubLevelRepository, creatorRepository, memberRepository);
     }
     @Bean
     public CreatorPostService creatorPostService(){
@@ -54,6 +60,11 @@ public class SpringConfig {
     @Bean
     public SubListService subListService(){
         return new SubListService(subListRepository);
+    }
+
+    @Bean
+    public SubscrService subscrService(){
+        return new SubscrService(subscrRepository,subsCustomRepository);
     }
 
 //    @Bean
