@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "static/inc/side.html"; ?>
+		
+		<section class="contents_container_nopad">
+			<div class="cpage_head">
+				<div><img src="/img/sample_bg.jpg" /></div>
+				<div>
+					<figure>
+						<img src="/img/sample_img.jpg" />
+					</figure>
+					<div th:text="${creator.getCiPageNm()}"></div>
+					<div>창작분야 : 비디오 포토</div>
+				</div>
+			</div>
+
+			<article class="fb_c_sc cpage_body">
+				<section class="fb_cc cpage_subscr_join">
+					<button type="button" class="w_all h35 default" onclick="location.href='mem_be.html';"
+							th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">구독하기</button>
+				</section>
+
+				<div class="fb_cc container_support_title">구독자 등급 선택</div>
+				<section class="tier_area">
+					<!-- 등급목록 -->
+					<th:block th:each="list:${levels.iterator()}">
+						<article class="tier">
+							<img src="/img/icon_level_top.png" />
+							<div class="perksName" th:text="${list.getCslNm()}"></div>
+							<div class="perksPrice">₩<span th:text="${list.getCslPrice()}"></span> / 월</div>
+
+							<p th:text="${list.getCslComment()}"></p>
+
+							<div class="fb_sc perks" th:text="${list.getCslPrefer()}"></div>
+
+							<section class="fb_cc mem_be_btns">
+								<form method="get" th:action="@{/subs/mem/pay}">
+									<input type="hidden" th:name="key" th:value="${list.getCslMiSeq()}">
+									<input type="hidden" th:name="key2" th:value="${list.getCslSeq()}">
+									<button type="submit" class="w150 h35 lightBlue">가입하기</button>
+								</form>
+							</section>
+						</article>
+					</th:block>
+
+<!--					<article class="tier">-->
+<!--						<img src="/img/icon_level_top.png" />-->
+<!--						<div class="perksName">무료 구독자 (Free)</div>-->
+<!--						<div class="perksPrice"><span>₩ 0</span> / 월</div>-->
+<!--						-->
+<!--						<p>기본 사진을 무료로 마음껏 감상 하세요.</p>-->
+<!--						-->
+<!--						<div class="fb_sc perks">구독자 전용 업데이트</div>-->
+<!--						<div class="fb_sc perks">무료 구독자 전용 창작물 제공</div>-->
+<!--						-->
+<!--						<section class="fb_cc mem_be_btns">-->
+<!--							<button type="button" class="w150 h35 lightBlue">가입하기</button>-->
+<!--						</section>-->
+<!--					</article>-->
+
+<!--					&lt;!&ndash; 등급목록 &ndash;&gt;-->
+<!--					<article class="tier">-->
+<!--						<img src="/img/icon_level_top.png" />-->
+<!--						<div class="perksName">공식 구독자 (Official)</div>-->
+<!--						<div class="perksPrice"><span>₩ 10,000</span> / 월</div>-->
+<!--						-->
+<!--						<p>기본 사진을 무료로 마음껏 감상 하세요.</p>-->
+<!--						-->
+<!--						<div class="fb_sc perks">구독자 전용 업데이트</div>-->
+<!--						<div class="fb_sc perks">공식 구독자 전용 창작물 제공</div>-->
+<!--						-->
+<!--						<section class="fb_cc mem_be_btns">-->
+<!--							<button type="button" class="w150 h35 lightBlue" onclick="location.href='mem_pay.html';"-->
+<!--									th:onclick="|location.href='@{/mem/pay}'|">가입하기</button>-->
+<!--						</section>-->
+<!--					</article>-->
+
+<!--					&lt;!&ndash; 등급목록 &ndash;&gt;-->
+<!--					<article class="tier">-->
+<!--						<img src="/img/icon_level_top.png" />-->
+<!--						<div class="perksName">VIP 구독자 (VIP)</div>-->
+<!--						<div class="perksPrice"><span>₩ 50,000</span> / 월</div>-->
+<!--						-->
+<!--						<p>기본 사진을 무료로 마음껏 감상 하세요.</p>-->
+<!--						-->
+<!--						<div class="fb_sc perks">구독자 전용 업데이트</div>-->
+<!--						<div class="fb_sc perks">VIP 전용 창작물 제공</div>-->
+<!--						-->
+<!--						<section class="fb_cc mem_be_btns">-->
+<!--							<button type="button" class="w150 h35 lightBlue" onclick="location.href='mem_pay.html';"-->
+<!--									th:onclick="|location.href='@{/mem/pay}'|">가입하기</button>-->
+<!--						</section>-->
+<!--					</article>-->
+<!--				</section>-->
+
+				<div class="fb_cc container_support_title">크리에이터 소개</div>
+				<section class="cpage_greeting">크리에이터 가입시 등록한 인사말이 나타난다.</section>
+
+				<div class="fb_cc container_support_title">최근 포스트</div>
+				<!-- 포스트 영역 -->
+				<section class="post_area">
+					<!-- 포스트 -->
+					<article class="post">
+						<figure><img src="/img/sample_post_img.jpg" /></figure>
+						<section class="post_slider_screen">
+							<div class="post_slider_body">
+								<img src="/img/mainPic_positive.jpg" />
+								<img src="/img/sample_creator1.jpg" />
+								<img src="/img/sample_post_img.jpg" />
+								<img src="/img/sample_bg2.jpg" />
+								<img src="/img/sample_post_img.jpg" />
+							</div>
+							<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+							<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+						</section>
+						<div class="post_date_area">2022년 4월5일 오전 1:16</div>
+						
+						<section class="linker" onclick="location.href='creator_page_detail.html';">
+							<p class="post_title_area">포스트 제목</p>
+							<p class="post_txt_area">
+								오늘은 CSS의 display   x라는 속성에 대해 알아보겠습니다.
+								코딩을 나름 오래하신 분들조차 의외로 이 속성은 잘 모르고 안쓰시는데 그럴 법도 한 게 예전에는
+							</p>
+							<div class="post_read_more">더읽기</div>
+						</section>
+						
+						<div class="post_tag_area">
+							<span>#TAG</span>
+							<span>#TAG</span>
+							<span>#TAG</span>
+						</div>
+						<div class="post_like_area fb_sc">
+							<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+							<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+						</div>
+					</article>
+
+					<!-- 포스트 -->
+					<article class="post">
+						<figure>
+							<div class="fb_c_cc">
+								<img src="/img/icon_lock.png" />
+								<p>구독자가 되어<br>포스트 잠금을 히제하고 내용을 확인하세요</p>
+								<button type="button" class="w200 h35 bright" ;
+										th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">구독하기</button>
+							</div>
+							<img src="/img/sample_post_img.jpg" />
+						</figure>
+						<div class="fb_sc post_date_area">2022년 4월5일 오전 1:16 <span class="fb_sc"><img src="/img/icon_lock.png" /> &nbsp; 잠금</span></div>
+						<p class="post_title_area">포스트 제목</p>
+						<div class="post_tag_area">
+							<span>#TAG</span>
+							<span>#TAG</span>
+							<span>#TAG</span>
+						</div>
+						<div class="post_like_area fb_sc">
+							<div class="fb_sc"><img src="/img/icon_heart.png" /> &nbsp;&nbsp; 좋아요 00개</div>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+						</div>
+					</article>
+
+					<!-- 포스트 더보기 버튼 -->
+					<div class="fb_cc container_bottom_btn">
+						<button type="button" class="lightBlue w_all h40" th:onclick="|location.href='@{/subs/creatorpage/mode0/post(key=${creator.getCiMiSeq()})}'|">
+						포스트 00건 모두보기
+						</button>
+					</div>
+				</section>
+			</article>
+
+		</section>
+	</article>
+
+	<article id="viewer_container">
+		<div class="viewer_imgArea"></div>
+		<div class="viewer_numArea"><span class="viewer_nowNum">1</span> / <span class="viewer_totalNum">6</span></div>
+		<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
+		<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+		<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "static/inc/footer.html"; ?>
+</body>
+</th:block>
+</html>
+
+<script>
+	// 포스트 이미지 클릭시 이미지 보기 화면
+	// 이미지 띄우는 것 까지만 구현 세부 동작은 구현 하지 않았음.
+	$(function() {
+		$(".post > figure > img, .post_slider_body img").on("click", function() {
+			$(".body_container").hide();
+			$("footer").hide();
+			$("#viewer_container").css("display", "flex");
+
+			var test = [];
+			$(".viewer_imgArea").empty();
+
+			test.push($(".post > figure > img").attr("src"));
+			if($(".post_slider_body img").length) {
+				$(".post_slider_body img").each(function(){
+					test.push($(this).attr("src"));
+				});
+			}
+			let imgSrc = "<img src='" + $(this).attr("src") + "'>";
+			$(".viewer_imgArea").append(imgSrc);
+		});
+
+		$("#viewer_container .close").on("click", function() {
+			$("#viewer_container").hide();
+			$(".body_container").show();
+			$("footer").show();
+		});
+	});
+</script>
