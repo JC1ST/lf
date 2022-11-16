@@ -14,7 +14,10 @@ public interface CreatorPostRepository {
 
     List<CreatorPostDto> findBycpMiSeq(Long cpMiSeq);
 
+
+
     Slice<CreatorPostDto> findSliceBycpMiSeq(Long cpMiSeq, Pageable pageable);
+
 
 
 
