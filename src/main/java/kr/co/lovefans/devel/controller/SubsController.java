@@ -460,7 +460,6 @@ public class SubsController {
         CreatorInfoDto creator = service.findOne(cpMiSeq).get();
         model.addAttribute("creator", creator);
 
-
         if(!subListDto.isEmpty()) {
 
             return "redirect:/subs/creatorpage/mode0/post?key=" + creator.getCiMiSeq();
