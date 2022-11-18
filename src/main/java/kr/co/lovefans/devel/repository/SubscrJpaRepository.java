@@ -27,7 +27,7 @@ public class SubscrJpaRepository implements SubscrRepository{
         QMember qmember = QMember.member;
 
         List<MemberDto> result = query
-                .select(Projections.bean(MemberDto.class, qcreatorInfoDto.ciMiSeq, qcreatorInfoDto.ciPageNm, qmember.miNick))
+                .select(Projections.bean(MemberDto.class, qcreatorInfoDto.ciMiSeq, qcreatorInfoDto.ciPageNm, qmember.miNick, qmember.miPhoto))
                 .from(qcreatorInfoDto, qmember)
                 .where(qcreatorInfoDto.ciMiSeq.eq(qmember.miSeq))
 

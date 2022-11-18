@@ -214,7 +214,7 @@
 						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"
 								 th:onclick="|location.href='@{/subs/creatorpage/mode0(key=${m.getCiMiSeq()})}'|" th:each="m : ${creatorList.iterator()}">
 							<div>
-								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+								<figure class="profile"><img src="/img/sample_img.jpg" th:src="${m.getMiPhoto()}"/></figure>
 								<section>
 									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>
 									<span class="fb_sc" th:text="${m.getMiNick()}">Nick Name</span>

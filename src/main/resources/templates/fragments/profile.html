@@ -33,10 +33,10 @@
 					크리에이터 &nbsp;&nbsp;<img src="/img/icon_mypage.png" />
 				</a>
 
-				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/members/main(key=${session.session})}">
+				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/subs/main(key=${session.session})}">
 					<th:block th:text="${session.memberInfoSession.getMiNick()}"></th:block> &nbsp;<span>&gt;</span>
 				</a>
-				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/members/mypage(key=${session.session})}">
+				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/subs/mypage(key=${session.session})}">
 					구독자 &nbsp;&nbsp;<img src="/img/icon_mypage.png" />
 				</a>
 			</th:block>

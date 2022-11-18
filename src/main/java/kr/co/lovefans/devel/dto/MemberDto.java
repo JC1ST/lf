@@ -14,13 +14,17 @@ public class MemberDto {
     // 회원 닉네임
     private String miNick;
 
+    // 프로필 이미지
+    private String miPhoto;
+
     public MemberDto() {
 
     }
 
-    public MemberDto(Long ciMiSeq, String ciPageNm, String miNick) {
+    public MemberDto(Long ciMiSeq, String ciPageNm, String miNick, String miPhoto) {
         this.ciMiSeq = ciMiSeq;
         this.ciPageNm = ciPageNm;
         this.miNick = miNick;
+        this.miPhoto = miPhoto;
     }
 }
