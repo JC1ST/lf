@@ -12,7 +12,7 @@
 		<?php include "/inc/side"; ?>
 		
 		<section class="contents_container">
-		<form>
+		<form th:action="@{/creators/post/creator_post_make_img(key=${session.session})}" method="post" enctype="multipart/form-data">
 			<div class="fb_bs post_makePage">
 				<article class="post_make_container">
 					<div class="fb_sc head">
@@ -26,10 +26,22 @@
 							<br />
 							<span>JPG, JPEG, PNG 또는 GIF 파일</span>
 						</div>
-						<input type="file" id="dummy" name="dummy" style="display: none;">
+						<input type="file" id="fileUpload" name="file" style="display: none;">
+						<!--위 input의 id는 script를 부르기 위한 id이고, name은 controller의 multipartfile과 연결되는 name-->
+
+						<!--<div class="fb_c_cc img_inp_btn">
+							<button type="button" id="imgUp" class="w150 h30 defaultLight" onclick="fileUpload()">이미지 업로드</button>
+							<input type="file" id="file" name="file">
+						</div>
+						<script>
+							function fileUpload() {
+								let fileInput = document.getElementById("file")
+								fileInput.click();
+							}
+						</script>-->
 						<div id="img_inp_area">
 							<div class="fb_sc img_infos">
-								총 &nbsp; <span>00</span> &nbsp; 개의 이미지 
+								총 &nbsp; <span>00</span> &nbsp; 개의 이미지
 								<button type="button" class="w100 h30 lightBlue">전체삭제</button>
 							</div>
 							<div class="fb_ss img_container">
@@ -67,8 +79,8 @@
 							<button type="button" class="img_add">+ 이미지 추가</button>
 						</div>
 					</section>
-					<input type="text" placeholder="포스트 제목 입력" />
-					<textarea placeholder="포스트 내용 입력"></textarea>
+					<input type="text" id="cpTitle" name="cpTitle" placeholder="포스트 제목 입력" />
+					<textarea id="cpContent" name="cpContent" placeholder="포스트 내용 입력"></textarea>
 					<div class="fb_sc tail">
 						<div class="fb_sc">
 							<img src="/img/icon_file.png" />
@@ -80,7 +92,8 @@
 								<img src="/img/icon_x_close_whiteSmall.png" />
 							</div>
 							<button type="button" id="chumbu" class="w80 h30 defaultLight">업로드</button>
-							<input type="file" id="chumbu_file" name="chumbu_file" />
+							<!--<input type="file" id="cpFile" name="cpFile"/>-->
+							<!--<input type="file" id="chumbu_file" name="chumbu_file" />-->
 						</div>
 					</div>
 					<div class="fb_sc tail">
@@ -88,7 +101,7 @@
 							<img src="/img/icon_tag.png" />
 							<span>태그추가</span>
 						</div>
-						<input type="text" placeholder="추가할 태그 입력" />
+						<input type="text" id="cpTag" name="cpTag" placeholder="추가할 태그 입력" />
 					</div>
 				</article>
 
@@ -100,16 +113,18 @@
 							<div class="fb_sc">
 								<div class="radio_clone"></div>
 								<input type="radio" name="openType_radio" />
+								<input type="hidden" id="cpOpen" name="cpOpen" value='1' />
 								전체 공개
 							</div>
 							<div class="fb_sc">
 								<div class="radio_clone"></div>
 								<input type="radio" name="openType_radio" />
+								<input type="hidden" id="cpOpen" name="cpOpen" value='2' />
 								구독자 전용
 							</div>
 							<div class="fb_sc">
 								<div class="radio_clone"></div>
-								<input type="radio" name="openType_radio" />
+								<!--<input type="radio" name="openType_radio" />-->
 								등급 선택
 							</div>
 						</section>
@@ -131,7 +146,7 @@
 							</div>
 						</section>
 						<div class="fb_vc">
-							<button type="button" class="w100 h30 defaultLight" disabled>지금게시</button>
+							<button class="w100 h30 defaultLight">지금게시</button>
 							<button type="button" class="w100 h30 lightBlue" disabled>일정예약</button> <!--달력이 나와야 됨-->
 						</div>
 					</section>
@@ -147,7 +162,7 @@
 
 	</article>
 
-	
+
 	<!-- FOOTER -->
 	<?php include_once "/inc/footer"; ?>
 </body>
@@ -156,23 +171,23 @@
 
 <script>
 	$(function() {
-		/*이미지 업로드 버튼 클릭*/
+		/*이미지 업로드*/
 		$("#imgUp, .img_add").on("click", function() {
-			$("#dummy").trigger("click");
+			$("#fileUpload").trigger("click");
 		});
-		$("#dummy").on("change", function() {
+		$("#fileUpload").on("change", function() {
 			if(this.files && this.files[0]) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					$(".img_inp_btn").hide();
 					$("#img_inp_area").show();
 					var tag_result = '<figure>';
-						tag_result+= '<img src="' + e.target.result + '" />';
-						tag_result+= '<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>';
-						tag_result+= '<input type="file" name="postImg" value="' + $("#dummy").val() + '"/>';
-						tag_result+= '</figure>';
+					tag_result+= '<img src="' + e.target.result + '" />';
+					tag_result+= '<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>';
+					tag_result+= '<input type="file" name="file" value="' + $("#fileUpload").val() + '"/>';
+					tag_result+= '</figure>';
 					$(".img_container").append(tag_result);
-					$("#dummy").val("");
+					/*$("#fileUpload").val("");*/
 					img_quantity_check();
 					required_inp_check();
 				}
