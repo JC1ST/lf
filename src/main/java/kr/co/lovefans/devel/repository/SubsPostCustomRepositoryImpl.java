@@ -31,7 +31,7 @@ public class SubsPostCustomRepositoryImpl implements SubsPostCustomRepository{
         QSubListDto sub = QSubListDto.subListDto;
 
         List<PostDto> result = query
-                .select(Projections.bean(PostDto.class,post.cpMiSeq,post.cpTitle,post.cpContent,post.cpTag,post.cpLink,post.cpRegdt,sub.slCMiSeq,sub.slVMiSeq))
+                .select(Projections.bean(PostDto.class,post.cpMiSeq,post.cpTitle,post.cpContent,post.cpImg,post.cpTag,post.cpLink,post.cpRegdt,sub.slCMiSeq,sub.slVMiSeq))
                 .from(sub)
                 .leftJoin(post).on(post.cpMiSeq.eq(sub.slCMiSeq))
                 .where(sub.slVMiSeq.eq(slvmiseq))

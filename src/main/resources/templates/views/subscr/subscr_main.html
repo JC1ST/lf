@@ -64,8 +64,8 @@
 				<section class="post_area">
 					<br>
 					<article class="post">
-						<th:block th:each="model:${postList.iterator()}">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
+						<th:block th:each="p : ${postList.iterator()}">
+							<figure><img src="/img/sample_post_img.jpg" th:src="${p.getCpImg()}"/></figure>
 							<section class="post_slider_screen">
 								<div class="post_slider_body">
 									<img src="/img/mainPic_positive.jpg" />
@@ -77,12 +77,12 @@
 								<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
 								<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
 							</section>
-							<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+							<div class="post_date_area" th:text="${p.getCpRegdt()}"></div>
 
 							<section class="linker" onclick="location.href='creator_page_detail.html';"
 									 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
-								<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
-								<p class="post_txt_area" th:text="${model.getCpContent()}">
+								<p class="post_title_area" th:text="${p.getCpTitle()}"></p>
+								<p class="post_txt_area" th:text="${p.getCpContent()}">
 								</p>
 								<div class="post_read_more">더읽기</div>
 							</section>
@@ -100,6 +100,7 @@
 							</div>
 						</th:block>
 					</article>
+
 					<!-- 포스트 -->
 <!--					<article class="post">-->
 <!--						<figure><img src="/img/sample_post_img.jpg" /></figure>-->
@@ -156,7 +157,7 @@
 <!--						</article>-->
 <!--					</article>-->
 
-<!--					&lt;!&ndash; 포스트 &ndash;&gt;-->
+					<!-- 포스트 -->
 <!--					<article class="post">-->
 <!--						<figure>-->
 <!--							<div class="fb_c_cc">-->
@@ -208,8 +209,8 @@
 						<img src="/img/arrow.png" />
 						<img src="/img/arrow.png" />
 					</div>
+
 					<div class="creator_banner_group">
-						
 						<!-- 베너 -->
 						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"
 								 th:onclick="|location.href='@{/subs/creatorpage/mode0(key=${m.getCiMiSeq()})}'|" th:each="m : ${creatorList.iterator()}">
@@ -222,34 +223,8 @@
 								</section>
 							</div>
 						</article>
-
-						<!-- 베너 -->
-<!--						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"-->
-<!--								 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|">-->
-<!--							<div>-->
-<!--								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
-<!--								<section>-->
-<!--									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>-->
-<!--									<span class="fb_sc">Nick Name</span>-->
-<!--									<span class="fb_sc">Creator Page Name</span>-->
-<!--								</section>-->
-<!--							</div>-->
-<!--						</article>-->
-
-						<!-- 베너 -->
-<!--						<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"-->
-<!--								 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|">-->
-<!--							<div>-->
-<!--								<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
-<!--								<section>-->
-<!--									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>-->
-<!--									<span class="fb_sc">Nick Name</span>-->
-<!--									<span class="fb_sc">Creator Page Name</span>-->
-<!--								</section>-->
-<!--							</div>-->
-<!--						</article>-->
-
 					</div>
+
 					<!-- 베너 페이징 -->
 					<div class="creator_banner_paging fb_cc">
 						<span></span>
