@@ -7,15 +7,18 @@ import kr.co.lovefans.devel.dto.PostDto;
 import kr.co.lovefans.devel.service.CreatorPostService;
 import kr.co.lovefans.devel.service.CreatorService;
 import kr.co.lovefans.devel.service.MemberService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,6 +155,17 @@ public class CreatorController {
     public String creator_post_make_img(@RequestParam("key") Long key) {
 
         return "views/creator/post/creator_post_make_img";
+    }
+
+    @PostMapping("creators/post/creator_post_make_img") // 이미지 한개씩만 업로드 가능(여러개 구현 X)
+    public String creator_post_regist_img(@RequestParam("key") Long key, CreatorPostDto creatorPostDto, MultipartFile file) throws Exception {
+        creatorPostDto.setCpMiSeq(key);
+        creatorPostDto.setCpState('Y');
+        creatorPostDto.setCpKind('I');
+
+        creatorPostService.registerImg(key, creatorPostDto, file);
+
+        return "redirect:/creators/creator_main";
     }
 
     @GetMapping("creators/post/creator_post_make_mov")
