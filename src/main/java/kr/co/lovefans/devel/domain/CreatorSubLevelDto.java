@@ -15,12 +15,11 @@ import java.util.Date;
 public class CreatorSubLevelDto {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "csl_seq")
-    private int cslSeq;
+    private Long cslSeq;
 
     @Column(name = "csl_mi_seq")
-    private int cslMiSeq;
+    private Long cslMiSeq;
 
     @Column(name = "csl_nm")
     private String cslNm;

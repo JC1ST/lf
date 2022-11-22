@@ -23,9 +23,17 @@
 			<div class="fb_cs men_pay_btm_text">lovefans는 크리에이터를 대신해 결제 금액을 환불하지 않습니다</div>
 
 			<div class="fb_cs container_bottom_btn">
-				<button type="button" class="w200 h35 default" onclick="location.href='mem_be.html';"
-						th:onclick="|location.href='@{/subs/mem/be(key=${session.session})}'|">등급보기</button>
+				<button type="button" class="w200 h35 default"; th:onclick="|location.href='@{/subs/mem/be(key=${cSeq})}'|">등급보기</button>
+
 			</div>
+				<section class="fb_cc mem_be_btns">
+					<form method="post" th:action="@{/members/subsJoin}">
+						<input type="hidden" th:name="cSeq" th:value="${cSeq}">
+						<input type="hidden" th:name="cslSeq" th:value="${cslSeq}">
+						<button type="submit" class="w150 h35 lightBlue">가입하기</button>
+					</form>
+				</section>
+
 
 		</section>
 	</article>

@@ -2,10 +2,13 @@ package kr.co.lovefans.devel.controller;
 
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.Member;
+import kr.co.lovefans.devel.domain.SubListDto;
+import kr.co.lovefans.devel.domain.SubListDtoId;
 import kr.co.lovefans.devel.form.LoginForm;
 import kr.co.lovefans.devel.form.MemberForm;
 import kr.co.lovefans.devel.service.CreatorService;
 import kr.co.lovefans.devel.service.MemberService;
+import kr.co.lovefans.devel.service.SubListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +25,13 @@ public class MemberControrller {
 
     private final MemberService memberService;
     private final CreatorService creatorService;
+    private final SubListService subListService;
 
     @Autowired
-    public MemberControrller(MemberService memberService, CreatorService creatorService){
+    public MemberControrller(MemberService memberService, CreatorService creatorService, SubListService subListService){
         this.memberService = memberService;
         this.creatorService = creatorService;
+        this.subListService = subListService;
     }
 
 
@@ -162,6 +167,19 @@ public class MemberControrller {
         boolean result = memberService.checkMail(mi_id);
 
         return result;
+    }
+
+    @PostMapping("/members/subsJoin")
+    public String subsJoin(@RequestParam("cSeq") Long cSeq, @RequestParam("cslSeq") Long cslSeq,HttpSession session){
+
+        SubListDto subListDto = new SubListDto();
+        subListDto.setSubListDtoId(new SubListDtoId());
+        subListDto.getSubListDtoId().setSlCMiSeq(cSeq);
+        subListDto.getSubListDtoId().setSlVMiSeq((Long) session.getAttribute("session"));
+        subListDto.getSubListDtoId().setSlCslSeq(cslSeq);
+        subListService.save(subListDto);
+        return "redirect:/subs/creatorpage/mode0/post?key="+cSeq;
+
     }
 
 
