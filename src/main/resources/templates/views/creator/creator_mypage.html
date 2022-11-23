@@ -93,11 +93,14 @@
 					<div class="opt">
 						<form action="/creators/update" method="post">
 							<input type="text" id="miNick" name="miNick" placeholder="변경할 닉네임을 입력하세요"/>
+							&nbsp;&nbsp;&nbsp;
+							<button type="button" class="w80 h30 defaultLight nickCheck">중복확인</button>
 							<br/><br/>
+							<span id="nickSpan" style="color:red"></span>
 							<div>
-								<button class="w80 h30 defaultLight">수정</button>
+								<button class="w80 h30 defaultLight" id="modifyBtn" disabled>수정</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="reset" class="w80 h30 cancel">취소</button>
+								<button type="button" class="w80 h30 cancel">취소</button>
 							</div>
 							<br/>
 						</form>
@@ -223,8 +226,35 @@
 </th:block>
 </html>
 
+<!--속성 선택자-->
+<!--id ==> $(#아이디밸류)-->
+<!--class ==> $(.클래스밸류)-->
+<!--name ==> $('[name="네임밸류"]')-->
 <script>
 	$(function(){
+		$(".nickCheck").on("click", function () {
+			let miNick = $("#miNick");
+			let nickSpan = $("#nickSpan");
+			let modifyBtn = $("#modifyBtn");
+			$.ajax({
+				url:'/nickCheck?miNick=' + miNick.val(),
+				type: 'get',
+				dataType: 'json',
+				success: function(result) {
+					let isDuplicate = result.isDuplicate;
+					if(isDuplicate == true) {
+						nickSpan.html("닉네임이 중복되었습니다.");
+						modifyBtn.attr("disabled", true);
+					} else {
+						nickSpan.empty();
+						modifyBtn.attr("disabled", false);
+					}
+				},
+				error:function() {
+					console.log("에러 발생");
+				}
+			})
+		})
 
 		/*정보 수정 아이콘 클릭 - 프로필사진은 제외*/
 		$(".mypage_section:not(:first-of-type) .modifies_btns button").on("click", function() {

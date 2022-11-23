@@ -14,11 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,6 +112,21 @@ public class CreatorController {
         model.addAttribute("member", memberInfo.get());
 
         return "views/creator/creator_mypage";
+    }
+    /*닉네임 중복 확인*/
+    @GetMapping("nickCheck")
+    public @ResponseBody HashMap<String, Boolean> nickCheck(@RequestParam("miNick") String miNick) {
+        HashMap<String, Boolean> result = new HashMap<String, Boolean>();
+        Optional<Member> member = memberService.findByNick(miNick);
+
+        if(!member.isEmpty()) {
+            result.put("isDuplicate", true);
+        } else {
+            result.put("isDuplicate", false);
+        }
+        Optional.empty();
+
+        return result;
     }
 
     @PostMapping("/creators/update") /*크리에이터 페이지 중지에 사용, 사이드바 변경 필요*/
