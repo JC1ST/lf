@@ -4,10 +4,10 @@
 	<section class="fb_c_cs profile_area">
 		<figure class="fb_cc profile">
 			<!-- 프로필 이미지가 있을 때 -->
-			<img th:if="${profile}" th:src="${model.getMiPhoto()}">
+			<img src="/img/sample_img.jpg" th:if="${profile}" th:src="${model.getMiPhoto()}">
 
 			<!-- 프로필 이미지가 없을 때 -->
-			<img th:unless="${profile}" th:src="" th:text="${model.getMiNick()}">
+<!--			<img src="/img/sample_img.jpg" th:unless="${profile}" th:src="">-->
 		</figure>
 
 		<div>

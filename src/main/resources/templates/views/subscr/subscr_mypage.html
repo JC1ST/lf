@@ -26,7 +26,9 @@
 								<img th:if="${profile}" th:src="${model.getMiPhoto()}" />
 
 								<!-- 프로필 이미지가 없을 때 -->
-								<img th:unless="${profile}" th:src="" th:text="${model.getMiNick()}">
+								<img th:unless="${profile}" th:src="">
+									<span>S</span>
+								</img>
 
 							</figure>
 							<input type="file" id="profile_pic" />

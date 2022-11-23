@@ -9,7 +9,10 @@ import kr.co.lovefans.devel.dto.SubCreDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 import static com.querydsl.jpa.JPAExpressions.select;
 
@@ -46,6 +49,15 @@ public class SubscrJpaRepository implements SubscrRepository{
                 .limit(3)
 
                 .fetch();
+
+        return result;
+    }
+
+    @Override
+    public List<SubListDto> findMySub(Long slCMiSeq) {
+        List<SubListDto> result = em.createQuery("select s from SubListDto s where s.slCMiSeq = :slCMiSeq", SubListDto.class)
+                .setParameter("slCMiSeq", slCMiSeq)
+                .getResultList();
 
         return result;
     }
