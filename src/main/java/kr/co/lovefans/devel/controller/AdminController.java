@@ -41,20 +41,42 @@ public class AdminController {
 
     // 전체 회원 리스트
     @GetMapping("/mem_all_list")
-    public String list(Model model, @PageableDefault(page = 0, size = 10, sort = "mi_seq", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String list(Model model, @PageableDefault(page = 0, size = 5, sort = "mi_seq", direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<MemberInfoDto> pageList = adminService.findPage(pageable);
 
-        int nowPage = pageList.getPageable().getPageNumber() + 1;
-//        int startPage = Math.max(nowPage - 4, 1);
-//        int endPage = Math.min(nowPage + 5, pageList.getTotalPages());
-        int endPage = (int)(Math.ceil(nowPage / 10))*10 + 10;
-        int startPage = endPage-9;
-
+//        // 페이지 번호
+//        int pageNumber = pageList.getPageable().getPageNumber();
+//        // 페이지 사이즈
+//        int pageSize = pageList.getPageable().getPageSize();
+//        // 전체 페이지 갯수
+//        int totalPages = pageList.getTotalPages();
+//        // 시작 페이지 번호
+//        int startPage = (int) (Math.floor(pageNumber / pageSize) * pageSize + 1);
+//        // 임시 마지막 페이지
+//        int tempEndPage = startPage + pageSize - 1;
+//        // 마지막 페이지
+//        int endPage = (tempEndPage > totalPages ? totalPages : tempEndPage);
+//
         model.addAttribute("pageList", pageList);
+//        model.addAttribute("pageNumber", pageNumber);
+//        model.addAttribute("pageSize", pageSize);
+//        model.addAttribute("totalPages", totalPages);
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("tempEndPage", tempEndPage);
+//        model.addAttribute("endPage", endPage);
+
+
+
+        int nowPage = pageList.getPageable().getPageNumber() + 1;
+        int startPage2 = Math.max(nowPage - 4, 1);
+        int endPage2 = Math.min(nowPage + 5, pageList.getTotalPages());
+
         model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        model.addAttribute("startPage2", startPage2);
+        model.addAttribute("endPage2", endPage2);
+
+
 
 //        사이드 메뉴 관련
         model.addAttribute("memAllList", true);

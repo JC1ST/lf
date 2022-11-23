@@ -26,7 +26,6 @@ public class SubsPostCustomRepositoryImpl implements SubsPostCustomRepository{
 
     @Override
     public List<PostDto> findBySlvmiSeq(Long slvmiseq) {
-//수정필요
         QCreatorPostDto post = QCreatorPostDto.creatorPostDto;
         QSubListDto sub = QSubListDto.subListDto;
 
@@ -35,6 +34,7 @@ public class SubsPostCustomRepositoryImpl implements SubsPostCustomRepository{
                 .from(sub)
                 .leftJoin(post).on(post.cpMiSeq.eq(sub.slCMiSeq))
                 .where(sub.slVMiSeq.eq(slvmiseq))
+                .orderBy(post.cpRegdt.desc())
                 .fetch();
 
 

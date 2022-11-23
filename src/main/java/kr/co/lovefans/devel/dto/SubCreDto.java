@@ -11,6 +11,9 @@ public class SubCreDto {
     // 회원 닉네임
     private String miNick;
 
+    // 프로필 이미지
+    private String miPhoto;
+
     // 크리에이터 화원번호(sub_list)
     private Long slcMiSeq;
 
@@ -27,9 +30,10 @@ public class SubCreDto {
 
     }
 
-    public SubCreDto(Long miSeq, String miNick, Long slcMiSeq, Long slvMiSeq, Long ciMiSeq, String ciPageNm) {
+    public SubCreDto(Long miSeq, String miNick, String miPhoto, Long slcMiSeq, Long slvMiSeq, Long ciMiSeq, String ciPageNm) {
         this.miSeq = miSeq;
         this.miNick = miNick;
+        this.miPhoto = miPhoto;
         this.slcMiSeq = slcMiSeq;
         this.slvMiSeq = slvMiSeq;
         this.ciMiSeq = ciMiSeq;

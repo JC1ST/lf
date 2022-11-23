@@ -2,11 +2,9 @@ package kr.co.lovefans.devel.repository;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kr.co.lovefans.devel.domain.CreatorInfoDto;
-import kr.co.lovefans.devel.domain.MemberInfoDto;
-import kr.co.lovefans.devel.domain.QCreatorInfoDto;
-import kr.co.lovefans.devel.domain.QMember;
+import kr.co.lovefans.devel.domain.*;
 import kr.co.lovefans.devel.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -66,14 +64,36 @@ public class JpaCreatorRepository implements CreatorRepository {
     }
 
     @Override
+    public List<CreatorPostDto> findAllPost(Long cpMiSeq) {
+        QCreatorPostDto qCreatorPostDto = QCreatorPostDto.creatorPostDto;
+
+        List<CreatorPostDto> result = query
+                .select(Projections.bean(CreatorPostDto.class, qCreatorPostDto.cpTitle, qCreatorPostDto.cpContent, qCreatorPostDto.cpImg, qCreatorPostDto.cpRegdt))
+                .from(qCreatorPostDto)
+                .where(qCreatorPostDto.cpMiSeq.eq(cpMiSeq))
+
+                .fetch();
+
+        return result;
+
+//        return em.createQuery("select c from CreatorPostDto c", CreatorPostDto.class)
+//                .getResultList();
+    }
+
+    @Override
     public List<MemberDto> findAllPlus() {
         QCreatorInfoDto creatorInfoDto = QCreatorInfoDto.creatorInfoDto;
         QMember member = QMember.member;
 
         List<MemberDto> result = query
-                .select(Projections.bean(MemberDto.class, creatorInfoDto.ciMiSeq, creatorInfoDto.ciPageNm, member.miNick))
+                .select(Projections.bean(MemberDto.class, creatorInfoDto.ciMiSeq, creatorInfoDto.ciPageNm, member.miNick, member.miPhoto))
                 .from(creatorInfoDto, member)
                 .where(creatorInfoDto.ciMiSeq.eq(member.miSeq))
+
+                // 데이터 랜덤 조회
+                .orderBy(Expressions.numberTemplate(Integer.class, "function('rand')").asc())
+                .limit(3)
+
                 .fetch();
 
 

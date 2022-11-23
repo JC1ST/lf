@@ -20,11 +20,13 @@ public class SubscrService {
         this.subCreRepository = subCreRepository;
     }
 
-    public List<MemberDto> findAll() {
-        return subscrRepository.findAll();
+    // 비구독 크리에이터
+    public List<MemberDto> findAll(Long slvmiseq) {
+        return subscrRepository.findAll(slvmiseq);
     }
 
-    public List<SubCreDto> findCre() {
-        return subCreRepository.findCre();
+    // 구독한 크리에이터
+    public List<SubCreDto> findCre(Long slvmiseq) {
+        return subCreRepository.findCre(slvmiseq);
     }
 }

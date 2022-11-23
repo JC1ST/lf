@@ -24,12 +24,12 @@
 			</div>
 
 			<!-- 메시지 목록 -->
-			<article class="aritcle_border_container">
+			<article class="aritcle_border_container" th:each="c: ${creList.iterator()}">
 				<div class="message_list" onclick="location.href='subscr_message_view.html';"
-					 th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|">
-					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
+					 th:onclick="|location.href='@{/subs/message/view(key=${c.getCiMiSeq()})}'|">
+					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" th:src="${c.getMiPhoto()}" /></figure>
 					<section>
-						<span>Creator Nick Name OR Page Name</span>
+						<span th:text="${c.getMiNick()}">Creator Nick Name OR Page Name</span>
 						<p>서로 주고받은 메시지 최종 내용이 표시됩니다. </p>
 						<h5 th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}">2022년 12월 25일</h5>
 					</section>
@@ -37,21 +37,21 @@
 				</div>
 			</article>
 			<br />
-			
+
 			<!-- 메시지 목록 -->
-			<article class="aritcle_border_container">
-				<div class="message_list" onclick="location.href='subscr_message_view.html';"
-					 th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|">
-					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
-					<section>
-						<span>Creator Nick Name OR Page Name</span>
-						<p>서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. </p>
-						<h5 th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}">2022년 12월 25일</h5>
-					</section>
-					<!-- <div class="fb_cc badge"><b>N</b></div> -->
-				</div>
-			</article>
-			<br />
+<!--			<article class="aritcle_border_container">-->
+<!--				<div class="message_list" onclick="location.href='subscr_message_view.html';"-->
+<!--					 th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|">-->
+<!--					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>-->
+<!--					<section>-->
+<!--						<span>Creator Nick Name OR Page Name</span>-->
+<!--						<p>서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. </p>-->
+<!--						<h5 th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}">2022년 12월 25일</h5>-->
+<!--					</section>-->
+<!--					&lt;!&ndash; <div class="fb_cc badge"><b>N</b></div> &ndash;&gt;-->
+<!--				</div>-->
+<!--			</article>-->
+<!--			<br />-->
 
 			<div id="message_add_btn" class="fb_cc" onclick="location.href='subscr_message_select.html';"
 				 th:onclick="|location.href='@{/subs/message/select(key=${session.session})}'|">

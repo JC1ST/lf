@@ -33,7 +33,7 @@ public class AdminJpaRepository implements AdminRepository{
         List<MemberInfoDto> content = query
                 .select(Projections.bean(MemberInfoDto.class, qMemberInfoDto.miSeq, qMemberInfoDto.miId, qMemberInfoDto.miNick, qMemberInfoDto.miState, qMemberInfoDto.miKind, qMemberInfoDto.miLevel, qMemberInfoDto.miRegdt))
                 .from(qMemberInfoDto)
-//                .offset(pageable.getOffset())
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
 

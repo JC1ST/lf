@@ -65,84 +65,51 @@
 				</tbody>
 			</table>
 
-			<!-- 페이징 -->
+<!--			&lt;!&ndash; 페이징 &ndash;&gt;-->
+<!--			<div class="fb_cc paging_area">-->
+<!--&lt;!&ndash;				startPage=${T(Math).floor(pageNumber/pageSize)*pageSize+1}&ndash;&gt;-->
+<!--				<nav th:with="pageNumber=${pageList.pageable.pageNumber}, pageSize=${pageList.pageable.pageSize}, totalPages=${pageList.totalPages}, tempEndPage=${startPage + pageSize - 1}, endPage=(${tempEndPage > totalPages ? totalPages : tempEndPage})">-->
+<!--	&lt;!&ndash;				첫번쨰 페이지&ndash;&gt;-->
+<!--					<th:block th:classappend="${pageNumber + 1 <= pageSize + 1} ? 'disabled'">-->
+<!--						<a th:href="@{/admin/mem_all_list(page=1)}">&laquo;</a>-->
+<!--					</th:block>-->
+
+<!--	&lt;!&ndash;				이전 페이지&ndash;&gt;-->
+<!--					<th:block th:classappend="${pageList.first} ? 'disabled'">-->
+<!--						<a th:href="${pageList.first} ? '#' : @{/admin/mem_all_list(page=${#numbers.formatDecimal(startPage - pageSize, 0, -1)})}">&lt;</a>-->
+<!--					</th:block>-->
+
+<!--	&lt;!&ndash;				페이지 번호들&ndash;&gt;-->
+<!--					<th:block th:each="page : ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'">-->
+<!--						<a th:href="@{/admin/mem_all_list(page=${page})}" th:text="${page}">-->
+<!--							<strong th:text="${page}" style="color : red"></strong>-->
+<!--						</a>-->
+<!--					</th:block>-->
+
+<!--	&lt;!&ndash;				다음 페이지&ndash;&gt;-->
+<!--					<th:block th:classappend="${pageList.last} ? 'disabled'">-->
+<!--						<a th:href="${pageList.last} ? '#' : @{/admin/mem_all_list(page=${#numbers.formatDecimal(startPage + pageSize, 0, -1)})}">&gt;</a>-->
+<!--					</th:block>-->
+
+<!--	&lt;!&ndash;				마지막 페이지&ndash;&gt;-->
+<!--&lt;!&ndash;					<th:block th:classappend="${T(Math).floor(totalPages/10) + 10 <= startPage} ? 'disabled'">&ndash;&gt;-->
+<!--&lt;!&ndash;						<a th:href="@{/admin/mem_all_list(page=${totalPages})}">End</a>&ndash;&gt;-->
+<!--&lt;!&ndash;					</th:block>&ndash;&gt;-->
+<!--				</nav>-->
+<!--			</div>-->
+
+
+
+
+
 			<div class="fb_cc paging_area">
-				<th:block>
-					<a href="#">&lt;</a>
+				<th:block th:each="page : ${#numbers.sequence(startPage2, endPage2)}">
+					<a th:if="${page != nowPage}" th:href="@{/admin/mem_all_list(page=${page - 1})}" th:text="${page}"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
 				</th:block>
-
-				<th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-					<a th:if="${page != nowPage}" th:href="@{/admin/mem_all_list(page = ${page - 1})}" th:text="${page}"></a>
-					<strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
-				</th:block>
-
-				<th:block>
-					<a href="#">&gt;</a>
-				</th:block>
-
-<!--				<a href="#">&lt;</a>-->
-<!--				&nbsp;&nbsp;&nbsp;-->
-<!--				<span>1</span>-->
-<!--				<a href="#">2</a>-->
-<!--				<a href="#">3</a>-->
-<!--				<a href="#">4</a>-->
-<!--				<a href="#">5</a>-->
-<!--				<a href="#">6</a>-->
-<!--				<a href="#">7</a>-->
-<!--				<a href="#">8</a>-->
-<!--				<a href="#">9</a>-->
-<!--				<a href="#">10</a>-->
-<!--				&nbsp;&nbsp;&nbsp;-->
-<!--				<a href="#">&gt;</a>-->
 			</div>
 
 
-
-<!--			<nav class="fb_cc paging_area" style="text-align: center;">-->
-<!--				<ul class="pagination" th:with="start=${T(Math).floor(pageList.number/10)*10 + 1},-->
-<!--                    last=(${start + 9 < pageList.totalPages ? start + 9 : pageList.totalPages})" >-->
-<!--					<th:block th:with="-->
-<!--                		firstAddr=@{/admin/mem_all_list(page=1)},-->
-<!--                		prevAddr=@{/admin/mem_all_list(page=${pageList.number})},-->
-<!--                		nextAddr=@{/admin/mem_all_list(page=${pageList.number + 2})},-->
-<!--                		lastAddr=@{/admin/mem_all_list(page=${pageList.totalPages})}" >-->
-<!--						<tli>-->
-<!--							<a th:href="${firstAddr}" aria-label="First">-->
-<!--								<span aria-hidden="true">First</span>-->
-<!--							</a>-->
-<!--						</tli>-->
-
-<!--						&lt;!&ndash; 이전 페이지로 가기 버튼 &ndash;&gt;-->
-<!--						<tli th:class="${pageList.first} ? 'disabled'">-->
-<!--							<a th:href="${pageList.first} ? '#' :${prevAddr}"-->
-<!--							   aria-label="Previous">-->
-<!--								<span aria-hidden="true">&lt;</span>-->
-<!--							</a>-->
-<!--						</tli>-->
-
-<!--						&lt;!&ndash;1,2,3,4,.. 등 페이지&ndash;&gt;-->
-<!--						<tli th:each="page: ${#numbers.sequence(start, last)}"-->
-<!--							th:class="${page == pageList.number + 1} ? 'active'">-->
-<!--							<a th:text="${page}" th:href="@{/admin/mem_all_list(page=${page})}"></a>-->
-<!--						</tli>-->
-
-<!--						&lt;!&ndash;다음 페이지로 &ndash;&gt;-->
-<!--						<tli th:class="${pageList.last} ? 'disabled'">-->
-<!--							<a th:href="${pageList.last} ? '#' : ${nextAddr}"-->
-<!--							   aria-label="Next">-->
-<!--								<span aria-hidden="true">&gt;</span>-->
-<!--							</a>-->
-<!--						</tli>-->
-
-<!--						&lt;!&ndash;맨 마지막 페이지로 이동 &ndash;&gt;-->
-<!--						<tli>-->
-<!--							<a th:href="${lastAddr}" aria-label="Last">-->
-<!--								<span aria-hidden="true">Last</span>-->
-<!--							</a>-->
-<!--						</tli>-->
-<!--					</th:block>-->
-<!--				</ul>-->
-<!--			</nav>-->
 
 
 

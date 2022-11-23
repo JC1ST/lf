@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface SubscrRepository {
 
-    List<MemberDto> findAll();
+    // 비구독 크리에이터
+    List<MemberDto> findAll(Long slvmiseq);
 }

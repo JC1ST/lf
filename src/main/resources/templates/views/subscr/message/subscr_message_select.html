@@ -14,7 +14,7 @@
 			</div>
 
 			<article class="fb_c_sc aritcle_border_container" style="margin-bottom: 50px;">
-				<div class="message_select_explain">
+				<div class="message_select_explain" >
 					대화 메시지를 보낼 크리에이터를 선택해 주세요
 					<button type="button" id="btn_check" class="w100 h30 defaultLight" onclick="location.href='subscr_message_view.html';"
 							th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|" disabled="disabled">확인</button>
@@ -22,34 +22,11 @@
 
 				<input type="text" class="sech2" placeholder="메시지 상대 검색" />
 
-				<div>
-					<!-- 크리에이터 목록 -->
-<!--					<section class="fb_sc" th:each="creator : ${creatorList}">-->
-<!--						<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>-->
-<!--						<th:block th:text="${creator.getCiPageNm()}">Creator Nick Name OR Page Name</th:block>-->
-<!--						<div class="fb_cc radio_clone"><img src="/img/icon_check.png"></div>-->
-<!--						<input type="radio" name="creator" />-->
-<!--					</section>-->
-
-					<section class="fb_sc">
-						<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
-						Creator Nick Name OR Page Name1
-						<div class="fb_cc radio_clone"><img src="/img/icon_check.png"></div>
-						<input type="radio" name="creator" />
-					</section>
-
+				<div th:each="c: ${creList.iterator()}">
 					<!-- 크리에이터 목록 -->
 					<section class="fb_sc">
-						<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
-						Creator Nick Name OR Page Name2
-						<div class="fb_cc radio_clone"><img src="/img/icon_check.png"></div>
-						<input type="radio" name="creator" />
-					</section>
-
-					<!-- 크리에이터 목록 -->
-					<section class="fb_sc">
-						<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
-						Creator Nick Name OR Page Name3
+						<figure class="fb_cc profile"><img src="/img/sample_img.jpg" th:src="${c.getMiPhoto()}" /></figure>
+						<th:block th:text="${c.getMiNick()}">Creator Nick Name OR Page Name1</th:block>
 						<div class="fb_cc radio_clone"><img src="/img/icon_check.png"></div>
 						<input type="radio" name="creator" />
 					</section>

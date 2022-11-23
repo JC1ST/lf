@@ -44,7 +44,7 @@
 						<th:block th:each="m:${model.iterator()}">
 							<article class="creator_pic">
 								<a th:href="@{/subs/creatorpage/mode0(key=${m.getCiMiSeq()})}">
-									<figure><img src="/img/sample_creator1.jpg" /></figure>
+									<figure><img src="/img/sample_creator1.jpg" th:src="${m.getMiPhoto()}"/></figure>
 									<p th:text="${m.getMiNick()}"></p>
 									<p th:text="${m.getCiPageNm()}"></p>
 

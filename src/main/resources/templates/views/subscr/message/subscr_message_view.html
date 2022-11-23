@@ -13,10 +13,10 @@
 				<img src="/img/icon_message.png" /> &nbsp;&nbsp; <b>메시지</b>
 			</div>
 
-			<article class="fb_c_sc aritcle_border_container" style="margin-bottom: 50px;">
+			<article class="fb_c_sc aritcle_border_container" style="margin-bottom: 50px;" th:each="c: ${creList.iterator()}">
 				<section class="fb_sc message_view_top">
 					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
-					<div>Creator Nick Name OR Page Name &nbsp;&nbsp;<span>님과의 메시지</span></div>
+					<div th:text="${c.getMiNick()}">Creator Nick Name OR Page Name &nbsp;&nbsp;<span>님과의 메시지</span></div>
 					<a class="fb_cc" href="subscr_message_list.html" th:href="@{/subs/message/list(key=${session.session})}"><img src="/img/icon_x_close.png" /></a>
 				</section>
 

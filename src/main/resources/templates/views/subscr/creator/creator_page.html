@@ -13,9 +13,9 @@
 				<div><img src="/img/sample_bg.jpg" /></div>
 				<div>
 					<figure>
-						<img src="/img/sample_img.jpg" />
+						<img src="/img/sample_img.jpg" th:src="${creator.getCiPPhoto()}"/>
 					</figure>
-					<div>Creaotr Page Name</div>
+					<div th:text="${creator.getCiPageNm()}"></div>
 					<div>창작분야 : 비디오 포토</div>
 					<div>구독자 : 100</div>
 				</div>
@@ -54,51 +54,53 @@
 						<!------ 포스트 리스트 영역 ------>
 						<!-- 포스트 -->
 						<article class="post">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
-							<section class="post_slider_screen">
-								<div class="post_slider_body">
-									<img src="/img/mainPic_positive.jpg" />
-									<img src="/img/sample_creator1.jpg" />
-									<img src="/img/sample_post_img.jpg" />
-									<img src="/img/sample_bg2.jpg" />
-									<img src="/img/sample_post_img.jpg" />
+							<th:block th:each="p : ${crePost.iterator()}">
+								<figure><img src="/img/sample_post_img.jpg" th:src="${p.getCpImg()}"/></figure>
+								<section class="post_slider_screen">
+									<div class="post_slider_body">
+										<img src="/img/mainPic_positive.jpg" />
+										<img src="/img/sample_creator1.jpg" />
+										<img src="/img/sample_post_img.jpg" />
+										<img src="/img/sample_bg2.jpg" />
+										<img src="/img/sample_post_img.jpg" />
+									</div>
+									<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+									<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+								</section>
+								<div class="post_date_area" th:text="${p.getCpRegdt()}">2022년 4월5일 오전 1:16</div>
+
+								<section class="linker" onclick="location.href='creator_page_detail.html';"
+										 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+									<p class="post_title_area" th:text="${p.getCpTitle()}">포스트 제목</p>
+									<p class="post_txt_area" th:text="${p.getCpContent()}">
+										오늘은 CSS의 display   x라는 속성에 대해 알아보겠습니다.
+										코딩을 나름 오래하신 분들조차 의외로 이 속성은 잘 모르고 안쓰시는데 그럴 법도 한 게 예전에는
+									</p>
+									<div class="post_read_more">더읽기</div>
+								</section>
+
+								<div class="post_tag_area">
+									<span>#TAG</span>
+									<span>#TAG</span>
+									<span>#TAG</span>
 								</div>
-								<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
-								<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
-							</section>
-							<div class="post_date_area">2022년 4월5일 오전 1:16</div>
+								<div class="post_like_area fb_sc">
 
-							<section class="linker" onclick="location.href='creator_page_detail.html';"
-									 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
-								<p class="post_title_area">포스트 제목</p>
-								<p class="post_txt_area">
-									오늘은 CSS의 display   x라는 속성에 대해 알아보겠습니다.
-									코딩을 나름 오래하신 분들조차 의외로 이 속성은 잘 모르고 안쓰시는데 그럴 법도 한 게 예전에는
-								</p>
-								<div class="post_read_more">더읽기</div>
-							</section>
-							
-							<div class="post_tag_area">
-								<span>#TAG</span>
-								<span>#TAG</span>
-								<span>#TAG</span>
-							</div>
-							<div class="post_like_area fb_sc">
-								
-								<!-- 페이지를 운영하는 크리에이터가 접속 하였을 때는 수정 삭제 버튼이 나타난다-->
-								<!-- <section class="fb_sc modifies_btns">
-									<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
-								</section> -->
+									<!-- 페이지를 운영하는 크리에이터가 접속 하였을 때는 수정 삭제 버튼이 나타난다-->
+									<!-- <section class="fb_sc modifies_btns">
+										<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+									</section> -->
 
-								<!-- 페이지 운영 크리에이터 이외의 접속자는 Like 버튼이 나타난다 -->
-								<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
-								
-								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
-							</div>
+									<!-- 페이지 운영 크리에이터 이외의 접속자는 Like 버튼이 나타난다 -->
+									<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+
+									<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+								</div>
+							</th:block>
 						</article>
 
 						<!-- 포스트 더보기 버튼 -->

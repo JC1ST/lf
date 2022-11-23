@@ -86,7 +86,7 @@ public class MemberControrller {
         if(memberService.login(member)){
 
             Optional<Member> memberInfo = memberService.findById(form.getMi_id());
-            System.out.println("회원닉 = " + memberInfo.get().getMiNick());
+//            System.out.println("회원닉 = " + memberInfo.get().getMiNick());
 
 //            model.addAttribute("model", memberInfo.get());
 
@@ -97,7 +97,7 @@ public class MemberControrller {
             memberInfoSession.setAttribute("memberInfoSession",memberInfo.get());
 
             Optional<CreatorInfoDto> creatorInfo = creatorService.findOne(memberInfo.get().getMiSeq());
-            System.out.println("멤 멤 멤 멤ㅁ ㅔㅁ ㅁ메 메 = " + creatorInfo);
+//            System.out.println("멤 멤 멤 멤ㅁ ㅔㅁ ㅁ메 메 = " + creatorInfo);
             if(memberInfo.get().getMiKind().equals("C")) {
                 HttpSession creatorInfoSession = request.getSession();
                 creatorInfoSession.setAttribute("creatorInfoSession", creatorInfo.get());

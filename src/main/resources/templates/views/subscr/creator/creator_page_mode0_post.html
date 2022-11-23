@@ -23,7 +23,7 @@
 				<div><img src="/img/sample_bg.jpg" /></div>
 				<div>
 					<figure>
-						<img src="/img/sample_img.jpg" />
+						<img src="/img/sample_img.jpg" th:src="${creator.getCiPPhoto()}" />
 					</figure>
 					<div th:text="${creator.getCiPageNm()}">Creaotr Page Name</div>
 					<div>창작분야 : 비디오 포토</div>
@@ -65,7 +65,7 @@
 						<!-- 포스트 -->
 						<article class="post">
 							<th:block th:each="model:${model.iterator()}">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
+							<figure><img src="/img/sample_post_img.jpg" th:src="${model.getCpImg()}"/></figure>
 							<section class="post_slider_screen">
 								<div class="post_slider_body">
 									<img src="/img/mainPic_positive.jpg" />
@@ -136,7 +136,8 @@
 					<div class="cpage_side">
 						<!-- 구독 버튼  -->
 						<section class="post_select_boxs">
-							<button type="button" class="w_all h35 default">구독하기</button>
+							<button type="button" class="w_all h35 default"
+									th:onclick="|location.href='@{/subs/mem/be(key=${session.session})}'|">구독하기</button>
 						</section>
 
 						<!-- 등급안내 -->

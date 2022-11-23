@@ -22,7 +22,12 @@
 						<section class="fb_sc"><img src="/img/icon_mypage.png" />프로필 사진</section>
 						<section class="fb_sc">
 							<figure class="fb_cc profile">
-								<span>S</span>
+								<!-- 프로필 이미지가 있을 때 -->
+								<img th:if="${profile}" th:src="${model.getMiPhoto()}" />
+
+								<!-- 프로필 이미지가 없을 때 -->
+								<img th:unless="${profile}" th:src="" th:text="${model.getMiNick()}">
+
 							</figure>
 							<input type="file" id="profile_pic" />
 							<div class="fb_cc modifies_btns">

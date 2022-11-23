@@ -3,11 +3,11 @@
 <th:block th:fragment="profileFragment">
 	<section class="fb_c_cs profile_area">
 		<figure class="fb_cc profile">
-			<!-- 프로필 이미지가 없을 때 -->
-			<!-- <span> S </span> -->
-
 			<!-- 프로필 이미지가 있을 때 -->
-			<img src="/img/sample_img.jpg">
+			<img th:if="${profile}" th:src="${model.getMiPhoto()}">
+
+			<!-- 프로필 이미지가 없을 때 -->
+			<img th:unless="${profile}" th:src="" th:text="${model.getMiNick()}">
 		</figure>
 
 		<div>
@@ -25,14 +25,15 @@
 <!--			</th:block>-->
 
 			<th:block>
+<!--				크리에이터인 경우-->
 				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'C'}" th:href="@{/creators/creator_main(key=${session.session})}">
 					<th:block th:text="${session.creatorInfoSession.getCiPageNm()}"></th:block> &nbsp;<span>&gt;</span>
 				</a>
-				<!-- 크리에이터 일때는 "크리에이터", 구독자 일때는 "구독자" 로 표시된다. -->
 				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'C'}" th:href="@{/creators/creator_mypage(key=${session.session})}">
 					크리에이터 &nbsp;&nbsp;<img src="/img/icon_mypage.png" />
 				</a>
 
+<!--				구독자인 경우-->
 				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/subs/main(key=${session.session})}">
 					<th:block th:text="${session.memberInfoSession.getMiNick()}"></th:block> &nbsp;<span>&gt;</span>
 				</a>
