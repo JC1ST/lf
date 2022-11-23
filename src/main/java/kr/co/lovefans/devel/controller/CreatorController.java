@@ -3,22 +3,24 @@ package kr.co.lovefans.devel.controller;
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.CreatorPostDto;
 import kr.co.lovefans.devel.domain.Member;
-import kr.co.lovefans.devel.dto.PostDto;
+import kr.co.lovefans.devel.domain.SubListDto;
 import kr.co.lovefans.devel.service.CreatorPostService;
 import kr.co.lovefans.devel.service.CreatorService;
 import kr.co.lovefans.devel.service.MemberService;
-import lombok.extern.log4j.Log4j2;
+import kr.co.lovefans.devel.service.SubscrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +30,14 @@ public class CreatorController {
     private final CreatorService creatorService;
     private final MemberService memberService;
     private final CreatorPostService creatorPostService;
+    private final SubscrService subscrService;
 
     @Autowired
-    public CreatorController(CreatorService creatorService, MemberService memberService, CreatorPostService creatorPostService) {
+    public CreatorController(CreatorService creatorService, MemberService memberService, CreatorPostService creatorPostService, SubscrService subscrService) {
         this.creatorService = creatorService;
         this.memberService = memberService;
         this.creatorPostService = creatorPostService;
+        this.subscrService = subscrService;
     }
     /*creator new 완벽히 구현 x*/
     @GetMapping("creators/new")
@@ -109,6 +113,21 @@ public class CreatorController {
 
         return "views/creator/creator_mypage";
     }
+    /*닉네임 중복 확인*/
+    @GetMapping("nickCheck")
+    public @ResponseBody HashMap<String, Boolean> nickCheck(@RequestParam("miNick") String miNick) {
+        HashMap<String, Boolean> result = new HashMap<String, Boolean>();
+        Optional<Member> member = memberService.findByNick(miNick);
+
+        if(!member.isEmpty()) {
+            result.put("isDuplicate", true);
+        } else {
+            result.put("isDuplicate", false);
+        }
+        Optional.empty();
+
+        return result;
+    }
 
     @PostMapping("/creators/update") /*크리에이터 페이지 중지에 사용, 사이드바 변경 필요*/
     public String infoModify(Member memberInfo, CreatorInfoDto creatorInfo, HttpSession session, Model model) {
@@ -139,7 +158,10 @@ public class CreatorController {
 
     /*creator alarm*/
     @GetMapping("creators/creator_alarm")
-    public String creator_alarm(@RequestParam("key") Long key) {
+    public String creator_alarm(@RequestParam("key") Long key, Model model) {
+        List<SubListDto> subList = subscrService.findSubBySlCMiSeq(key);
+
+        model.addAttribute("subList", subList);
 
         return "views/creator/creator_alarm";
     }
@@ -306,7 +328,23 @@ public class CreatorController {
 
     /*creator subscr*/
     @GetMapping("creators/subscr/creator_subscr_mng")
-    public String creator_subscr_mng(@RequestParam("key") Long key) {
+    public String creator_subscr_mng(@RequestParam("key") Long key, Model model) {
+        List<SubListDto> subList = subscrService.findSubBySlCMiSeq(key);
+
+        if(subList.size() != 0) {
+            List<Member> subMemberInfoList = new ArrayList<>();
+            for (int i = 0; i < subList.size(); i++) {
+                subMemberInfoList.add(memberService.findOne(subList.get(i).getSlVMiSeq()).get());
+            }
+
+            model.addAttribute("subList", subList);
+            model.addAttribute("subMemberInfoList", subMemberInfoList);
+        } else {
+            model.addAttribute("subList", subList);
+        }
+
+        int numOfSub = subList.size();
+        model.addAttribute("numOfSub", numOfSub);
 
         return "views/creator/subscr/creator_subscr_mng";
     }
