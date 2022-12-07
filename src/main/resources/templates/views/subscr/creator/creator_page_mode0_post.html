@@ -66,67 +66,285 @@
 						<div id="posts">
 							<!------ 포스트 리스트 영역 ------>
 							<!-- 포스트 -->
-							<article class="post">
-								<th:block th:each="model:${model.iterator()}">
-									<figure><img src="/img/sample_post_img.jpg" /></figure>
-									<section class="post_slider_screen">
-										<div class="post_slider_body">
-											<img src="/img/mainPic_positive.jpg" />
-											<img src="/img/sample_creator1.jpg" />
-											<img src="/img/sample_post_img.jpg" />
-											<img src="/img/sample_bg2.jpg" />
-											<img src="/img/sample_post_img.jpg" />
-										</div>
-										<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
-										<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
-									</section>
-									<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+							<th:block th:each="model:${model.iterator()}">
 
-									<section class="linker" onclick="location.href='creator_page_detail.html';"
-											 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
-										<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
-										<p class="post_txt_area" th:text="${model.getCpContent()}">
-										</p>
-										<div class="post_read_more">더읽기</div>
-									</section>
+									<th:block th:switch="${model.getCpOpen()}">
+										<article th:case="'1'" class="post">
+											<!--모두 공개-->
+												<figure><img src="/img/sample_post_img.jpg" /></figure>
+												<section class="post_slider_screen">
+													<div class="post_slider_body">
+														<img src="/img/mainPic_positive.jpg" />
+														<img src="/img/sample_creator1.jpg" />
+														<img src="/img/sample_post_img.jpg" />
+														<img src="/img/sample_bg2.jpg" />
+														<img src="/img/sample_post_img.jpg" />
+													</div>
+													<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+													<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+												</section>
+											<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+											<section class="linker" onclick="location.href='creator_page_detail.html';"
+													 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+												<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+												<p class="post_txt_area" th:text="${model.getCpContent()}">
+												</p>
+												<div class="post_read_more">더읽기</div>
+											</section>
 
-									<div class="post_tag_area">
-										<span>#TAG</span>
-										<span>#TAG</span>
-										<span>#TAG</span>
-									</div>
-									<div class="post_like_area fb_sc">
-										<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
-										<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
-									</div>
-								</th:block>
-							</article>
+											<div class="post_tag_area">
+												<span>#TAG</span>
+												<span>#TAG</span>
+												<span>#TAG</span>
+											</div>
+											<div class="post_like_area fb_sc">
+												<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+												<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+											</div>
+										</article>
+										<th:block th:case="'2'" >
+												<article th:if="${checkSubs==1}" class="post">
+													<!--구독자에게 공개-->
+													<figure><img src="/img/sample_post_img.jpg" /></figure>
+													<section class="post_slider_screen">
+														<div class="post_slider_body">
+															<img src="/img/mainPic_positive.jpg" />
+															<img src="/img/sample_creator1.jpg" />
+															<img src="/img/sample_post_img.jpg" />
+															<img src="/img/sample_bg2.jpg" />
+															<img src="/img/sample_post_img.jpg" />
+														</div>
+														<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+														<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+													</section>
+													<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+													<section class="linker" onclick="location.href='creator_page_detail.html';"
+															 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+														<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+														<p class="post_txt_area" th:text="${model.getCpContent()}">
+														</p>
+														<div class="post_read_more">더읽기</div>
+													</section>
 
-							<!-- 포스트 -->
-							<article class="post">
-								<figure>
-									<div class="fb_c_cc">
-										<img src="/img/icon_lock.png" />
-										<p>구독자가 되어<br>포스트 잠금을 히제하고 내용을 확인하세요</p>
-										<button type="button" class="w200 h35 bright"; th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">구독하기</button>
-									</div>
-									<img src="/img/sample_post_img.jpg" />
-								</figure>
-								<div class="fb_sc post_date_area">2022년 4월5일 오전 1:16 <span class="fb_sc"><img src="/img/icon_lock.png" /> &nbsp; 잠금</span></div>
-								<p class="post_title_area">포스트 제목</p>
-								<div class="post_tag_area">
-									<span>#TAG</span>
-									<span>#TAG</span>
-									<span>#TAG</span>
-								</div>
-								<div class="post_like_area fb_sc">
-									<div class="fb_sc"><img src="/img/icon_heart.png" /> &nbsp;&nbsp; 좋아요 00개</div>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
-								</div>
-							</article>
+													<div class="post_tag_area">
+														<span>#TAG</span>
+														<span>#TAG</span>
+														<span>#TAG</span>
+													</div>
+													<div class="post_like_area fb_sc">
+														<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+														<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+													</div>
+												</article>
+												<article th:unless="${checkSubs==1}" class="post">
+													<!--구독하면 보여줌-->
+														<section class="wrap" style="position: relative;  cursor: pointer;" th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
+															<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" /></figure>
+
+															<div style="position: absolute; top:40%; left:50%; width:100%; transform: translate(-50%,-50%);">
+																<div class="fb_c_cc">
+																	<img src="/img/icon_lock.png" />
+																	<p style="text-align: center; color: white; font-size: 1.4rem;">구독자가 되어<br>포스트 잠금을 해제하고 내용을 확인하세요</p>
+																	<button type="button" class="w200 h35 bright";>구독하기</button>
+																</div>
+															</div>
+															<section class="post_slider_screen">
+																<div class="post_slider_body" style="pointer-events: none; -webkit-filter: blur(7px)">
+																	<img src="/img/mainPic_positive.jpg" />
+																	<img src="/img/sample_creator1.jpg" />
+																	<img src="/img/sample_post_img.jpg" />
+																	<img src="/img/sample_bg2.jpg" />
+																	<img src="/img/sample_post_img.jpg" />
+																</div>
+																<!--																<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+																<!--																<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+															</section>
+
+														</section>
+														<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+														<section class="linker" onclick="location.href='creator_page_detail.html';"
+																 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+															<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+															<p class="post_txt_area" th:text="${model.getCpContent()}">
+															</p>
+															<div class="post_read_more">더읽기</div>
+														</section>
+
+														<div class="post_tag_area">
+															<span>#TAG</span>
+															<span>#TAG</span>
+															<span>#TAG</span>
+														</div>
+														<div class="post_like_area fb_sc">
+															<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+															<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+														</div>
+													</article>
+											</th:block>
+										<th:block th:case="'3'" >
+												<th:block th:if="${checkSubs==1}" >
+													<article th:if="${#strings.contains(model.getCpOpenCslSeq(),cslSeq)}" class="post">
+														<!--돈냈네 보여줌-->
+														<figure><img src="/img/sample_post_img.jpg" /></figure>
+														<section class="post_slider_screen">
+															<div class="post_slider_body">
+																<img src="/img/mainPic_positive.jpg" />
+																<img src="/img/sample_creator1.jpg" />
+																<img src="/img/sample_post_img.jpg" />
+																<img src="/img/sample_bg2.jpg" />
+																<img src="/img/sample_post_img.jpg" />
+															</div>
+															<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+															<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+														</section>
+														<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+														<section class="linker" onclick="location.href='creator_page_detail.html';"
+																 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+															<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+															<p class="post_txt_area" th:text="${model.getCpContent()}">
+															</p>
+															<div class="post_read_more">더읽기</div>
+														</section>
+
+														<div class="post_tag_area">
+															<span>#TAG</span>
+															<span>#TAG</span>
+															<span>#TAG</span>
+														</div>
+														<div class="post_like_area fb_sc">
+															<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+															<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+														</div>
+													</article>
+													<article th:unless="${#strings.contains(model.getCpOpenCslSeq(),cslSeq)}" class="post">
+														<!--돈내면 보여줌-->
+														<section class="wrap" style="position: relative;  cursor: pointer;" th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
+															<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" /></figure>
+
+															<div style="position: absolute; top:40%; left:50%; width:100%; transform: translate(-50%,-50%);">
+																<div class="fb_c_cc">
+																	<img src="/img/icon_lock.png" />
+																	<p style="text-align: center; color: white; font-size: 1.4rem;">구독자가 되어<br>포스트 잠금을 해제하고 내용을 확인하세요</p>
+																	<button type="button" class="w200 h35 bright";>구독하기</button>
+																</div>
+															</div>
+															<section class="post_slider_screen">
+																<div class="post_slider_body" style="pointer-events: none; -webkit-filter: blur(7px)">
+																	<img src="/img/mainPic_positive.jpg" />
+																	<img src="/img/sample_creator1.jpg" />
+																	<img src="/img/sample_post_img.jpg" />
+																	<img src="/img/sample_bg2.jpg" />
+																	<img src="/img/sample_post_img.jpg" />
+																</div>
+																<!--																<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+																<!--																<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+															</section>
+
+														</section>
+														<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+														<section class="linker" onclick="location.href='creator_page_detail.html';"
+																 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+															<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+															<p class="post_txt_area" th:text="${model.getCpContent()}">
+															</p>
+															<div class="post_read_more">더읽기</div>
+														</section>
+
+														<div class="post_tag_area">
+															<span>#TAG</span>
+															<span>#TAG</span>
+															<span>#TAG</span>
+														</div>
+														<div class="post_like_area fb_sc">
+															<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+															<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+														</div>
+													</article>
+												</th:block>
+
+												<article th:unless="${checkSubs==1}" class="post">
+													<!--일단 구독부터 해-->
+													<section class="wrap" style="position: relative;  cursor: pointer;" th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
+														<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" /></figure>
+
+														<div style="position: absolute; top:40%; left:50%; width:100%; transform: translate(-50%,-50%);">
+															<div class="fb_c_cc">
+																<img src="/img/icon_lock.png" />
+																<p style="text-align: center; color: white; font-size: 1.4rem;">구독자가 되어<br>포스트 잠금을 해제하고 내용을 확인하세요</p>
+																<button type="button" class="w200 h35 bright";>구독하기</button>
+															</div>
+														</div>
+														<section class="post_slider_screen">
+															<div class="post_slider_body" style="pointer-events: none; -webkit-filter: blur(7px)">
+																<img src="/img/mainPic_positive.jpg" />
+																<img src="/img/sample_creator1.jpg" />
+																<img src="/img/sample_post_img.jpg" />
+																<img src="/img/sample_bg2.jpg" />
+																<img src="/img/sample_post_img.jpg" />
+															</div>
+															<!--																<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+															<!--																<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
+														</section>
+
+													</section>
+													<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
+													<section class="linker" onclick="location.href='creator_page_detail.html';"
+															 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+														<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
+														<p class="post_txt_area" th:text="${model.getCpContent()}">
+														</p>
+														<div class="post_read_more">더읽기</div>
+													</section>
+
+													<div class="post_tag_area">
+														<span>#TAG</span>
+														<span>#TAG</span>
+														<span>#TAG</span>
+													</div>
+													<div class="post_like_area fb_sc">
+														<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+														<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+													</div>
+												</article>
+											</th:block>
+									</th:block>
+							</th:block>
+
+<!--							&lt;!&ndash; 포스트 &ndash;&gt;-->
+<!--							<article class="post">-->
+<!--								<figure>-->
+<!--									<div class="fb_c_cc">-->
+<!--										<img src="/img/icon_lock.png" />-->
+<!--										<p>구독자가 되어<br>포스트 잠금을 히제하고 내용을 확인하세요</p>-->
+<!--										<button type="button" class="w200 h35 bright"; th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">구독하기</button>-->
+<!--									</div>-->
+<!--									<img src="/img/sample_post_img.jpg" />-->
+<!--								</figure>-->
+<!--								<div class="fb_sc post_date_area">2022년 4월5일 오전 1:16 <span class="fb_sc"><img src="/img/icon_lock.png" /> &nbsp; 잠금</span></div>-->
+<!--								<p class="post_title_area">포스트 제목</p>-->
+<!--								<div class="post_tag_area">-->
+<!--									<span>#TAG</span>-->
+<!--									<span>#TAG</span>-->
+<!--									<span>#TAG</span>-->
+<!--								</div>-->
+<!--								<div class="post_like_area fb_sc">-->
+<!--									<div class="fb_sc"><img src="/img/icon_heart.png" /> &nbsp;&nbsp; 좋아요 00개</div>-->
+<!--									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--									<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>-->
+<!--								</div>-->
+<!--							</article>-->
 
 						</div>
 						<!-- 포스트 더보기 버튼 -->
@@ -187,6 +405,33 @@
 									<div th:text="${mySubLevel.get().getCslPrefer()}"></div>
 								</article>
 							</section>
+
+							<!-- 구독 버튼  -->
+							<section class="post_select_boxs">
+								<button type="button" class="w_all h35 default" th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">구독변경</button>
+							</section>
+
+							<!-- 등급안내 -->
+							<th:block th:if="${!#lists.isEmpty(subLevelList)}">
+								<section class="tier_info">
+									<div class="fb_cc">등급안내</div>
+
+
+									<th:block th:each="levels:${subLevelList.iterator()}">
+										<article>
+											<div th:text="${levels.getCslNm()}"></div>
+											<div><span>₩ <span th:text="${levels.getCslPrice()}"></span></span> / 월</div>
+											<div th:text="${levels.getCslPrefer()}"></div>
+										</article>
+									</th:block>
+									<div class="tier_info_btm_btn">
+										<div></div>
+										<button type="button" class="h30 outline">등급 펼처보기</button>
+									</div>
+								</section>
+							</th:block>
+
+
 						</th:block>
 
 						<!-- 추천 크리에이터 -->
@@ -403,5 +648,4 @@
 	});
 
 </script>
-
 
