@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -17,11 +18,9 @@ public class QSubListDto extends EntityPathBase<SubListDto> {
 
     private static final long serialVersionUID = 15199256L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QSubListDto subListDto = new QSubListDto("subListDto");
-
-    public final NumberPath<Long> slCMiSeq = createNumber("slCMiSeq", Long.class);
-
-    public final NumberPath<Integer> slCslSeq = createNumber("slCslSeq", Integer.class);
 
     public final DateTimePath<java.util.Date> slModidt = createDateTime("slModidt", java.util.Date.class);
 
@@ -31,18 +30,27 @@ public class QSubListDto extends EntityPathBase<SubListDto> {
 
     public final ComparablePath<Character> slState = createComparable("slState", Character.class);
 
-    public final NumberPath<Long> slVMiSeq = createNumber("slVMiSeq", Long.class);
+    public final QSubListDtoId subListDtoId;
 
     public QSubListDto(String variable) {
-        super(SubListDto.class, forVariable(variable));
+        this(SubListDto.class, forVariable(variable), INITS);
     }
 
     public QSubListDto(Path<? extends SubListDto> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QSubListDto(PathMetadata metadata) {
-        super(SubListDto.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QSubListDto(PathMetadata metadata, PathInits inits) {
+        this(SubListDto.class, metadata, inits);
+    }
+
+    public QSubListDto(Class<? extends SubListDto> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.subListDtoId = inits.isInitialized("subListDtoId") ? new QSubListDtoId(forProperty("subListDtoId")) : null;
     }
 
 }

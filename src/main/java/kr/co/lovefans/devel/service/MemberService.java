@@ -1,8 +1,13 @@
 package kr.co.lovefans.devel.service;
 
+import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.Member;
 import kr.co.lovefans.devel.repository.MemberRepository;
+import kr.co.lovefans.devel.repository.SearchResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -14,11 +19,13 @@ import java.util.Optional;
 public class MemberService {
 
 
+    @Autowired private final SearchResultRepository searchResultRepository;
     @Autowired private final MemberRepository memberRepository;
     @Autowired PasswordEncoder passwordEncoder;
 
 
-    public MemberService(MemberRepository memberRepository) {
+    public MemberService(SearchResultRepository searchResultRepository, MemberRepository memberRepository) {
+        this.searchResultRepository = searchResultRepository;
         this.memberRepository = memberRepository;
     }
 
@@ -154,5 +161,10 @@ public class MemberService {
     }
 
 
+    public Page<CreatorInfoDto> searchResult(String keyword, int page){
+
+        return searchResultRepository.findByciPageNmContainingIgnoreCase(keyword, PageRequest.of(page,1,Sort.by(Sort.Direction.DESC,"ciPageNm")));
+
+    }
 
 }

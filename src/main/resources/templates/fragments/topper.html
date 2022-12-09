@@ -9,13 +9,14 @@
 	
 	<!-- 크리에이터 검색 -->
 	<div class="fb_cc">
+		<form action="/search" method="get">
+			<input name="keyword" type="text" class="search" placeholder="크리에이터 찾기" />
 
-		<input type="text" class="sech" placeholder="크리에이터 찾기" />
-
-
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button type="button" class="w80 h35 default" onclick="location.href='search_result.html'">찾기</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="submit" class="w80 h35 default">찾기</button>
+		</form>
 	</div>
+
 	<h5>세션확인용 회원번호 <span th:text="${session.session}"></span></h5><br>
 	<th:block th:if="${session.session != null}">
 		<button type="button" onclick="location.href='/members/logout';">로그아웃</button> <!--로그인 버튼 만들기-->

@@ -1,37 +1,38 @@
 package kr.co.lovefans.devel.controller;
 
-import kr.co.lovefans.devel.domain.CreatorInfoDto;
-import kr.co.lovefans.devel.domain.CreatorPostDto;
-import kr.co.lovefans.devel.domain.Member;
+import kr.co.lovefans.devel.domain.*;
 import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.dto.PostDto;
 import kr.co.lovefans.devel.dto.SubCreDto;
-import kr.co.lovefans.devel.service.CreatorPostService;
-import kr.co.lovefans.devel.service.CreatorService;
-import kr.co.lovefans.devel.service.MemberService;
-import kr.co.lovefans.devel.service.SubscrService;
+import kr.co.lovefans.devel.dto.SubsSubsListDto;
+import kr.co.lovefans.devel.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RequestMapping(value="/subs")
 @Controller
 public class SubsController {
 
+    private final SubListService subListService;
     private final CreatorService service;
     private final CreatorPostService creatorPostService;
     private final MemberService memberService;
     private final SubscrService subscrService;
 
     @Autowired
-    public SubsController(CreatorService service, CreatorPostService creatorPostService, MemberService memberService, SubscrService subscrService) {
+    public SubsController(SubListService subListService, CreatorService service, CreatorPostService creatorPostService, MemberService memberService, SubscrService subscrService) {
+        this.subListService = subListService;
         this.service = service;
         this.creatorPostService = creatorPostService;
         this.memberService = memberService;
@@ -55,8 +56,6 @@ public class SubsController {
 
         // 사이드 메뉴 관련
         model.addAttribute("mainMenu", true);
-        // 프로필 여부 관련
-        model.addAttribute("profile", true);
 
         if (memberInfo.isEmpty()) return "redirect:/login";
 
@@ -71,9 +70,9 @@ public class SubsController {
         else {
             return "redirect:/login";
         }
-//
-       return go;
-   }
+
+        return go;
+    }
 
     // 구독자 마이 페이지
     @GetMapping("/mypage")
@@ -84,9 +83,6 @@ public class SubsController {
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
-
-        // 프로필 여부 관련
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/subscr_mypage";
@@ -100,17 +96,6 @@ public class SubsController {
 
         return go;
     }
-    @PostMapping("/mypage")
-    public void uploadFile(MultipartFile[] uploadFiles) {
-
-        for(MultipartFile uploadFile : uploadFiles) {
-
-            // 이미지 파일만 업로드 가능
-            if(uploadFile.getContentType().startsWith("image") == false) {
-                return;
-            }
-        }
-    }
 
     // 알림 - 구독자 알림 페이지
     @GetMapping("/alarm")
@@ -122,7 +107,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("alarmMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/subscr_alarm";
@@ -151,7 +135,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("msgMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/message/subscr_message_list";
@@ -180,7 +163,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("msgMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/message/subscr_message_select";
@@ -209,7 +191,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("msgMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/message/subscr_message_view";
@@ -226,7 +207,7 @@ public class SubsController {
 
     // 구독채널 - 구독중인 크리에이터 목록 보기 페이지
     @GetMapping("/channel")
-    public String channel(HttpSession session, Model model, @RequestParam("key") Long key) {
+    public String channel(HttpSession session, Model model) {
         String go = "views/subscr/subscr_channel";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
@@ -234,9 +215,27 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("channelMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
+            List<SubsSubsListDto> list = subscrService.findBySlVmiSeq((Long) session.getAttribute("session"));
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar calendar = Calendar.getInstance();
+            boolean checkDate = true;
+            String endSubs = "";
+            LocalDate now = LocalDate.now();
+
+            for(SubsSubsListDto a : list){
+
+                calendar.setTime(a.getSlRegdt());
+                calendar.add(Calendar.MONTH, 1 );
+                a.setSlRegdt(calendar.getTime());
+                endSubs = simpleDateFormat.format(a.getSlRegdt());
+                checkDate = a.getSlRegdt().before(java.sql.Date.valueOf(now));
+            }
+
+            model.addAttribute("endSubs",endSubs);
+            model.addAttribute("checkDate",checkDate);
+            model.addAttribute("list",list);
             go =  "views/subscr/subscr_channel";
         }
         else if(memberInfo.get().getMiKind().equals("C")) {
@@ -249,6 +248,16 @@ public class SubsController {
         return go;
     }
 
+    //구독취소
+    @DeleteMapping("/cancel/{cSeq}")
+    public String cancelSubs(@PathVariable(value = "cSeq") Long cSeq,HttpSession session){
+
+        Optional<SubListDto> subListDto = subListService.checkBySeq(cSeq, (Long) session.getAttribute("session"));
+        subListService.delete(subListDto.get());
+
+        return "redirect:/subs/channel";
+    }
+
     // 결재 - 구독자가 등록한 결재 카드 보기
     @GetMapping("/payment")
     public String payment(HttpSession session, Model model, @RequestParam("key") Long key) {
@@ -259,7 +268,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("payMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/payment/subscr_payment";
@@ -284,7 +292,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("payMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/payment/subscr_payment_detail";
@@ -309,7 +316,6 @@ public class SubsController {
 
         model.addAttribute("model", memberInfo.get());
         model.addAttribute("callMenu", true);
-        model.addAttribute("profile", true);
 
         if(memberInfo.get().getMiKind().equals("V")) {
             go =  "views/subscr/subscr_call_center";
@@ -336,7 +342,7 @@ public class SubsController {
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
-        model.addAttribute("profile", true);
+
         model.addAttribute("creator",creator);
         model.addAttribute("crePost", crePost);
 
@@ -353,20 +359,35 @@ public class SubsController {
         return go;
     }
 
-
-
     // 크리에이터 페이지 구독하기(등급선택)
     @GetMapping("/mem/be")
-    public String be(HttpSession session, Model model) {
+    public String be(HttpSession session, Model model, @RequestParam("key") Long cSeq) {
         String go = "views/subscr/member/mem_be";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
-        model.addAttribute("profile", true);
 
         if (memberInfo.get().getMiKind().equals("V")) {
+
+            CreatorInfoDto creator = service.findOne(cSeq).get();
+            model.addAttribute("creator", creator);
+            List<CreatorSubLevelDto> levels = service.findByCslMiSeq(cSeq);
+            model.addAttribute("levels",levels);
+
+            subListService.checkBySeq(cSeq, (Long) session.getAttribute("session")).ifPresent(a->{
+                Optional<SubListDto> subListDto = Optional.ofNullable(a);
+                Long cslSeq = (subListDto.get().getSubListDtoId().getSlCslSeq());
+                model.addAttribute("cslSeq",cslSeq);
+
+                service.findByCslSeq(cslSeq).ifPresent(b->{
+                    Optional<CreatorSubLevelDto> mySubLevel = Optional.ofNullable(b);
+                    model.addAttribute("levels",levels);
+                    levels.remove(mySubLevel.get());
+                });
+            });
+
             go = "views/subscr/member/mem_be";
         }
         else if (memberInfo.get().getMiKind().equals("C")) {
@@ -381,16 +402,17 @@ public class SubsController {
 
     // 구독에 대한 결재하기
     @GetMapping("/mem/pay")
-    public String pay(HttpSession session, Model model) {
+    public String pay(HttpSession session, Model model,@RequestParam("key") Long cSeq,@RequestParam("key2") Long cslSeq) {
         String go = "views/subscr/member/mem_pay";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
-        model.addAttribute("profile", true);
 
         if (memberInfo.get().getMiKind().equals("V")) {
+            model.addAttribute("cSeq",cSeq);
+            model.addAttribute("cslSeq",cslSeq);
             go = "views/subscr/member/mem_pay";
         }
         else if (memberInfo.get().getMiKind().equals("C")) {
@@ -403,85 +425,70 @@ public class SubsController {
         return go;
     }
 
-//    // 크리에이터 신청 step 1
-//    @GetMapping("/regist/creator/step1")
-//    public String reg1(HttpSession session, Model model) {
-//        String go = "views/subscr/regist/regist_creator_step1";
-//
-//        Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
-//        if (memberInfo.isEmpty()) return "redirect:/login";
-//
-//        model.addAttribute("model", memberInfo.get());
-//
-//        if (memberInfo.get().getMiKind().equals("V")) {
-//            go = "views/subscr/regist/regist_creator_step1";
-//        }
-//        else if (memberInfo.get().getMiKind().equals("C")) {
-//            go = "redirect:/creator/creator_mypage";
-//        }
-//        else {
-//            return "redirect:/login";
-//        }
-//
-//        return go;
-//    }
-//
-//    // 크리에이터 신청 step 2
-//    @GetMapping("/regist/creator/step2")
-//    public String reg2(HttpSession session, Model model) {
-//        String go = "views/subscr/regist/regist_creator_step2";
-//
-//        Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
-//        if (memberInfo.isEmpty()) return "redirect:/login";
-//
-//        model.addAttribute("model", memberInfo.get());
-//
-//        if (memberInfo.get().getMiKind().equals("V")) {
-//            go = "views/subscr/regist/regist_creator_step2";
-//        }
-//        else if (memberInfo.get().getMiKind().equals("C")) {
-//            go = "redirect:/creator/creator_mypage";
-//        }
-//        else {
-//            return "redirect:/login";
-//        }
-//
-//        return go;
-//    }
-
-
-
-
     // 비구독자 및 비회원이 보는 크리에이터 페이지 첫 화면
     // 비회원(비로그인)일 경우
     @GetMapping("/creatorpage/mode0")
-    public String mode0(@RequestParam("key") Long cpMiSeq, Model model) {
+    public String mode0(@RequestParam("key") Long cpMiSeq, Model model, HttpSession session) {
 
+        Optional<SubListDto> subListDto = subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session"));
         CreatorInfoDto creator = service.findOne(cpMiSeq).get();
-        List<CreatorPostDto> crePost = service.findAllPost(cpMiSeq);
+        List<CreatorPostDto> post = service.findAllPost(cpMiSeq);
 
-        model.addAttribute("creator",creator);
-        model.addAttribute("crePost", crePost);
+        model.addAttribute("creator", creator);
+        model.addAttribute("post", post);
 
-        return "views/subscr/creator/creator_page_mode0";
+        if (!subListDto.isEmpty()) {
+            return "redirect:/subs/creatorpage/mode0/post?key=" + creator.getCiMiSeq();
+
+        } else {
+            List<CreatorSubLevelDto> levels = service.findByCslMiSeq(cpMiSeq);
+            model.addAttribute("levels", levels);
+            return "views/subscr/creator/creator_page_mode0";
+        }
     }
 
     // 비구독자, 비회원이 보는 크리에이터 포스트 보기 화면
     // 비회원(비로그인)일 경우
     @GetMapping("/creatorpage/mode0/post")
-    public String post(@RequestParam("key") Long cpMiSeq, Model model,Integer page) {
+    public String post(@RequestParam("key") Long cpMiSeq, Model model,Integer page, HttpSession session) {
 
+        AtomicInteger checkSubs = new AtomicInteger();
+        checkSubs.set(0);
         page = 0;
         CreatorInfoDto creator = service.findOne(cpMiSeq).get();
         Slice<CreatorPostDto> post = creatorPostService.findSliceBycpMiSeq(cpMiSeq,page);
-        List<CreatorPostDto> list = creatorPostService.findBycpMiSeq(cpMiSeq);
 
+        for (CreatorPostDto x : post) {
+            System.out.println("getCpOpenCslSeq " + x.getCpOpenCslSeq());
+            Optional<String> cpOpenCslSeq = Optional.ofNullable(x.getCpOpenCslSeq());
+            cpOpenCslSeq.ifPresent(a -> {
+                System.out.println("test test test test test " + a.contains("1"));
+                String[] needForRead = a.split(",");
+                model.addAttribute("subName", service.findByCslSeq(Long.valueOf(needForRead[0])).get().getCslNm());
+            });
+        }
+
+        List<CreatorSubLevelDto> subLevelList = service.findByCslMiSeq(cpMiSeq);
+        if(!subLevelList.isEmpty()){
+            model.addAttribute("subLevelList",subLevelList);
+        }
+
+        subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session")).ifPresent(a-> {
+            Optional<SubListDto> subListDto = Optional.ofNullable(a);
+            Long cslSeq = (subListDto.get().getSubListDtoId().getSlCslSeq());
+            model.addAttribute("cslSeq", cslSeq);
+            checkSubs.set(1);
+
+            service.findByCslSeq(cslSeq).ifPresent(b -> {
+                Optional<CreatorSubLevelDto> mySubLevel = Optional.ofNullable(b);
+                model.addAttribute("mySubLevel", mySubLevel);
+                subLevelList.remove(mySubLevel.get());
+            });
+        });
+
+        model.addAttribute("checkSubs",checkSubs);
         model.addAttribute("model",post);
         model.addAttribute("creator",creator);
-
-        for(CreatorPostDto a : post){
-            System.out.println(a.getCpContent());
-        }
 
         return "views/subscr/creator/creator_page_mode0_post";
     }
@@ -499,7 +506,3 @@ public class SubsController {
         return post;
     }
 }
-
-
-
-

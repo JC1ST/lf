@@ -5,9 +5,6 @@
 <th:block layout:fragment="content">
 <body>
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "static/inc/side.html"; ?>
-		
 		<section class="contents_container">
 			<div class="fb_cc container_top_title">
 				<img src="/img/icon_message.png" /> &nbsp;&nbsp; <b>메시지</b>
@@ -16,7 +13,7 @@
 			<article class="fb_c_sc aritcle_border_container" style="margin-bottom: 50px;">
 				<div class="message_select_explain" >
 					대화 메시지를 보낼 크리에이터를 선택해 주세요
-					<button type="button" id="btn_check" class="w100 h30 defaultLight" onclick="location.href='subscr_message_view.html';"
+					<button type="button" id="btn_check" class="w100 h30 defaultLight"
 							th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|" disabled="disabled">확인</button>
 				</div>
 
@@ -31,12 +28,9 @@
 						<input type="radio" name="creator" />
 					</section>
 				</div>
-
 			</article>
 		</section>
 	</article>
-	
-	<!-- FOOTER -->
 
 </body>
 </th:block>
@@ -45,6 +39,7 @@
 <!-- 라디오 버튼의 디자인을 위한 스크립트
      라디오 버튼은 숨겨두고 div가 라디오 버튼인척 한다 -->
 <script>
+	// 체크 시 버튼 활성화
 	$(function() {
 		$(".radio_clone").on("click", function() {
 			$(".radio_clone").css({"background-color":"white", "border":"1px solid #bac6cc"});

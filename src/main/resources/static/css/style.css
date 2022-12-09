@@ -79,7 +79,9 @@ select {height: 35px; border: solid 1px #c4cad1; border-radius: 3px;}
 .fb_sc {display: flex; justify-content: flex-start; align-items: center;}
 .fb_se {display: flex; justify-content: flex-start; align-items: flex-end;}
 .fb_cs {display: flex; justify-content: center; align-items: flex-start;}
-.fb_cc {display: flex; justify-content: center; align-items: center;}
+.fb_cc {display: flex; justify-content: center; align-items: center; text-align: center;}
+.fb_cc ul {display: inline-block; zoom: 1;}
+.fb_cc ul li {display: inline; margin-left: 10px; z-index: 1}
 .fb_ce {display: flex; justify-content: center; align-items: flex-end;}
 .fb_cb {display: flex; justify-content: center; align-items: space-between;}
 .fb_ec {display: flex; justify-content: flex-end; align-items: center;}
@@ -283,7 +285,7 @@ select {height: 35px; border: solid 1px #c4cad1; border-radius: 3px;}
 
 
 /*회원등급*/
-.tier_area {width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;}
+.tier_area {width: 100%; max-width: 800px; display: flex; justify-content: space-around; align-items: flex-start; flex-wrap: wrap;}
 .tier {width: 30%; padding: 15px; margin-bottom: 30px; background-color: white; border: 1px solid #e8eaed; border-radius: 5px; box-shadow: 0 2px 5px 1px #dedede; font-size: 1.3rem;}
 /*.tier:nth-of-type(3n-2) {margin-right: 2.5%;}
 .tier:nth-of-type(3n-1) {margin-right: 2.5% ; margin-left: 2.5%;}

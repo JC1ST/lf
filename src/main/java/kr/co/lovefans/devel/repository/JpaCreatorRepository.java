@@ -48,6 +48,7 @@ public class JpaCreatorRepository implements CreatorRepository {
         return Optional.ofNullable(memberInfo);
     }
 
+
     @Override
     public Optional<CreatorInfoDto> findByPageNm(String ciPageNm) {
         List<CreatorInfoDto> result = em.createQuery("select c from CreatorInfoDto c where c.ciPageNm = :ciPageNm", CreatorInfoDto.class)
@@ -71,6 +72,10 @@ public class JpaCreatorRepository implements CreatorRepository {
                 .select(Projections.bean(CreatorPostDto.class, qCreatorPostDto.cpTitle, qCreatorPostDto.cpContent, qCreatorPostDto.cpImg, qCreatorPostDto.cpRegdt))
                 .from(qCreatorPostDto)
                 .where(qCreatorPostDto.cpMiSeq.eq(cpMiSeq))
+                
+                // 최신 날짜 순 포스트 3개만 조회
+                .orderBy(qCreatorPostDto.cpRegdt.desc())
+                .limit(3)
 
                 .fetch();
 
@@ -99,6 +104,4 @@ public class JpaCreatorRepository implements CreatorRepository {
 
         return result;
     }
-
-
 }

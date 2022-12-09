@@ -10,21 +10,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
+    private final CreateSubLevelRepository createSubLevelRepository;
     private final SubsPostCustomRepository subsPostCustomRepository;
 
     private final MemberRepository memberRepository;
     private final CreatorRepository creatorRepository;
     private final CreatorPostRepository creatorPostRepository;
-//    private final SubListRepository subListRepository;
-
+    private final SubListRepository subListRepository;
+    private final SubsCustomRepository subsCustomRepository;
     private final AdminRepository adminRepository;
+    private final SearchResultRepository searchResultRepository;
 
     @Autowired
-    public SpringConfig(SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, AdminRepository adminRepository) {
+    public SpringConfig(SearchResultRepository searchResultRepository, CreateSubLevelRepository createSubLevelRepository, SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, SubListRepository subListRepository, SubsCustomRepository subsCustomRepository, AdminRepository adminRepository) {
+        this.searchResultRepository = searchResultRepository;
+        this.createSubLevelRepository = createSubLevelRepository;
         this.subsPostCustomRepository = subsPostCustomRepository;
         this.memberRepository = memberRepository;
         this.creatorRepository = creatorRepository;
         this.creatorPostRepository = creatorPostRepository;
+        this.subListRepository = subListRepository;
+        this.subsCustomRepository = subsCustomRepository;
         this.adminRepository = adminRepository;
     }
 //    private DataSource dataSource;
@@ -40,12 +46,12 @@ public class SpringConfig {
     @Bean
     public MemberService memberService(){
 
-        return new MemberService(memberRepository);
+        return new MemberService(searchResultRepository,memberRepository);
     }
     @Bean
     public CreatorService creatorService(){
 
-        return new CreatorService(creatorRepository, memberRepository);
+        return new CreatorService(createSubLevelRepository, creatorRepository, memberRepository);
     }
     @Bean
     public CreatorPostService creatorPostService(){
@@ -59,10 +65,10 @@ public class SpringConfig {
         return new AdminService(adminRepository);
     }
 
-//    @Bean
-//    public SubListService subListService(){
-//        return new SubListService(subListRepository);
-//    }
+    @Bean
+    public SubListService subListService(){
+        return new SubListService(subListRepository);
+    }
 
 //    @Bean
 //    public MemberRepository memberRepository(){
