@@ -60,59 +60,29 @@
 							</div>
 						</td>
 						<td th:text="${p.getMiLevel()}"></td>
-						<td th:text="${p.getMiRegdt()}"></td>
+						<td th:text="${#dates.format(p.getMiRegdt(), 'yyyy-MM-dd')}"></td>
 					</tr>
 				</tbody>
 			</table>
 
-<!--			&lt;!&ndash; 페이징 &ndash;&gt;-->
-<!--			<div class="fb_cc paging_area">-->
-<!--&lt;!&ndash;				startPage=${T(Math).floor(pageNumber/pageSize)*pageSize+1}&ndash;&gt;-->
-<!--				<nav th:with="pageNumber=${pageList.pageable.pageNumber}, pageSize=${pageList.pageable.pageSize}, totalPages=${pageList.totalPages}, tempEndPage=${startPage + pageSize - 1}, endPage=(${tempEndPage > totalPages ? totalPages : tempEndPage})">-->
-<!--	&lt;!&ndash;				첫번쨰 페이지&ndash;&gt;-->
-<!--					<th:block th:classappend="${pageNumber + 1 <= pageSize + 1} ? 'disabled'">-->
-<!--						<a th:href="@{/admin/mem_all_list(page=1)}">&laquo;</a>-->
-<!--					</th:block>-->
-
-<!--	&lt;!&ndash;				이전 페이지&ndash;&gt;-->
-<!--					<th:block th:classappend="${pageList.first} ? 'disabled'">-->
-<!--						<a th:href="${pageList.first} ? '#' : @{/admin/mem_all_list(page=${#numbers.formatDecimal(startPage - pageSize, 0, -1)})}">&lt;</a>-->
-<!--					</th:block>-->
-
-<!--	&lt;!&ndash;				페이지 번호들&ndash;&gt;-->
-<!--					<th:block th:each="page : ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'">-->
-<!--						<a th:href="@{/admin/mem_all_list(page=${page})}" th:text="${page}">-->
-<!--							<strong th:text="${page}" style="color : red"></strong>-->
-<!--						</a>-->
-<!--					</th:block>-->
-
-<!--	&lt;!&ndash;				다음 페이지&ndash;&gt;-->
-<!--					<th:block th:classappend="${pageList.last} ? 'disabled'">-->
-<!--						<a th:href="${pageList.last} ? '#' : @{/admin/mem_all_list(page=${#numbers.formatDecimal(startPage + pageSize, 0, -1)})}">&gt;</a>-->
-<!--					</th:block>-->
-
-<!--	&lt;!&ndash;				마지막 페이지&ndash;&gt;-->
-<!--&lt;!&ndash;					<th:block th:classappend="${T(Math).floor(totalPages/10) + 10 <= startPage} ? 'disabled'">&ndash;&gt;-->
-<!--&lt;!&ndash;						<a th:href="@{/admin/mem_all_list(page=${totalPages})}">End</a>&ndash;&gt;-->
-<!--&lt;!&ndash;					</th:block>&ndash;&gt;-->
-<!--				</nav>-->
-<!--			</div>-->
-
-
-
-
-
 			<div class="fb_cc paging_area">
-				<th:block th:each="page : ${#numbers.sequence(startPage2, endPage2)}">
-					<a th:if="${page != nowPage}" th:href="@{/admin/mem_all_list(page=${page - 1})}" th:text="${page}"></a>
-					<strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
-				</th:block>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" th:classappend="${1 == pageList.pageable.pageNumber + 1} ? 'disabled'">
+							<a class="page-link" href="#"
+							   th:href="@{/admin/mem_all_list(page=${pageList.pageable.pageNumber - 1})}"
+							   tabindex="-1" aria-disabled="true">Previous</a>
+						</li>
+<!--						수정필요-->
+<!--						<li class="page-item" th:classappend="${i == pageList.pageable.pageNumber + 2} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">-->
+<!--							<a class="page-link" href="#" th:href="@{/admin/mem_all_list(page=${i - 1})}" th:text="${i}">1</a>-->
+<!--						</li>-->
+						<li class="page-item" th:classappend="${pageList.totalPages == pageList.pageable.pageNumber + 1} ? 'disabled'">
+							<a class="page-link" href="#" th:href="@{/admin/mem_all_list(page=${pageList.pageable.pageNumber + 1})}">Next</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
-
-
-
-
-
 		</div>
 	</article>
 

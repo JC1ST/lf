@@ -5,9 +5,6 @@
 <th:block layout:fragment="content">
 <body>
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "/inc/side.html"; ?>
-		
 		<section class="contents_container">
 			<div class="fb_cc container_top_title">
 				<img src="/img/icon_message.png" /> &nbsp;&nbsp; <b>메시지</b>
@@ -38,21 +35,6 @@
 			</article>
 			<br />
 
-			<!-- 메시지 목록 -->
-<!--			<article class="aritcle_border_container">-->
-<!--				<div class="message_list" onclick="location.href='subscr_message_view.html';"-->
-<!--					 th:onclick="|location.href='@{/subs/message/view(key=${session.session})}'|">-->
-<!--					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>-->
-<!--					<section>-->
-<!--						<span>Creator Nick Name OR Page Name</span>-->
-<!--						<p>서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.서로 주고받은 메시지 최종 내용이 표시됩니다. </p>-->
-<!--						<h5 th:text="${#calendars.format(#calendars.createNow(), 'yyyy년 MM월 dd일')}">2022년 12월 25일</h5>-->
-<!--					</section>-->
-<!--					&lt;!&ndash; <div class="fb_cc badge"><b>N</b></div> &ndash;&gt;-->
-<!--				</div>-->
-<!--			</article>-->
-<!--			<br />-->
-
 			<div id="message_add_btn" class="fb_cc" onclick="location.href='subscr_message_select.html';"
 				 th:onclick="|location.href='@{/subs/message/select(key=${session.session})}'|">
 				<img src="/img/icon_message_add.png" />
@@ -64,8 +46,6 @@
 
 		</section>
 	</article>
-	
-	<!-- FOOTER -->
 
 </body>
 </th:block>

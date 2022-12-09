@@ -4,8 +4,6 @@
 
 <th:block layout:fragment="content">
 <body>
-	<?php include "/inc/topper.html"; ?>
-
 	<article class="body_container">
 		<section class="contents_container">
 			<div class="fb_cc container_top_title">
@@ -79,15 +77,13 @@
 			</article>
 
 			<div class="fb_cc container_bottom_btn">
-				<button type="button" class="default w200 h40" disabled onclick="location.href='regist_creator_step2.html';"
-						th:onclick="|location.href='@{/subs/regist/creator/step2}'|">다음단계</button>
+				<button type="button" class="default w200 h40" disabled th:onclick="|location.href='@{/subs/regist/creator/step2}'|">다음단계</button>
 			</div>
 		</section>
 	</article>
-	
-	<!-- FOOTER -->
-	<?php include_once "/inc/footer.html"; ?>
+
 </body>
+</th:block>
 </html>
 
 <script>

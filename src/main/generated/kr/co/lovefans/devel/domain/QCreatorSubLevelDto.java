@@ -21,7 +21,7 @@ public class QCreatorSubLevelDto extends EntityPathBase<CreatorSubLevelDto> {
 
     public final StringPath cslComment = createString("cslComment");
 
-    public final NumberPath<Integer> cslMiSeq = createNumber("cslMiSeq", Integer.class);
+    public final NumberPath<Long> cslMiSeq = createNumber("cslMiSeq", Long.class);
 
     public final DateTimePath<java.util.Date> cslModidt = createDateTime("cslModidt", java.util.Date.class);
 
@@ -33,7 +33,7 @@ public class QCreatorSubLevelDto extends EntityPathBase<CreatorSubLevelDto> {
 
     public final DateTimePath<java.util.Date> cslRegdt = createDateTime("cslRegdt", java.util.Date.class);
 
-    public final NumberPath<Integer> cslSeq = createNumber("cslSeq", Integer.class);
+    public final NumberPath<Long> cslSeq = createNumber("cslSeq", Long.class);
 
     public QCreatorSubLevelDto(String variable) {
         super(CreatorSubLevelDto.class, forVariable(variable));

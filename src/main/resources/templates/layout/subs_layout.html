@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <th:block th:replace="fragments/head :: headFragment" ></th:block>
     <th:block th:replace="fragments/topper :: topperFragment"></th:block>
-
-
 </head>
-<body>
 
+<body>
 <div style="display: flex;">
     <th:block th:if="${session.session != null}">
     <div style=" align-items: center">
-
-
         <th:block th:if="${session.kind == 'C'}">
             <th:block th:replace="fragments/profile :: profileFragment"></th:block>
             <th:block th:replace="fragments/menus_creator :: menus_creatorFragment"></th:block>
@@ -22,7 +19,6 @@
             <th:block th:replace="fragments/profile :: profileFragment"></th:block>
             <th:block th:replace="fragments/menus_subscr :: menus_subFragment"></th:block>
         </th:block>
-
     </div>
     </th:block>
 
@@ -33,15 +29,5 @@
         <th:block th:replace="fragments/footer :: footerFragment"></th:block>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

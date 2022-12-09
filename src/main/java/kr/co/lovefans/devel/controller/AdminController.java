@@ -1,7 +1,6 @@
 package kr.co.lovefans.devel.controller;
 
 import kr.co.lovefans.devel.domain.MemberInfoDto;
-import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.service.AdminService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
@@ -23,7 +20,6 @@ public class AdminController {
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
-
 
     // 관리자 로그인
     @GetMapping("/login")
@@ -41,44 +37,19 @@ public class AdminController {
 
     // 전체 회원 리스트
     @GetMapping("/mem_all_list")
-    public String list(Model model, @PageableDefault(page = 0, size = 5, sort = "mi_seq", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "mi_seq", direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<MemberInfoDto> pageList = adminService.findPage(pageable);
 
-//        // 페이지 번호
-//        int pageNumber = pageList.getPageable().getPageNumber();
-//        // 페이지 사이즈
-//        int pageSize = pageList.getPageable().getPageSize();
-//        // 전체 페이지 갯수
-//        int totalPages = pageList.getTotalPages();
-//        // 시작 페이지 번호
-//        int startPage = (int) (Math.floor(pageNumber / pageSize) * pageSize + 1);
-//        // 임시 마지막 페이지
-//        int tempEndPage = startPage + pageSize - 1;
-//        // 마지막 페이지
-//        int endPage = (tempEndPage > totalPages ? totalPages : tempEndPage);
-//
+        int startPage = Math.max(1, pageList.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(pageList.getTotalPages(), pageList.getPageable().getPageNumber() + 4);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         model.addAttribute("pageList", pageList);
-//        model.addAttribute("pageNumber", pageNumber);
-//        model.addAttribute("pageSize", pageSize);
-//        model.addAttribute("totalPages", totalPages);
-//        model.addAttribute("startPage", startPage);
-//        model.addAttribute("tempEndPage", tempEndPage);
-//        model.addAttribute("endPage", endPage);
 
-
-
-        int nowPage = pageList.getPageable().getPageNumber() + 1;
-        int startPage2 = Math.max(nowPage - 4, 1);
-        int endPage2 = Math.min(nowPage + 5, pageList.getTotalPages());
-
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage2", startPage2);
-        model.addAttribute("endPage2", endPage2);
-
-
-
-//        사이드 메뉴 관련
+        // 사이드 메뉴 관련
         model.addAttribute("memAllList", true);
 
         return "admin/member/mem_all_list";

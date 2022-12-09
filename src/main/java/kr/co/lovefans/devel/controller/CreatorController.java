@@ -1,14 +1,13 @@
 package kr.co.lovefans.devel.controller;
 
-import kr.co.lovefans.devel.domain.CreatorInfoDto;
-import kr.co.lovefans.devel.domain.CreatorPostDto;
-import kr.co.lovefans.devel.domain.Member;
-import kr.co.lovefans.devel.domain.SubListDto;
+import kr.co.lovefans.devel.domain.*;
+import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.service.CreatorPostService;
 import kr.co.lovefans.devel.service.CreatorService;
 import kr.co.lovefans.devel.service.MemberService;
 import kr.co.lovefans.devel.service.SubscrService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -159,7 +158,7 @@ public class CreatorController {
     /*creator alarm*/
     @GetMapping("creators/creator_alarm")
     public String creator_alarm(@RequestParam("key") Long key, Model model) {
-        List<SubListDto> subList = subscrService.findSubBySlCMiSeq(key);
+        List<SubListTempDto> subList = subscrService.findSubBySlCMiSeq(key);
 
         model.addAttribute("subList", subList);
 
@@ -325,30 +324,48 @@ public class CreatorController {
         return "views/creator/page/creator_page_modify_tier";
     }
 
-
     /*creator subscr*/
     @GetMapping("creators/subscr/creator_subscr_mng")
-    public String creator_subscr_mng(@RequestParam("key") Long key, Model model) {
-        List<SubListDto> subList = subscrService.findSubBySlCMiSeq(key);
+    public String creator_subscr_mng(@RequestParam("key") Long key, Model model, HttpSession session) {
+//        List<SubListTempDto> subList = subscrService.findSubBySlCMiSeq(key);
+//
+//        System.out.println(subList.size());
+//
+//        if(subList.size() != 0) {
+//            List<Member> subMemberInfoList = new ArrayList<>();
+//            for (int i = 0; i < subList.size(); i++) {
+//                subMemberInfoList.add(memberService.findOne(subList.get(i).getSlVMiSeq()).get());
+//            }
+//
+//            model.addAttribute("subList", subList);
+//            model.addAttribute("subMemberInfoList", subMemberInfoList);
+//        } else {
+//            model.addAttribute("subList", subList);
+//        }
+//
+//        int numOfSub = subList.size();
+//        model.addAttribute("numOfSub", numOfSub);
+
+        Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
+        List<MemberDto> subList = subscrService.findSub((Long) session.getAttribute("session"));
+
+        model.addAttribute("model", memberInfo.get());
 
         if(subList.size() != 0) {
-            List<Member> subMemberInfoList = new ArrayList<>();
-            for (int i = 0; i < subList.size(); i++) {
-                subMemberInfoList.add(memberService.findOne(subList.get(i).getSlVMiSeq()).get());
-            }
-
             model.addAttribute("subList", subList);
-            model.addAttribute("subMemberInfoList", subMemberInfoList);
-        } else {
+        }
+        else {
             model.addAttribute("subList", subList);
         }
 
         int numOfSub = subList.size();
+
         model.addAttribute("numOfSub", numOfSub);
+
 
         return "views/creator/subscr/creator_subscr_mng";
     }
-
+    
     @GetMapping("creators/subscr/creator_subscr_block")
     public String creator_subscr_block(@RequestParam("key") Long key) {
 

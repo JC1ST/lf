@@ -3,6 +3,7 @@ package kr.co.lovefans.devel.repository;
 import com.querydsl.core.Tuple;
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.CreatorPostDto;
+import kr.co.lovefans.devel.domain.Member;
 import kr.co.lovefans.devel.domain.MemberInfoDto;
 import kr.co.lovefans.devel.dto.MemberDto;
 

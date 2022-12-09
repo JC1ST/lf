@@ -9,12 +9,12 @@
 
 	<ul class="menu_group">
 		<li>
-			<!--		main 페이지인 경우-->
+			<!-- main 페이지인 경우-->
 			<a href="subscr_main.html" th:href="@{/subs/main(key=${session.session})}" th:if="${mainMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
 				<img src="/img/icon_home.png" style="filter: hue-rotate(0deg) saturate(100%);"/>
 				<span>HOME</span>
 			</a>
-			<!--		그 외 페이지인 경우-->
+			<!-- 그 외 페이지인 경우-->
 			<a href="subscr_main.html" th:href="@{/subs/main(key=${session.session})}" th:unless="${mainMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_home.png" />
 				<span>HOME</span>

@@ -34,7 +34,7 @@ public class SubCreJpaRepository implements SubCreRepository{
         QCreatorInfoDto qCreatorInfoDto = QCreatorInfoDto.creatorInfoDto;
         
         List<SubCreDto> result = query
-                .select(Projections.bean(SubCreDto.class, qMember.miNick, qCreatorInfoDto.ciMiSeq, qCreatorInfoDto.ciPageNm, qMember.miPhoto))
+                .select(Projections.bean(SubCreDto.class, qMember.miNick, qCreatorInfoDto.ciMiSeq, qCreatorInfoDto.ciPageNm, qMember.miPhoto, qCreatorInfoDto.ciCPhoto))
                 .from(qCreatorInfoDto)
                 .join(qMember).on(qCreatorInfoDto.ciMiSeq.eq(qMember.miSeq))
                 .where(qCreatorInfoDto.ciMiSeq.in(

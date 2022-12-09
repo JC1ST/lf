@@ -27,6 +27,13 @@ public class SubscrJpaRepository implements SubscrRepository{
         this.query = new JPAQueryFactory(em);
     }
 
+    @Override
+    public Subscr save(Subscr subscr) {
+        em.persist(subscr);
+
+        return subscr;
+    }
+
     // 비구독 크리에이터
     @Override
     public List<MemberDto> findAll(Long slvmiseq) {
@@ -35,7 +42,7 @@ public class SubscrJpaRepository implements SubscrRepository{
         QCreatorInfoDto qCreatorInfoDto = QCreatorInfoDto.creatorInfoDto;
 
         List<MemberDto> result = query
-                .select(Projections.bean(MemberDto.class, qCreatorInfoDto.ciMiSeq, qCreatorInfoDto.ciPageNm, qMember.miNick, qMember.miPhoto))
+                .select(Projections.bean(MemberDto.class, qCreatorInfoDto.ciMiSeq, qCreatorInfoDto.ciPageNm, qMember.miNick, qMember.miPhoto, qCreatorInfoDto.ciCPhoto))
                 .from(qCreatorInfoDto)
                 .join(qMember).on(qCreatorInfoDto.ciMiSeq.eq(qMember.miSeq))
                 .where(qCreatorInfoDto.ciMiSeq.notIn(
@@ -54,10 +61,27 @@ public class SubscrJpaRepository implements SubscrRepository{
     }
 
     @Override
-    public List<SubListDto> findMySub(Long slCMiSeq) {
-        List<SubListDto> result = em.createQuery("select s from SubListDto s where s.slCMiSeq = :slCMiSeq", SubListDto.class)
+    public List<SubListTempDto> findMySub(Long slCMiSeq) {
+        List<SubListTempDto> result = em.createQuery("select s from SubListTempDto s where s.slCMiSeq = :slCMiSeq", SubListTempDto.class)
                 .setParameter("slCMiSeq", slCMiSeq)
                 .getResultList();
+
+        return result;
+    }
+
+    // 내 구독자 조회
+    @Override
+    public List<MemberDto> findSub(Long slcMiSeq) {
+        QMember qMember = QMember.member;
+        QSubscr qSubscr = QSubscr.subscr;
+
+        List<MemberDto> result = query
+                .select(Projections.bean(MemberDto.class, qMember.miId, qMember.miNick, qSubscr.slRegdt))
+                .from(qSubscr)
+                .join(qMember).on(qSubscr.slvMiSeq.eq(qMember.miSeq))
+                .where(qSubscr.slcMiSeq.eq(slcMiSeq))
+
+                .fetch();
 
         return result;
     }

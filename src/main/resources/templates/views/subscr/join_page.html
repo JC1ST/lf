@@ -1,80 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default_layout}">
-<?php include "static/inc/head.html"; ?>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/default_layout}">
+
 <th:block layout:fragment="content">
-	<head>
-		<style>
-			.nick_ok{
-				color:#00b0f0;
-				display: none;
-			}
+<head>
+	<style>
+		.nick_ok{
+			color:#00b0f0;
+			display: none;
+		}
 
-			.nick_already{
-				color:#ff3779;
-				display: none;
-			}
-			.mail_ok{
-				color:#00b0f0;
-				display: none;
-			}
+		.nick_already{
+			color:#ff3779;
+			display: none;
+		}
+		.mail_ok{
+			color:#00b0f0;
+			display: none;
+		}
 
-			.mail_already{
-				color:#ff3779;
-				display: none;
-			}
-		</style>
-	</head>
+		.mail_already{
+			color:#ff3779;
+			display: none;
+		}
+	</style>
+</head>
 
 <body>
-<?php include "static/inc/topper.html"; ?>
+	<article class="body_container">
+		<section class="contents_container txt_align_center">
+			<div class="fb_cc container_top_title">
+				<img src="/img/logo_icon.png" /> &nbsp;&nbsp; <b>Join</b>&nbsp;Members
+			</div>
 
-<article class="body_container">
-	<section class="contents_container txt_align_center">
-		<div class="fb_cc container_top_title">
-			<img src="/img/logo_icon.png" /> &nbsp;&nbsp; <b>Join</b>&nbsp;Members
+			<div class="join_area">
+				<section class="join_area_container">
+					<div class="small_box_container">
+						<section class="fb_c_bc account">
+							<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_n.png" />네이버 계정으로 가입</button>
+							<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_k.png" />카카오 계정으로 가입</button>
+							<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_t.png" />트위터 계정으로 가입</button>
+							<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_g.png" />구글 계정으로 가입</button>
+						</section>
+					</div>
+					<span>소셜 계정으로 가입하기</span>
+				</section>
+
+				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+				<form action="/members/new" method="post">
+				<section class="join_area_container">
+					<div class="small_box_container">
+						<section class="fb_c_bc">
+							<input type="text" name="mi_nick" id="mi_nick" placeholder="닉네임">
+							<span class="nick_ok">사용 가능한 닉네임 입니다.</span>
+							<span class="nick_already">이미 사용중인 닉네임 입니다.</span>
+							<input type="text" name="mi_id" id="mi_id" placeholder="이메일">
+							<span class="mail_ok">사용 가능한 이메일 입니다.</span>
+							<span class="mail_already">이미 가입된 이메일 입니다.</span>
+							<input type="text" placeholder="이메일 확인">
+							<input type="password" name="mi_pwd" placeholder="암호">
+							<button type="submit" class="h35 default" >회원가입</button>
+							<!--onclick="location.href='subscr_main.html';"-->
+						</section>
+					</div>
+					<span>이메일 등록 직접 가입</span>
+				</section>
+				</form>
+			</div>
+		</section>
 		</div>
+	</article>
 
-		<div class="join_area">
-			<section class="join_area_container">
-				<div class="small_box_container">
-					<section class="fb_c_bc account">
-						<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_n.png" />네이버 계정으로 가입</button>
-						<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_k.png" />카카오 계정으로 가입</button>
-						<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_t.png" />트위터 계정으로 가입</button>
-						<button type="button" class="fb_sc h35 outline" onclick=""><img src="/img/social_logo_g.png" />구글 계정으로 가입</button>
-					</section>
-				</div>
-				<span>소셜 계정으로 가입하기</span>
-			</section>
-
-			<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-			<form action="/members/new" method="post">
-			<section class="join_area_container">
-				<div class="small_box_container">
-					<section class="fb_c_bc">
-						<input type="text" name="mi_nick" id="mi_nick" placeholder="닉네임">
-						<span class="nick_ok">사용 가능한 닉네임 입니다.</span>
-						<span class="nick_already">이미 사용중인 닉네임 입니다.</span>
-						<input type="text" name="mi_id" id="mi_id" placeholder="이메일">
-						<span class="mail_ok">사용 가능한 이메일 입니다.</span>
-						<span class="mail_already">이미 가입된 이메일 입니다.</span>
-						<input type="text" placeholder="이메일 확인">
-						<input type="password" name="mi_pwd" placeholder="암호">
-						<button type="submit" class="h35 default" >회원가입</button>
-						<!--onclick="location.href='subscr_main.html';"-->
-					</section>
-				</div>
-				<span>이메일 등록 직접 가입</span>
-			</section>
-			</form>
-		</div>
-	</section>
-	</div>
-</article>
-
-<!-- FOOTER -->
-<?php include_once "static/inc/footer.html"; ?>
 </body>
 </th:block>
 </html>
@@ -125,17 +122,14 @@
 		})
 	});
 </Script>
+
 <script th:inline="javascript">
 
 	/*<![CDATA[*/
 	var message = [[${message}]];
 	if (message != null){
-
 		alert(message);
 	}
-
-
-
 	/*]]>*/
 
 </script>
