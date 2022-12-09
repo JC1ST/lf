@@ -372,6 +372,21 @@ public class SubsController {
             List<CreatorSubLevelDto> levels = service.findByCslMiSeq(cSeq);
             model.addAttribute("levels",levels);
 
+
+
+            subListService.checkBySeq(cSeq, (Long) session.getAttribute("session")).ifPresent(a->{
+                Optional<SubListDto> subListDto = Optional.ofNullable(a);
+                Long cslSeq = (subListDto.get().getSubListDtoId().getSlCslSeq());
+                model.addAttribute("cslSeq",cslSeq);
+
+                service.findByCslSeq(cslSeq).ifPresent(b->{
+                    Optional<CreatorSubLevelDto> mySubLevel = Optional.ofNullable(b);
+                    model.addAttribute("levels",levels);
+                    levels.remove(mySubLevel.get());
+                });
+            });
+
+
             go = "views/subscr/member/mem_be";
         }
         else if (memberInfo.get().getMiKind().equals("C")) {
@@ -475,45 +490,61 @@ public class SubsController {
         } else {
             List<CreatorSubLevelDto> levels = service.findByCslMiSeq(cpMiSeq);
             model.addAttribute("levels", levels);
+            System.out.println("****************levels****************"+levels);
             return "views/subscr/creator/creator_page_mode0";
         }
     }
     // 비구독자, 비회원이 보는 크리에이터 포스트 보기 화면
     // 비회원(비로그인)일 경우
-        @GetMapping("/creatorpage/mode0/post")
-        public String post(@RequestParam("key") Long cpMiSeq, Model model,Integer page, HttpSession session) {
-
-            AtomicInteger checkSubs = new AtomicInteger();
-            page = 0;
-            CreatorInfoDto creator = service.findOne(cpMiSeq).get();
-            Slice<CreatorPostDto> post = creatorPostService.findSliceBycpMiSeq(cpMiSeq,page);
+    @GetMapping("/creatorpage/mode0/post")
+    public String post(@RequestParam("key") Long cpMiSeq, Model model,Integer page, HttpSession session) {
 
 
-            subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session")).ifPresent(a->{
-                Optional<SubListDto> subListDto = Optional.ofNullable(a);
-                System.out.println("subListDto subListDto subListDto subListDto subListDto subListDto" + subListDto.get());
-                checkSubs.set(1);
+        AtomicInteger checkSubs = new AtomicInteger();
+        checkSubs.set(0);
 
 
-                service.findByCslSeq(subListDto.get().getSubListDtoId().getSlCslSeq()).ifPresent(b->{
-                    Optional<CreatorSubLevelDto> mySubLevel = Optional.ofNullable(b);
-                    model.addAttribute("mySubLevel",mySubLevel);
-                    System.out.println("mysublevel      " + mySubLevel.get().getCslNm());
+        page = 0;
+        CreatorInfoDto creator = service.findOne(cpMiSeq).get();
+        Slice<CreatorPostDto> post = creatorPostService.findSliceBycpMiSeq(cpMiSeq,page);
 
-
-                    List<CreatorSubLevelDto> subLevelList = service.findByCslMiSeq(cpMiSeq);
-                    if(!subLevelList.isEmpty()){
-                        model.addAttribute("subLevelList",subLevelList);
-                    }
-                });
+        for (CreatorPostDto x : post) {
+            System.out.println("getCpOpenCslSeq " + x.getCpOpenCslSeq());
+            Optional<String> cpOpenCslSeq = Optional.ofNullable(x.getCpOpenCslSeq());
+            cpOpenCslSeq.ifPresent(a->{
+                System.out.println("test test test test test " + a.contains("1"));
+                String[] needForRead = a.split(",");
+                model.addAttribute("subName",service.findByCslSeq(Long.valueOf(needForRead[0])).get().getCslNm());
             });
 
-            model.addAttribute("checkSubs",checkSubs);
-            model.addAttribute("model",post);
-            model.addAttribute("creator",creator);
 
-            return "views/subscr/creator/creator_page_mode0_post";
-    }
+
+        }
+
+        List<CreatorSubLevelDto> subLevelList = service.findByCslMiSeq(cpMiSeq);
+        if(!subLevelList.isEmpty()){
+            model.addAttribute("subLevelList",subLevelList);
+        }
+
+        subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session")).ifPresent(a->{
+            Optional<SubListDto> subListDto = Optional.ofNullable(a);
+            Long cslSeq = (subListDto.get().getSubListDtoId().getSlCslSeq());
+            model.addAttribute("cslSeq",cslSeq);
+            checkSubs.set(1);
+
+            service.findByCslSeq(cslSeq).ifPresent(b->{
+                Optional<CreatorSubLevelDto> mySubLevel = Optional.ofNullable(b);
+                model.addAttribute("mySubLevel",mySubLevel);
+                subLevelList.remove(mySubLevel.get());
+            });
+        });
+
+        model.addAttribute("checkSubs",checkSubs);
+        model.addAttribute("model",post);
+        model.addAttribute("creator",creator);
+
+        return "views/subscr/creator/creator_page_mode0_post";
+}
 
     @PostMapping("/creatorpage/mode0/post/more")
     @ResponseBody

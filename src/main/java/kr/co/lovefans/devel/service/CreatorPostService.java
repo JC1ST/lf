@@ -38,7 +38,7 @@ public class CreatorPostService {
         Slice<CreatorPostDto> post = creatorPostRepository.findSliceBycpMiSeq(cpMiSeq, pageRequest);
         return post;
 
-    };
+    }
 
 
     public List<PostDto> findPostByCpMiSeq(Long slvmiseq){

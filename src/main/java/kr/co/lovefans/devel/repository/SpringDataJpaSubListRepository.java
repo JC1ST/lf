@@ -12,5 +12,8 @@ public interface SpringDataJpaSubListRepository extends  JpaRepository<SubListDt
     @Override
     Optional<SubListDto> checkBySeq(Long cSeq, Long vSeq);
 
+    @Query("select count(m) from SubListDto m where m.subListDtoId.slCMiSeq = ?1")
+    @Override
+    Long countBySlCMiSeq(Long seq);
 }
 

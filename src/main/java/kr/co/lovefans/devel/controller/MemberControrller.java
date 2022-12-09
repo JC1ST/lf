@@ -172,6 +172,12 @@ public class MemberControrller {
     @PostMapping("/members/subsJoin")
     public String subsJoin(@RequestParam("cSeq") Long cSeq, @RequestParam("cslSeq") Long cslSeq,HttpSession session){
 
+
+        subListService.checkBySeq(cSeq, (Long) session.getAttribute("session")).ifPresent(a-> {
+            Optional<SubListDto> subListDto = Optional.ofNullable(a);
+            subListService.delete(subListDto.get());
+        });
+
         SubListDto subListDto = new SubListDto();
         subListDto.setSubListDtoId(new SubListDtoId());
         subListDto.getSubListDtoId().setSlCMiSeq(cSeq);

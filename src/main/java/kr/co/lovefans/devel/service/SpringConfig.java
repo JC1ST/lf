@@ -19,9 +19,10 @@ public class SpringConfig {
     private final SubListRepository subListRepository;
     private final SubsCustomRepository subsCustomRepository;
     private final AdminRepository adminRepository;
+    private final SearchResultRepository searchResultRepository;
 
     @Autowired
-    public SpringConfig(CreateSubLevelRepository createSubLevelRepository, SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, SubListRepository subListRepository, SubsCustomRepository subsCustomRepository, AdminRepository adminRepository) {
+    public SpringConfig(SearchResultRepository searchResultRepository ,CreateSubLevelRepository createSubLevelRepository, SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, SubListRepository subListRepository, SubsCustomRepository subsCustomRepository, AdminRepository adminRepository) {
         this.createSubLevelRepository = createSubLevelRepository;
         this.subsPostCustomRepository = subsPostCustomRepository;
         this.memberRepository = memberRepository;
@@ -30,6 +31,7 @@ public class SpringConfig {
         this.subListRepository = subListRepository;
         this.subsCustomRepository = subsCustomRepository;
         this.adminRepository = adminRepository;
+        this.searchResultRepository = searchResultRepository;
     }
 //    private DataSource dataSource;
 
@@ -44,7 +46,7 @@ public class SpringConfig {
     @Bean
     public MemberService memberService(){
 
-        return new MemberService(memberRepository);
+        return new MemberService(searchResultRepository,memberRepository);
     }
     @Bean
     public CreatorService creatorService(){

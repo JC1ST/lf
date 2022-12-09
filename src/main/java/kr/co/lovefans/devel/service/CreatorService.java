@@ -7,8 +7,10 @@ import kr.co.lovefans.devel.domain.MemberInfoDto;
 import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.repository.CreateSubLevelRepository;
 import kr.co.lovefans.devel.repository.CreatorRepository;
+import kr.co.lovefans.devel.repository.JpaCreatorRepository;
 import kr.co.lovefans.devel.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -84,6 +86,10 @@ public class CreatorService {
 
         return createSubLevelRepository.findByCslSeq(CslSeq);
     }
+
+
+
+
 
 }
 

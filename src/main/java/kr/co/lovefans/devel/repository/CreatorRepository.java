@@ -4,6 +4,8 @@ import com.querydsl.core.Tuple;
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.MemberInfoDto;
 import kr.co.lovefans.devel.dto.MemberDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +20,7 @@ public interface CreatorRepository {
     List<CreatorInfoDto> findAll();
 
     List<MemberDto> findAllPlus();
+
+
+
 }

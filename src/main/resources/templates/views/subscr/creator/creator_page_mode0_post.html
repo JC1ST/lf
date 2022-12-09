@@ -166,8 +166,8 @@
 
 														</section>
 														<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
-														<section class="linker" onclick="location.href='creator_page_detail.html';"
-																 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+														<section class="linker"
+																 th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
 															<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
 															<p class="post_txt_area" th:text="${model.getCpContent()}">
 															</p>
@@ -233,7 +233,8 @@
 																<div class="fb_c_cc">
 																	<img src="/img/icon_lock.png" />
 																	<p style="text-align: center; color: white; font-size: 1.4rem;">구독자가 되어<br>포스트 잠금을 해제하고 내용을 확인하세요</p>
-																	<button type="button" class="w200 h35 bright";>구독하기</button>
+
+																	<button type="button" class="w200 h35 bright"><span th:text="${subName}"></span>등급 구독하기</button>
 																</div>
 															</div>
 															<section class="post_slider_screen">
@@ -250,8 +251,8 @@
 
 														</section>
 														<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
-														<section class="linker" onclick="location.href='creator_page_detail.html';"
-																 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+														<section class="linker"
+																 th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
 															<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
 															<p class="post_txt_area" th:text="${model.getCpContent()}">
 															</p>
@@ -281,7 +282,7 @@
 															<div class="fb_c_cc">
 																<img src="/img/icon_lock.png" />
 																<p style="text-align: center; color: white; font-size: 1.4rem;">구독자가 되어<br>포스트 잠금을 해제하고 내용을 확인하세요</p>
-																<button type="button" class="w200 h35 bright";>구독하기</button>
+																<button type="button" class="w200 h35 bright";><span th:text="${subName}"></span>등급 구독하기</button>
 															</div>
 														</div>
 														<section class="post_slider_screen">
@@ -298,8 +299,8 @@
 
 													</section>
 													<div class="post_date_area" th:text="${model.getCpRegdt()}"></div>
-													<section class="linker" onclick="location.href='creator_page_detail.html';"
-															 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+													<section class="linker"
+															 th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
 														<p class="post_title_area" th:text="${model.getCpTitle()}"></p>
 														<p class="post_txt_area" th:text="${model.getCpContent()}">
 														</p>

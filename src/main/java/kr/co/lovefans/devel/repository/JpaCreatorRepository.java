@@ -9,6 +9,9 @@ import kr.co.lovefans.devel.domain.QCreatorInfoDto;
 import kr.co.lovefans.devel.domain.QMember;
 import kr.co.lovefans.devel.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -64,6 +67,8 @@ public class JpaCreatorRepository implements CreatorRepository {
         return em.createQuery("select c from CreatorInfoDto c", CreatorInfoDto.class)
                 .getResultList();
     }
+
+
 
     @Override
     public List<MemberDto> findAllPlus() {
