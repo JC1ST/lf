@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+
+	<article class="body_container">
+
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+
+		<section class="contents_container">
+			<!-- SEARCH -->
+<!--			<div class="fb_bc searcher">-->
+<!--				<input class="sech" placeholder="크리에이터 찾기">-->
+<!--				<button type="button" class="h35 default">찾기</button>-->
+<!--			</div>-->
+			
+			<!-- RESULT -->
+			<div class="search_result_container">
+				<th:block th:if="${result.isEmpty()}">
+					<h2>검색 결과 없음</h2>
+				</th:block>
+
+				<th:block th:if="${!result.isEmpty()}">
+				<th:block th:each="list:${result.iterator()}">
+					<th:block th:each="subs:${subsCount.iterator()}">
+
+
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+						<div class="fb_c_ss">
+							<a th:href="@{/subs/creatorpage/mode0(key=${list.getCiMiSeq()})}"><h2 th:text="${list.getCiPageNm()}"> </h2></a>
+							<p>
+								창작분야 : <span th:text="${list.getCiTheme()}"></span>
+								<br/>
+								<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+							</p>
+								</div>
+									<div class="fb_c_cc">
+										구독자
+										<br />
+									<h3 th:text="${subs.longValue()}"></h3>
+								</div>
+							</article>
+						</th:block>
+					</th:block>
+				</th:block>
+
+				<!-- Paging -->
+				<th:block th:if="${!result.isEmpty()}">
+			<div class="fb_cc paging_area">
+				<br/>
+				<th:block th:each="page:${#numbers.sequence(0, totalPage - 1)}">
+						<a th:href="@{/search(keyword=${keyword},page=${pageStat.index})}" th:text="${pageStat.index + 1}"}></a>
+				</th:block>
+			</div>
+
+				</th:block>
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+</body>
+</th:block>
+</html>
