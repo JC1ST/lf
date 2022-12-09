@@ -9,10 +9,18 @@ public class SubsSubsListDto {
 
     String CiPageNm;
     String CslNm;
+
+    String CiPPhoto;
+    String CiCPhoto;
+
     Long CiMiSeq;
     Long SlVmiSeq;
     int CslPrice;
     Date SlRegdt;
 
 
+
 }
+
+
+

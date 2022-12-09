@@ -1,15 +1,15 @@
 package kr.co.lovefans.devel.controller;
 
 import kr.co.lovefans.devel.domain.MemberInfoDto;
-import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.service.AdminService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @RequestMapping("/admin")
 @Controller
@@ -20,7 +20,6 @@ public class AdminController {
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
-
 
     // 관리자 로그인
     @GetMapping("/login")
@@ -38,16 +37,20 @@ public class AdminController {
 
     // 전체 회원 리스트
     @GetMapping("/mem_all_list")
-    public String list(Model model, Pageable pageable) {
+    public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "mi_seq", direction = Sort.Direction.ASC) Pageable pageable) {
 
-        List<MemberInfoDto> memberAll = adminService.findAll();
+        Page<MemberInfoDto> pageList = adminService.findPage(pageable);
 
-        model.addAttribute("memberAll", memberAll);
+        int startPage = Math.max(1, pageList.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(pageList.getTotalPages(), pageList.getPageable().getPageNumber() + 4);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        model.addAttribute("pageList", pageList);
 
         // 사이드 메뉴 관련
         model.addAttribute("memAllList", true);
-        // 페이징
-        adminService.findAll();
 
         return "admin/member/mem_all_list";
     }

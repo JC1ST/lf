@@ -146,6 +146,9 @@ public class MemberService {
     public Optional<Member> findById(String id){
         return memberRepository.findByMiId(id);
     }
+    public Optional<Member> findByNick(String miNick) {
+        return memberRepository.findByMiNick(miNick);
+    }
 
     public Boolean login(Member member){
 

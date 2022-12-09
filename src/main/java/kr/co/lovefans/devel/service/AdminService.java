@@ -2,6 +2,8 @@ package kr.co.lovefans.devel.service;
 
 import kr.co.lovefans.devel.domain.MemberInfoDto;
 import kr.co.lovefans.devel.repository.AdminRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class AdminService {
     }
 
 
-    public List<MemberInfoDto> findAll() {
-        return adminRepository.findAll();
+    public Page<MemberInfoDto> findPage(Pageable pageable) {
+        return adminRepository.findAll(pageable);
     }
 }

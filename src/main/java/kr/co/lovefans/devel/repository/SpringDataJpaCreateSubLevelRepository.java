@@ -13,4 +13,7 @@ public interface SpringDataJpaCreateSubLevelRepository extends JpaRepository<Cre
 
     @Override
     Optional<CreatorSubLevelDto> findByCslSeq(Long ScsSeq);
+
+
 }
+

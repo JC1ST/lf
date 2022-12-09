@@ -79,7 +79,9 @@ select {height: 35px; border: solid 1px #c4cad1; border-radius: 3px;}
 .fb_sc {display: flex; justify-content: flex-start; align-items: center;}
 .fb_se {display: flex; justify-content: flex-start; align-items: flex-end;}
 .fb_cs {display: flex; justify-content: center; align-items: flex-start;}
-.fb_cc {display: flex; justify-content: center; align-items: center;}
+.fb_cc {display: flex; justify-content: center; align-items: center; text-align: center;}
+.fb_cc ul {display: inline-block; zoom: 1;}
+.fb_cc ul li {display: inline; margin-left: 10px; z-index: 1}
 .fb_ce {display: flex; justify-content: center; align-items: flex-end;}
 .fb_cb {display: flex; justify-content: center; align-items: space-between;}
 .fb_ec {display: flex; justify-content: flex-end; align-items: center;}

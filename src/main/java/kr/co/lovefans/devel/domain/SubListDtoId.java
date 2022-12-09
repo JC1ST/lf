@@ -18,4 +18,7 @@ public class SubListDtoId implements Serializable {
 
     @Column(name = "sl_csl_seq")
     private Long slCslSeq;
+
 }
+
+

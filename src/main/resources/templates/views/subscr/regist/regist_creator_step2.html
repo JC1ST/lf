@@ -4,8 +4,6 @@
 
 <th:block layout:fragment="content">
 <body>
-	<?php include "/inc/topper.html"; ?>
-
 	<article class="body_container">
 		<section class="contents_container">
 			<div class="fb_cc container_top_title">
@@ -99,17 +97,11 @@
 
 			<br />
 
-			<div class="fb_cc container_bottom_btn"><button type="button" class="default w200 h40" disabled onclick="location.href='creator_main.html';"
+			<div class="fb_cc container_bottom_btn"><button type="button" class="default w200 h40" disabled
 				th:onclick="|location.href='@{/creator/creator_main}'|">작성완료</button>
 			</div>
 		</section>
 	</article>
-
-	<!-- FOOTER -->
-	<?php include_once "/inc/footer.html"; ?>
-
-
-
 
 	<!-- 회원등급 등록화면 -->
 	<div id="tierInput" class="fb_cs tier_operate_back">
@@ -218,6 +210,7 @@
 	</div>
 
 </body>
+</th:block>
 </html>
 
 <script>

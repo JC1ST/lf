@@ -1,149 +1,153 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
-<?php include "static/inc/head.html"; ?>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
 <th:block layout:fragment="content">
-	<body>
-
-	<?php include "static/inc/topper.html"; ?>
-
+<body>
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "static/inc/side.html"; ?>
-
 		<section class="contents_container">
-			<div class="fb_cc container_top_title">
-				<img src="/img/icon_mypage.png" /> &nbsp;&nbsp; <b>마이페이지</b>
-			</div>
+			<form th:action="@{/subs/mypage(key=${session.session})}" method="post" enctype="multipart/form-data">
+				<div class="fb_cc container_top_title">
+					<img src="/img/icon_mypage.png" /> &nbsp;&nbsp; <b>마이페이지</b>
+				</div>
 
-			<article class="aritcle_border_container" style="margin-bottom:100px;">
-				<!-- 프로필 사진 -->
-				<section class="mypage_section">
-					<div>
-						<section class="fb_sc"><img src="/img/icon_mypage.png" />프로필 사진</section>
-						<section class="fb_sc">
-							<figure class="fb_cc profile">
-								<span>S</span>
-							</figure>
-							<input type="file" id="profile_pic" />
-							<div class="fb_cc modifies_btns">
-								<button type="button" id="profile_pic_del" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="button" id="profile_pic_modify" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
-							</div>
-							<div class="profile_pic_btns">
-								<button type="button" id="profile_pic_accept" class="w80 h30 defaultLight">적용</button>
+				<article class="aritcle_border_container" style="margin-bottom:100px;">
+					<!-- 프로필 사진 -->
+					<section class="mypage_section">
+						<div>
+							<section class="fb_sc"><img src="/img/icon_mypage.png" />프로필 사진</section>
+							<section class="fb_sc">
+								<figure class="fb_cc profile">
+									<!-- 프로필 이미지가 있을 때 -->
+									<th:block th:if="${model.getMiPhoto() != null}">
+										<img th:src="${model.getMiPhoto()}" />
+									</th:block>
+
+									<!-- 프로필 이미지가 없을 때 -->
+									<th:block th:if="${model.getMiPhoto() == null}">
+										<span th:text="${#strings.substring(model.getMiNick(), 0, 1)}"></span>
+									</th:block>
+
+								</figure>
+								<input type="file" id="profile_pic" />
+								<div class="fb_cc modifies_btns">
+									<button type="button" id="profile_pic_del" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" id="profile_pic_modify" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+								</div>
+								<div class="profile_pic_btns">
+									<button type="button" id="profile_pic_accept" class="w80 h30 defaultLight"
+											th:onclick="|location.href='@{/subs/mypage(key=${session.session})}'|">적용</button>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" id="profile_pic_cancel" class="w80 h30 cancel">취소</button>
+								</div>
+							</section>
+						</div>
+					</section>
+
+					<!-- 활동상태 -->
+					<section class="mypage_section">
+						<div>
+							<section class="fb_sc"><img src="/img/icon_mypage.png" />활동상태</section>
+							<section class="fb_sc">
+								<div class="context">
+									<div th:if="${model.getMiKind() == 'V'}">구독자</div>
+									<div th:if="${model.getMiKind() == 'C'}">크리에이터</div>
+								</div>
+								<div class="fb_cc modifies_btns">
+									<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+								</div>
+								<img src="/img/arrow_m.png" />
+							</section>
+						</div>
+						<div class="opt">
+							<span>크리에이터로 전환하기</span>
+							<p>
+								크리에이터가 되고 싶으신가요?<br>
+								우리의 후원 시스템을 통해 당신의 팬들로부터 창작물 제작에 필요한 비용을 후원 받으세요.
+							</p>
+							<div>
+								<button type="button" class="w80 h30 defaultLight"
+										th:onclick="|location.href='@{/creators/new}'|">확인</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="button" id="profile_pic_cancel" class="w80 h30 cancel">취소</button>
+								<button type="button" class="w80 h30 cancel">취소</button>
 							</div>
-						</section>
-					</div>
-				</section>
-
-				<!-- 활동상태 -->
-				<section class="mypage_section">
-					<div>
-						<section class="fb_sc"><img src="/img/icon_mypage.png" />활동상태</section>
-						<section class="fb_sc">
-							<div class="context">
-								<div th:if="${model.getMiKind() == 'V'}">구독자</div>
-								<div th:if="${model.getMiKind() == 'C'}">크리에이터</div>
-							</div>
-							<div class="fb_cc modifies_btns">
-								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
-							</div>
-							<img src="/img/arrow_m.png" />
-						</section>
-					</div>
-					<div class="opt">
-						<span>크리에이터로 전환하기</span>
-						<p>
-							크리에이터가 되고 싶으신가요?<br>
-							우리의 후원 시스템을 통해 당신의 팬들로부터 창작물 제작에 필요한 비용을 후원 받으세요.
-						</p>
-						<div>
-							<button type="button" class="w80 h30 defaultLight"
-									th:onclick="|location.href='@{/creators/new}'|">확인</button>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="button" class="w80 h30 cancel">취소</button>
+							<br />
 						</div>
-						<br />
-					</div>
-				</section>
+					</section>
 
-				<!-- 설정닉네임 -->
-				<section class="mypage_section">
-					<div>
-						<section class="fb_sc"><img src="/img/icon_mypage.png" />설정 닉네임</section>
-						<section class="fb_sc">
-							<div class="context"><span th:text="${model.getMiNick()}"></span></div>
-							<div class="fb_cc modifies_btns">
-								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
-							</div>
-							<img src="/img/arrow_m.png" />
-						</section>
-					</div>
-					<div class="opt">
-						<input th:value="${model.getMiNick()}" type="text" />
-						<br /><br />
+					<!-- 설정닉네임 -->
+					<section class="mypage_section">
 						<div>
-							<button type="button" class="w80 h30 defaultLight">수정</button>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="button" class="w80 h30 cancel">취소</button>
+							<section class="fb_sc"><img src="/img/icon_mypage.png" />설정 닉네임</section>
+							<section class="fb_sc">
+								<div class="context"><span th:text="${model.getMiNick()}"></span></div>
+								<div class="fb_cc modifies_btns">
+									<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+								</div>
+								<img src="/img/arrow_m.png" />
+							</section>
 						</div>
-						<br />
-					</div>
-				</section>
+						<div class="opt">
+							<input th:value="${model.getMiNick()}" type="text" />
+							<br /><br />
+							<div>
+								<button type="button" class="w80 h30 defaultLight">수정</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" class="w80 h30 cancel">취소</button>
+							</div>
+							<br />
+						</div>
+					</section>
 
-				<!-- 계정이메일 -->
-				<section class="mypage_section">
-					<div>
-						<section class="fb_sc"><img src="/img/icon_mypage.png" />계정 이메일</section>
-						<section class="fb_sc">
-							<div class="context">
-								<span th:text="${model.getMiId()}"></span>
-							</div>
-							<div class="fb_cc modifies_btns">
-								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
-							</div>
-							<img src="/img/arrow_m.png" />
-						</section>
-					</div>
-					<div class="opt">
-						<!-- 직접 입력한 이메일 계정 사용시 나타난다. -->
-						<span>현재 직접 입력한 이메일 계정 사용중</span>
-						<br /><br />
-						<input type="password" placeholder="현재비밀번호 입력" />
-						<br />
-						<input type="password" placeholder="새 비밀번호 입력" />
-						<br />
-						<input type="password" placeholder="새 비밀번호 재입력" />
-						<br /><br />
+					<!-- 계정이메일 -->
+					<section class="mypage_section">
 						<div>
-							<button type="button" class="w150 h30 defaultLight">비밀번호 업데이트</button>
+							<section class="fb_sc"><img src="/img/icon_mypage.png" />계정 이메일</section>
+							<section class="fb_sc">
+								<div class="context">
+									<span th:text="${model.getMiId()}"></span>
+								</div>
+								<div class="fb_cc modifies_btns">
+									<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+								</div>
+								<img src="/img/arrow_m.png" />
+							</section>
 						</div>
+						<div class="opt">
+							<!-- 직접 입력한 이메일 계정 사용시 나타난다. -->
+							<span>현재 직접 입력한 이메일 계정 사용중</span>
+							<br /><br />
+							<input type="password" placeholder="현재비밀번호 입력" />
+							<br />
+							<input type="password" placeholder="새 비밀번호 입력" />
+							<br />
+							<input type="password" placeholder="새 비밀번호 재입력" />
+							<br /><br />
+							<div>
+								<button type="button" class="w150 h30 defaultLight">비밀번호 업데이트</button>
+							</div>
 
-						<!-- 네이버 계정으로 사용시 나타난다 -->
-						<div class="fb_sc"><img src="/img/social_logo_n.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">네이버 계정 사용중</span></div>
+							<!-- 네이버 계정으로 사용시 나타난다 -->
+							<div class="fb_sc"><img src="/img/social_logo_n.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">네이버 계정 사용중</span></div>
 
-						<!-- 카카오 계정으로 사용시 나타난다 -->
-						<div class="fb_sc"><img src="/img/social_logo_k.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">카카오 계정 사용중</span></div>
+							<!-- 카카오 계정으로 사용시 나타난다 -->
+							<div class="fb_sc"><img src="/img/social_logo_k.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">카카오 계정 사용중</span></div>
 
-						<!-- 트위터 계정으로 사용시 나타난다 -->
-						<div class="fb_sc"><img src="/img/social_logo_t.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">트위터 계정 사용중</span></div>
+							<!-- 트위터 계정으로 사용시 나타난다 -->
+							<div class="fb_sc"><img src="/img/social_logo_t.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">트위터 계정 사용중</span></div>
 
-						<!-- 구글 계정으로 사용시 나타난다 -->
-						<div class="fb_sc"><img src="/img/social_logo_g.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">구글 계정 사용중</span></div>
-						<br />
-					</div>
-				</section>
-
-			</article>
+							<!-- 구글 계정으로 사용시 나타난다 -->
+							<div class="fb_sc"><img src="/img/social_logo_g.png" /> &nbsp;&nbsp;&nbsp; <span class="gray">구글 계정 사용중</span></div>
+							<br />
+						</div>
+					</section>
+				</article>
+			</form>
 		</section>
 	</article>
 
-	<!-- FOOTER -->
-	<?php include_once "static/inc/footer.html"; ?>
-	</body>
+</body>
 </th:block>
 </html>
 

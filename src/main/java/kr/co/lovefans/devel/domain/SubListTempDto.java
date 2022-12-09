@@ -3,7 +3,6 @@ package kr.co.lovefans.devel.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,27 +12,28 @@ import java.util.Date;
 @Setter
 @Table(name = "sub_list")
 @DynamicInsert
-@DynamicUpdate
-public class SubListDto {
+public class SubListTempDto {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @EmbeddedId
-    private SubListDtoId subListDtoId = new SubListDtoId();
+    @Column(name = "sl_c_mi_seq")
+    private Long slCMiSeq;
+
+    @Column(name = "sl_v_mi_seq")
+    private Long slVMiSeq;
+
+    @Column(name = "sl_state")
+    private char slState;
 
     @Column(name = "sl_msg")
     private String slMsg;
+
+    @Column(name = "sl_csl_seq")
+    private int slCslSeq;
 
     @Column(name = "sl_modidt")
     private Date slModidt;
 
     @Column(name = "sl_regdt")
     private Date slRegdt;
-
-
-    @Column(name = "sl_state")
-    private Character slState = 'Y';
-
 }
-
-}
-

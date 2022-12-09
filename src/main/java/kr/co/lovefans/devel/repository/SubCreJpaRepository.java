@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static com.querydsl.jpa.JPAExpressions.select;
+
 @Repository
 public class SubCreJpaRepository implements SubCreRepository{
 
@@ -24,21 +26,22 @@ public class SubCreJpaRepository implements SubCreRepository{
         this.query = new JPAQueryFactory(em);
     }
 
+    // 구독한 크리에이터
     @Override
-    public List<SubCreDto> findCre() {
+    public List<SubCreDto> findCre(Long slvmiseq) {
         QMember qMember = QMember.member;
         QSubscr qSubscr = QSubscr.subscr;
         QCreatorInfoDto qCreatorInfoDto = QCreatorInfoDto.creatorInfoDto;
-
-        // 수정 필요
+        
         List<SubCreDto> result = query
-                .select(Projections.bean(SubCreDto.class, qMember.miSeq, qMember.miNick, qSubscr.slvMiSeq, qSubscr.slcMiSeq, qCreatorInfoDto.ciMiSeq, qCreatorInfoDto.ciPageNm))
-                .from(qMember, qCreatorInfoDto, qSubscr)
-                .where(qMember.miSeq.eq(qSubscr.slvMiSeq), qSubscr.slvMiSeq.eq(21L), qSubscr.slcMiSeq.eq(2L), qSubscr.slcMiSeq.eq(qCreatorInfoDto.ciMiSeq))
-
-                // 데이터 랜덤 조회
-//                .orderBy(Expressions.numberTemplate(Integer.class, "function('rand')").asc())
-//                .limit(3)
+                .select(Projections.bean(SubCreDto.class, qMember.miNick, qCreatorInfoDto.ciMiSeq, qCreatorInfoDto.ciPageNm, qMember.miPhoto, qCreatorInfoDto.ciCPhoto))
+                .from(qCreatorInfoDto)
+                .join(qMember).on(qCreatorInfoDto.ciMiSeq.eq(qMember.miSeq))
+                .where(qCreatorInfoDto.ciMiSeq.in(
+                        select(qSubscr.slcMiSeq)
+                                .from(qSubscr)
+                                .where(qSubscr.slvMiSeq.eq(slvmiseq))
+                ))
 
                 .fetch();
 

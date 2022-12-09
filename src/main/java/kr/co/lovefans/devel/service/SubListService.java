@@ -43,9 +43,11 @@ public class SubListService {
         subListRepository.delete(subListDto);
     }
 
+
     public Long count(Long seq){
         return subListRepository.countBySlCMiSeq(seq);
     }
 
 
 }
+

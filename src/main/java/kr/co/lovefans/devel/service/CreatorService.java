@@ -1,9 +1,13 @@
 package kr.co.lovefans.devel.service;
 
+
 import kr.co.lovefans.devel.domain.CreatorInfoDto;
 import kr.co.lovefans.devel.domain.CreatorSubLevelDto;
 import kr.co.lovefans.devel.domain.Member;
 import kr.co.lovefans.devel.domain.MemberInfoDto;
+
+import kr.co.lovefans.devel.domain.*;
+
 import kr.co.lovefans.devel.dto.MemberDto;
 import kr.co.lovefans.devel.repository.CreateSubLevelRepository;
 import kr.co.lovefans.devel.repository.CreatorRepository;
@@ -55,6 +59,9 @@ public class CreatorService {
         return creatorRepository.findMemInfoBySeq(miSeq);
     }
 
+    public List<CreatorPostDto> findAllPost(Long cpMiSeq) {
+        return creatorRepository.findAllPost(cpMiSeq);
+    }
 
     public List<MemberDto> findAllPlus(){
         return creatorRepository.findAllPlus();
@@ -91,6 +98,9 @@ public class CreatorService {
 
 
 
+
 }
+
+
 
 

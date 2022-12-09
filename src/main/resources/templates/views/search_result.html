@@ -1,13 +1,21 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
 <body>
 
+<html>
+	<?php include "static/inc/head.html"; ?>
+<body>
+	<?php include "static/inc/topper.html"; ?>
+
+
 	<article class="body_container">
 
 		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+
 
 		<section class="contents_container">
 			<!-- SEARCH -->
@@ -28,9 +36,94 @@
 
 
 
+		<?php include "static/inc/side.html"; ?>
+		
+		<section class="contents_container">
+			<!-- SEARCH -->
+			<div class="fb_bc searcher">
+				<input class="sech" placeholder="크리에이터 찾기">
+				<button type="button" class="h35 default">찾기</button>
+			</div>
+			
+			<!-- RESULT -->
+			<div class="search_result_container">
 				<!-- Creaotr List -->
 				<article class="fb_sc creator_list">
 					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+
 						<div class="fb_c_ss">
 							<a th:href="@{/subs/creatorpage/mode0(key=${list.getCiMiSeq()})}"><h2 th:text="${list.getCiPageNm()}"> </h2></a>
 							<p>
@@ -59,10 +152,83 @@
 			</div>
 
 				</th:block>
+
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+
+				<!-- Creaotr List -->
+				<article class="fb_sc creator_list">
+					<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+					<div class="fb_c_ss">
+						<h2>Creator PageName</h2>
+						<p>
+							창작분야 : 비디오 포토
+							<br />
+							<span>100 이미지</span><span>100 포토</span><span>100 링크</span>
+						</p>
+					</div>
+					<div class="fb_c_cc">
+						구독자
+						<br />
+						<h3>1234</h3>
+					</div>
+				</article>
+			</div>
+
+			<!-- Paging -->
+			<div class="fb_cc paging_area">
+				<a href="#">&lt;</a>
+				&nbsp;&nbsp;&nbsp;
+				<span>1</span>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a href="#">6</a>
+				<a href="#">7</a>
+				<a href="#">8</a>
+				<a href="#">9</a>
+				<a href="#">10</a>
+				&nbsp;&nbsp;&nbsp;
+				<a href="#">&gt;</a>
+			</div>
+
 		</section>
 	</article>
 	
 	<!-- FOOTER -->
+
 </body>
 </th:block>
+
 </html>

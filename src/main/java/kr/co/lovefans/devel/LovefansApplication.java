@@ -17,4 +17,5 @@ public class LovefansApplication {
 		return new HiddenHttpMethodFilter();
 	}
 
+
 }

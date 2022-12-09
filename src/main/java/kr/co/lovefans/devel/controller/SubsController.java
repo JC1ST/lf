@@ -46,15 +46,15 @@ public class SubsController {
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
 
-        List<MemberDto> List = subscrService.findAll();
+        List<MemberDto> List = subscrService.findAll((Long) session.getAttribute("session"));
         List<PostDto> postList = creatorPostService.findPostByCpMiSeq((Long) session.getAttribute("session"));
-        List<SubCreDto> creList = subscrService.findCre();
+        List<SubCreDto> creList = subscrService.findCre((Long) session.getAttribute("session"));
 
         model.addAttribute("creatorList", List);
         model.addAttribute("postList", postList);
         model.addAttribute("creList", creList);
 
-//        사이드 메뉴 관련
+        // 사이드 메뉴 관련
         model.addAttribute("mainMenu", true);
 
         if (memberInfo.isEmpty()) return "redirect:/login";
@@ -70,9 +70,9 @@ public class SubsController {
         else {
             return "redirect:/login";
         }
-//
-       return go;
-   }
+
+        return go;
+    }
 
     // 구독자 마이 페이지
     @GetMapping("/mypage")
@@ -126,10 +126,11 @@ public class SubsController {
     public String list(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/message/subscr_message_list";
 
-//        List<CreatorInfoDto> creatorList = subscrService.findAll();
-//        model.addAttribute("creatorList", creatorList);
-
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
+
+        List<SubCreDto> creList = subscrService.findCre((Long) session.getAttribute("session"));
+        model.addAttribute("creList", creList);
+
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
@@ -153,10 +154,11 @@ public class SubsController {
     public String select(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/message/subscr_message_select";
 
-//        List<CreatorInfoDto> creatorList = subscrService.findAll();
-//        model.addAttribute("creatorList", creatorList);
-
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
+
+        List<SubCreDto> creList = subscrService.findCre((Long) session.getAttribute("session"));
+        model.addAttribute("creList", creList);
+
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
@@ -180,10 +182,11 @@ public class SubsController {
     public String view(HttpSession session, Model model, @RequestParam("key") Long key) {
         String go = "views/subscr/message/subscr_message_view";
 
-//        List<CreatorInfoDto> creatorList = subscrService.findAll();
-//        model.addAttribute("creatorList", creatorList);
-
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
+
+        List<SubCreDto> creList = subscrService.findCre((Long) session.getAttribute("session"));
+        model.addAttribute("creList", creList);
+
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
@@ -330,13 +333,19 @@ public class SubsController {
 
     // 크리에이터 페이지(구독자 및 크리에이터 본인 전용)
     @GetMapping("/creatorpage")
-    public String creatorpage(HttpSession session, Model model) {
+    public String creatorpage(HttpSession session, Model model, @RequestParam("key") Long cpMiSeq) {
         String go = "views/subscr/creator/creator_page";
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
+        CreatorInfoDto creator = service.findOne(cpMiSeq).get();
+        List<CreatorPostDto> crePost = service.findAllPost(cpMiSeq);
+
         if (memberInfo.isEmpty()) return "redirect:/login";
 
         model.addAttribute("model", memberInfo.get());
+
+        model.addAttribute("creator",creator);
+        model.addAttribute("crePost", crePost);
 
         if (memberInfo.get().getMiKind().equals("V")) {
             go = "views/subscr/creator/creator_page";
@@ -350,8 +359,6 @@ public class SubsController {
 
         return go;
     }
-
-
 
     // 크리에이터 페이지 구독하기(등급선택)
     @GetMapping("/mem/be")
@@ -374,6 +381,7 @@ public class SubsController {
 
 
 
+
             subListService.checkBySeq(cSeq, (Long) session.getAttribute("session")).ifPresent(a->{
                 Optional<SubListDto> subListDto = Optional.ofNullable(a);
                 Long cslSeq = (subListDto.get().getSubListDtoId().getSlCslSeq());
@@ -385,6 +393,7 @@ public class SubsController {
                     levels.remove(mySubLevel.get());
                 });
             });
+
 
 
             go = "views/subscr/member/mem_be";
@@ -425,65 +434,36 @@ public class SubsController {
         return go;
     }
 
-//    // 크리에이터 신청 step 1
-//    @GetMapping("/regist/creator/step1")
-//    public String reg1(HttpSession session, Model model) {
-//        String go = "views/subscr/regist/regist_creator_step1";
-//
-//        Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
-//        if (memberInfo.isEmpty()) return "redirect:/login";
-//
-//        model.addAttribute("model", memberInfo.get());
-//
-//        if (memberInfo.get().getMiKind().equals("V")) {
-//            go = "views/subscr/regist/regist_creator_step1";
-//        }
-//        else if (memberInfo.get().getMiKind().equals("C")) {
-//            go = "redirect:/creator/creator_mypage";
-//        }
-//        else {
-//            return "redirect:/login";
-//        }
-//
-//        return go;
-//    }
-//
-//    // 크리에이터 신청 step 2
-//    @GetMapping("/regist/creator/step2")
-//    public String reg2(HttpSession session, Model model) {
-//        String go = "views/subscr/regist/regist_creator_step2";
-//
-//        Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
-//        if (memberInfo.isEmpty()) return "redirect:/login";
-//
-//        model.addAttribute("model", memberInfo.get());
-//
-//        if (memberInfo.get().getMiKind().equals("V")) {
-//            go = "views/subscr/regist/regist_creator_step2";
-//        }
-//        else if (memberInfo.get().getMiKind().equals("C")) {
-//            go = "redirect:/creator/creator_mypage";
-//        }
-//        else {
-//            return "redirect:/login";
-//        }
-//
-//        return go;
-//    }
-
-
-
-
     // 비구독자 및 비회원이 보는 크리에이터 페이지 첫 화면
     // 비회원(비로그인)일 경우
     @GetMapping("/creatorpage/mode0")
     public String mode0(@RequestParam("key") Long cpMiSeq, Model model, HttpSession session) {
+
         Optional<SubListDto> subListDto = subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session"));
         CreatorInfoDto creator = service.findOne(cpMiSeq).get();
         model.addAttribute("creator", creator);
 
 
         if (!subListDto.isEmpty()) {
+
+
+        Optional<SubListDto> subListDto = subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session"));
+        CreatorInfoDto creator = service.findOne(cpMiSeq).get();
+        List<CreatorPostDto> post = service.findAllPost(cpMiSeq);
+
+        model.addAttribute("creator", creator);
+        model.addAttribute("post", post);
+
+        if (!subListDto.isEmpty()) {
+            return "redirect:/subs/creatorpage/mode0/post?key=" + creator.getCiMiSeq();
+
+        } else {
+            List<CreatorSubLevelDto> levels = service.findByCslMiSeq(cpMiSeq);
+            model.addAttribute("levels", levels);
+            return "views/subscr/creator/creator_page_mode0";
+        }
+    }
+
 
             return "redirect:/subs/creatorpage/mode0/post?key=" + creator.getCiMiSeq();
 
@@ -500,13 +480,17 @@ public class SubsController {
     public String post(@RequestParam("key") Long cpMiSeq, Model model,Integer page, HttpSession session) {
 
 
+
         AtomicInteger checkSubs = new AtomicInteger();
         checkSubs.set(0);
 
 
+
+        AtomicInteger checkSubs = new AtomicInteger();
         page = 0;
         CreatorInfoDto creator = service.findOne(cpMiSeq).get();
         Slice<CreatorPostDto> post = creatorPostService.findSliceBycpMiSeq(cpMiSeq,page);
+
 
         for (CreatorPostDto x : post) {
             System.out.println("getCpOpenCslSeq " + x.getCpOpenCslSeq());
@@ -543,6 +527,28 @@ public class SubsController {
         model.addAttribute("model",post);
         model.addAttribute("creator",creator);
 
+
+        subListService.checkBySeq(cpMiSeq, (Long) session.getAttribute("session")).ifPresent(a->{
+            Optional<SubListDto> subListDto = Optional.ofNullable(a);
+            System.out.println("subListDto subListDto subListDto subListDto subListDto subListDto" + subListDto.get());
+            checkSubs.set(1);
+
+            service.findByCslSeq(subListDto.get().getSubListDtoId().getSlCslSeq()).ifPresent(b->{
+                Optional<CreatorSubLevelDto> mySubLevel = Optional.ofNullable(b);
+                model.addAttribute("mySubLevel",mySubLevel);
+                System.out.println("mysublevel      " + mySubLevel.get().getCslNm());
+
+                List<CreatorSubLevelDto> subLevelList = service.findByCslMiSeq(cpMiSeq);
+                if(!subLevelList.isEmpty()){
+                    model.addAttribute("subLevelList",subLevelList);
+                }
+            });
+        });
+
+        model.addAttribute("checkSubs",checkSubs);
+        model.addAttribute("model",post);
+        model.addAttribute("creator",creator);
+
         return "views/subscr/creator/creator_page_mode0_post";
 }
 
@@ -559,7 +565,3 @@ public class SubsController {
         return post;
     }
 }
-
-
-
-

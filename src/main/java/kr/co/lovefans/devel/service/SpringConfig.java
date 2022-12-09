@@ -22,7 +22,9 @@ public class SpringConfig {
     private final SearchResultRepository searchResultRepository;
 
     @Autowired
+
     public SpringConfig(SearchResultRepository searchResultRepository ,CreateSubLevelRepository createSubLevelRepository, SubsPostCustomRepository subsPostCustomRepository, MemberRepository memberRepository, CreatorRepository creatorRepository, CreatorPostRepository creatorPostRepository, SubListRepository subListRepository, SubsCustomRepository subsCustomRepository, AdminRepository adminRepository) {
+
         this.createSubLevelRepository = createSubLevelRepository;
         this.subsPostCustomRepository = subsPostCustomRepository;
         this.memberRepository = memberRepository;

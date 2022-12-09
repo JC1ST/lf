@@ -5,9 +5,6 @@
 <th:block layout:fragment="content">
 <body>
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "static/inc/side.html"; ?>
-		
 		<section class="contents_container">
 			<br><br>
 			<div class="fb_cc container_top_title">
@@ -25,20 +22,17 @@
 			<div class="fb_cs container_bottom_btn">
 				<button type="button" class="w200 h35 default"; th:onclick="|location.href='@{/subs/mem/be(key=${cSeq})}'|">등급보기</button>
 
+
 			</div>
-				<section class="fb_cc mem_be_btns">
-					<form method="post" th:action="@{/members/subsJoin}">
-						<input type="hidden" th:name="cSeq" th:value="${cSeq}">
-						<input type="hidden" th:name="cslSeq" th:value="${cslSeq}">
-						<button type="submit" class="w150 h35 lightBlue">가입하기</button>
-					</form>
-				</section>
-
-
+			<section class="fb_cc mem_be_btns">
+				<form method="post" th:action="@{/members/subsJoin}">
+					<input type="hidden" th:name="cSeq" th:value="${cSeq}">
+					<input type="hidden" th:name="cslSeq" th:value="${cslSeq}">
+					<button type="submit" class="w150 h35 lightBlue">가입하기</button>
+				</form>
+			</section>
 		</section>
 	</article>
-	
-	<!-- FOOTER -->
 
 </body>
 </th:block>

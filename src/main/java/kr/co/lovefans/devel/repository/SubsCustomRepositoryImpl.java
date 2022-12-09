@@ -5,7 +5,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.lovefans.devel.domain.QCreatorInfoDto;
 import kr.co.lovefans.devel.domain.QCreatorSubLevelDto;
 import kr.co.lovefans.devel.domain.QSubListDto;
+
 import kr.co.lovefans.devel.dto.PostDto;
+
 import kr.co.lovefans.devel.dto.SubsSubsListDto;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,11 @@ import java.util.List;
 
 @Repository
 public class SubsCustomRepositoryImpl implements SubsCustomRepository{
+
+    private final EntityManager em;
+
+
+
     private final EntityManager em;
 
     private final JPAQueryFactory query;
@@ -32,7 +39,11 @@ public class SubsCustomRepositoryImpl implements SubsCustomRepository{
         QSubListDto subList = QSubListDto.subListDto;
 
         List<SubsSubsListDto> result = query
+
                 .select(Projections.bean(SubsSubsListDto.class,creatorInfo.ciPageNm,creatorInfo.ciMiSeq,creatorSubLevel.cslNm,creatorSubLevel.cslPrice,subList.subListDtoId.slVMiSeq, subList.slRegdt ))
+
+                .select(Projections.bean(SubsSubsListDto.class,creatorInfo.ciPageNm,creatorInfo.ciMiSeq,creatorInfo.ciPPhoto,creatorInfo.ciCPhoto,creatorSubLevel.cslNm,creatorSubLevel.cslPrice,subList.subListDtoId.slVMiSeq, subList.slRegdt ))
+
                 .from(creatorInfo)
                 .innerJoin(creatorSubLevel).on(creatorInfo.ciMiSeq.eq(creatorSubLevel.cslMiSeq))
                 .innerJoin(subList).on(creatorSubLevel.cslMiSeq.eq(subList.subListDtoId.slCMiSeq))

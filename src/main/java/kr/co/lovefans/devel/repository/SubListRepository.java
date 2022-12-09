@@ -15,9 +15,11 @@ public interface SubListRepository {
 
     void delete(SubListDto subListDto);
 
+
     Long countBySlCMiSeq(Long seq);
 
 
 
 
 }
+

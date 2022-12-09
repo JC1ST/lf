@@ -5,8 +5,6 @@
 <th:block layout:fragment="content">
 	<body>
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "static/inc/side.html"; ?>
 
 		<section class="contents_container">
 			<div class="fb_cc container_top_title">
@@ -25,8 +23,10 @@
 				<th:block th:each="list:${list.iterator()}">
 					<section class="channel_box" th:onclick="|location.href='@{/subs/creatorpage/mode0/post(key=${list.getCiMiSeq()})}'|">
 						<div class="channel_pic">
-							<div><img src="/img/sample_bg.jpg" /></div>
-							<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+
+							<div><img src="/img/sample_bg.jpg" th:src="${list.getCiCPhoto()}"/></div>
+							<figure class="profile"><img src="/img/sample_img.jpg" th:src="${list.getCiPPhoto()}"/></figure>
+
 						</div>
 
 						<p th:text="${list.getCiPageNm()}"></p>
@@ -35,6 +35,7 @@
 							<span>10<br>이미지</span>
 							<span>10<br>동영상</span>
 							<span>10<br>링크</span>
+
 						</div>
 
 						<th:block th:if="${checkDate == true}">
@@ -52,6 +53,7 @@
 							</div>
 						</div>
 
+
 						<div class="channel_btns">
 
 							<th:block th:if="${checkDate == false}">
@@ -67,38 +69,11 @@
 						</div>
 					</section>
 				</th:block>
-				<!--				&lt;!&ndash; 채널목록 &ndash;&gt;-->
-				<!--				<section class="channel_box" onclick="location.href='creator_page.html';"-->
-				<!--						 th:onclick="|location.href='@{/subs/creatorpage}'|">-->
-				<!--					<div class="channel_pic">-->
-				<!--						<div><img src="/img/sample_bg.jpg" /></div>-->
-				<!--						<figure class="profile"><img src="/img/sample_img.jpg" /></figure>-->
-				<!--					</div>-->
-				<!--					-->
-				<!--					<p>Creator Page Name</p>-->
-				<!--					-->
-				<!--					<div class="channel_cont">-->
-				<!--						<span>10<br>이미지</span>-->
-				<!--						<span>10<br>동영상</span>-->
-				<!--						<span>10<br>링크</span>-->
-				<!--					</div>-->
-				<!--					-->
-				<!--					<p><span class="channel_subscr">구독중</span></p>-->
-				<!--					-->
-				<!--					<div class="fb_c_ss channel_info">-->
-				<!--						<div>-->
-				<!--							<div class="fb_ss"><span>등급 :</span><span>공식 구독자(Official)</span></div>-->
-				<!--							<div class="fb_ss"><span>가격 :</span><span>₩10,000 / 월</span></div>-->
-				<!--							<div class="fb_ss"><span>구독만료일 :</span><span>2022-12-25</span></div>-->
-				<!--						</div>-->
-				<!--					</div>-->
-				<!--					<div class="channel_btns">-->
-				<!--						<button type="button" class="w100 h35 cancel">구독취소</button>-->
-				<!--					</div>-->
-				<!--				</section>-->
-				<!--			</article>-->
-				<!--		</section>-->
+
 			</article>
+		</section>
+	</article>
+
 
 			<!-- FOOTER -->
 
@@ -107,12 +82,16 @@
 </html>
 <script th:inline="javascript">
 
+
+<script th:inline="javascript">
+
 	[[${list}]].forEach((x,index)=>{
 		$('.w100.h35.cancel').eq(index).on('click',function (){
 			if (confirm('취소하시겠습니까?')) $('.del_form').eq(index).submit();
- 		})
+		})
 	});
 </script>
+
 
 <script>
 	$(function(){
@@ -132,4 +111,6 @@
 			e.stopPropagation();
 		});
 	});
+
 </script>
+

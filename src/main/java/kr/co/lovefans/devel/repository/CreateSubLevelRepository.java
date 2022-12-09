@@ -9,4 +9,6 @@ public interface CreateSubLevelRepository {
 
     List<CreatorSubLevelDto> findByCslMiSeq(Long CslMiSeq);
     Optional<CreatorSubLevelDto> findByCslSeq(Long ScsSeq);
+
 }
+

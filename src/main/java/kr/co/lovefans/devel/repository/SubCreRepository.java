@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface SubCreRepository {
 
-    List<SubCreDto> findCre();
+    // 구독한 크리에이터
+    List<SubCreDto> findCre(Long slvmiseq);
 }
