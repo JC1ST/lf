@@ -24,7 +24,15 @@
 						<section class="fb_sc"><img src="/img/icon_mypage.png" />프로필 사진</section>
 						<section class="fb_sc">
 							<figure class="fb_cc profile">
-								<img src="/img/sample_img.jpg">
+								<!-- 프로필 이미지가 있을 때 -->
+								<th:block th:if="${member.getMiPhoto() != null}">
+									<img th:src="${member.getMiPhoto()}" />
+								</th:block>
+
+								<!-- 프로필 이미지가 없을 때 -->
+								<th:block th:if="${member.getMiPhoto() == null}">
+									<span th:text="${#strings.substring(member.getMiNick(), 0, 1)}"></span>
+								</th:block>
 							</figure>
 							<input type="file" id="profile_pic" />
 							<div class="fb_cc modifies_btns">
