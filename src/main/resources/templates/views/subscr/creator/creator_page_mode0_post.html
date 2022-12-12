@@ -533,6 +533,7 @@
 	let page = 1;
 	/*<![CDATA[*/
 	var CiMiSeq = [[${creator.getCiMiSeq()}]];
+	let checkSubs = [[${checkSubs}]];
 	/*]]>*/
 
 	$('#more').click(function(){
@@ -547,11 +548,25 @@
 			success:function(data) {
 
 
-				console.log(data.content[0].cpContent);
 				let testDom ="<p>"+data.content[0].cpContent+"</p>";
 				let newPost = "";
 				for(var i=0; i < data.content.length; i++) {
 
+					switch (data.content[i].cpOpen) {
+						case "1":
+							console.log("모두 공개");
+							break;
+						case "2":
+							console.log("구독자 공개");
+							if (checkSubs == 1){
+								console.log("구독자 입니다");
+							}else
+								console.log("구독하고 오세요");
+							break;
+						case "3":
+							console.log("유료 구독자 공개");
+							break;
+					}
 
 					let newContent = "<article class='post'>";
 					newContent+="<figure><img src='/img/sample_post_img.jpg' /></figure>";
@@ -584,6 +599,10 @@
 					newContent+="<div class=\"fb_sc\"><img src=\"/img/icon_reply\" /> &nbsp;&nbsp; 댓글 00개</div>";
 					newContent+="</div>";
 					newContent+="</article>";
+
+
+
+
 
 					newPost += newContent;
 				}

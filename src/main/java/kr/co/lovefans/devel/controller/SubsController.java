@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -218,23 +221,17 @@ public class SubsController {
 
         if(memberInfo.get().getMiKind().equals("V")) {
             List<SubsSubsListDto> list = subscrService.findBySlVmiSeq((Long) session.getAttribute("session"));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar calendar = Calendar.getInstance();
-            boolean checkDate = true;
-            String endSubs = "";
             LocalDate now = LocalDate.now();
+            LocalDate plusOneMonth;
+            List<Boolean> checks = new ArrayList<>();
 
             for(SubsSubsListDto a : list){
-
-                calendar.setTime(a.getSlRegdt());
-                calendar.add(Calendar.MONTH, 1 );
-                a.setSlRegdt(calendar.getTime());
-                endSubs = simpleDateFormat.format(a.getSlRegdt());
-                checkDate = a.getSlRegdt().before(java.sql.Date.valueOf(now));
+                plusOneMonth = a.getSlRegdt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(1);
+                a.setSlRegdt(java.sql.Date.valueOf(plusOneMonth));
+                checks.add(plusOneMonth.isBefore(now));
             }
 
-            model.addAttribute("endSubs",endSubs);
-            model.addAttribute("checkDate",checkDate);
+            model.addAttribute("checks",checks);
             model.addAttribute("list",list);
             go =  "views/subscr/subscr_channel";
         }
