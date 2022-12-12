@@ -1,0 +1,72 @@
+.admin_log_area {width: 100%; height: auto; min-height: calc(100% - 210px);}
+.admin_container {display: table; width: 100%; height: auto; min-height: calc(100% - 210px);}
+.admin_container a:hover {color: #ffb000; font-weight: bold;}
+.admin_container button {font-size: 1.6rem;}
+
+.admin_menu_area {display: table-cell; width: 200px; height: 100%; min-height: 100%; padding: 0; font-size: 1.6rem;}
+.admin_menu_area div {width: 90%; height: 80px; margin: auto; border-bottom: 1px solid #e8eaed;}
+.admin_menu_area ul {width: 95%;padding: 0; padding-bottom: 50px;}
+.admin_menu_area li {display: flex; justify-content: flex-start; align-items: center; height: 40px;}
+.admin_menu_area li.big_menu {font-family: notokr-bold; padding-left: 20px;}
+.admin_menu_area li:not(.big_menu) {padding-left: 35px;}
+.admin_menu_area li a:hover {color: #00b0f0;}
+.admin_menu_area li.selected a {/*pointer-events: none;*/ color: #00b0f0; font-family: notokr-bold;}
+
+.admin_contents_area {display: table-cell; height: 100%; min-height: 100%; padding: 0 30px;  border-left: solid 1px #e8eaed;}
+
+.admin_contnets_head {width: 100%; height: 80px; text-align: center;}
+.admin_contnets_head p {font-size: 2.2rem; font-family: notokr-bold;}
+.admin_contnets_head p span {color: #00b0f0;}
+.admin_contnets_head > div {margin-left: auto; font-size: 1.6rem; font-family: notokr-bold;}
+
+.admin_search_area {width: 100%; height: 45px; margin-bottom: 20px;}
+.admin_search_area select {width: 150px;}
+.admin_search_area select option:first-of-type {text-align: center;}
+.admin_search_area select.datetime {background-color: #e9f9ff;}
+.admin_search_area input {width: 300px; margin: 0 15px; background-color: #f6f7f9;}
+.admin_search_area button {color: white;}
+
+
+.admin_contents_area table {width: 100%; border-collapse: collapse; font-size: 1.5rem; text-align: center; border-radius: 5px; border-style: hidden; overflow: hidden; margin-bottom: 15px;}
+
+.admin_list_tb {box-shadow: 0 0 0 1px #c4cad1;}
+.admin_list_tb td > tdLink:hover {color: #ffb000; }
+.admin_list_tb th, .admin_list_tb td {height: 45px; border: solid 1px #c4cad1; }
+.admin_list_tb th {color: white; background-color: #00b0f0; font-family: notokr-thin; }
+.admin_list_tb tr:nth-child(odd) {background-color: #f6f7f9;}
+.admin_list_tb input {width: 95%;}
+.admin_list_tb select {width: 95%;}
+
+.admin_profile_tb {box-shadow: 0 0 0 1px #242529;}
+.admin_profile_tb td {padding: 10px; border: dotted 1px #242529;}
+.admin_profile_tb td:first-of-type {width: 220px; height: 220px;}
+.admin_profile_tb td img {width: auto; max-height: 200px;}
+.admin_profile_tb td:last-of-type {padding-left: 20px; text-align: left;}
+.admin_profile_tb p {font-size: 1.6rem;}
+.admin_profile_tb a {color: #00b0f0; font-family: notokr-bold;}
+.admin_profile_tb div.nopic {display: flex; justify-content: center; align-items: center; width: 120px; height: 120px; margin: auto; font-family: notokr-bold; font-size: 5.0rem; border-radius: 50%; background-color: #00b0f0; color: white;} 
+
+.mem_stop {color: MediumSlateBlue; font-family: notokr-bold;}
+.mem_del {color: crimson; font-family: notokr-bold;}
+.mem_creator {color: #00b0f0;}
+
+.admin_info_tb {box-shadow: 0 0 0 1px #828ea0;}
+.admin_info_tb td {height: 50px; padding: 10px 0; border: dotted 1px #828ea0;}
+.admin_info_tb td:nth-child(odd) {width: 220px; background-color: #f6f7f9;}
+.admin_info_tb td:nth-child(even) {background-color: white;}
+.admin_info_tb input {width: 95%;}
+.admin_info_tb select {width: 95%;}
+.admin_info_tb span {color: black; font-family: notokr-bold;}
+.admin_info_tb span.price {color: #00b0f0;}
+.admin_info_tb p {padding-left: 20px;}
+.admin_info_tb p.title {font-size: 1.8rem; padding-bottom: 10px;}
+.admin_info_tb p select {width: 150px;}
+.admin_info_tb textarea {width: 98%; line-height: 150%;}
+
+.admin_statistic {width: 100%; height: 70px; padding-right: 20px; font-size: 1.8rem; font-family: notokr-medium; background-color: #f6f7f9; color: #828ea0;}
+.admin_statistic p {margin-left: 50px;}
+.admin_statistic p:nth-of-type(1) span {color: #00b0f0;}
+.admin_statistic p:nth-of-type(2) span {color: #ff5ca1;}
+.admin_statistic p:nth-of-type(3) span {color: #242529;}
+
+.admin_bottom_btns {width: 100%; height: 120px;}

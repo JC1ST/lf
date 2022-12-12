@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_message.png" /> &nbsp;&nbsp; <b>메시지</b>
+			</div>
+
+			<div class="fb_ss tab_area">
+				<a href="creator_message_c_list">크리에이터 메시지함</a>
+				<a href="creator_message_s_list" class="selected">구독자 메시지함</a>
+			</div>
+
+			<article class="fb_c_sc aritcle_border_container" style="margin-bottom: 50px;">
+				<section class="fb_sc message_view_top">
+					<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
+					<div>구독자 Nick Name &nbsp;&nbsp;<span>님과의 메시지</span></div>
+					<a class="fb_cc" href="creator_message_s_list"><img src="/img/icon_x_close.png" /></a>
+				</section>
+
+				<section class="fb_c_ss message_area">
+					<!-- 받은 메시지 -->
+					<div class="message_recieve">
+						<figure class="fb_cc profile"><span>S</span></figure>
+						<div>
+							<p>서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다. 서로 주고받은 메시지 최종 내용이 표시됩니다.</p>
+							<h5>2022-12-25 12:12:12</h5>
+						</div>
+					</div>
+
+					<!-- 보낸 메시지 -->
+					<div class="message_send">
+						<div>
+							<p>서로 주고받은 메시지 최종 내용이 표시됩니다. </p>
+							<h5>2022-12-25 12:12:12</h5>
+						</div>
+					</div>
+				</section>
+
+				<section class="fb_bc message_input">
+					<input type="text" placeholder="메시지 입력" />
+					<button type="button" class="w80 h35 defaultLight">보내기</button>
+				</section>
+
+			</article>
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>
+
+<!-- 메시지 영역의 높이를 결정하는 스크립트 
+     대충 통박으로 맞춰놓음-->
+<script>
+	$(function() {
+		let screenH = screen.availHeight;
+		let m1 = $("header").height();
+		let m2 = $(".container_top_title").height();
+		let m3 = $(".message_view_top").height();
+		let m4 = $(".message_input").height();
+		let m5 = $("footer").height();
+		let applyH = screenH - (m1+m2+m3+m4+m5+50);
+		$(".message_area").css("height", applyH + "px");
+
+		$(window).on("resize", function(){
+			screenH = screen.availHeight;
+			m1 = $("header").height();
+			m2 = $(".container_top_title").height();
+			m3 = $(".message_view_top").height();
+			m4 = $(".message_input").height();
+			m5 = $("footer").height();
+			applyH = screenH - (m1+m2+m3+m4+m5+50);
+			$(".message_area").css("height", applyH + "px");
+		});
+	});
+</script>

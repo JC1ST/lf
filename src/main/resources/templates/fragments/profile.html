@@ -1,0 +1,37 @@
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<!--Fragment 선언-->
+<th:block th:fragment="profileFragment">
+	<section class="fb_c_cs profile_area">
+		<figure class="fb_cc profile">
+			<!-- 프로필 이미지가 없을 때 -->
+			<!-- <span> S </span> -->
+
+			<!-- 프로필 이미지가 있을 때 -->
+			<img src="/img/sample_img.jpg">
+		</figure>
+
+		<div>
+			<th:block>
+				<!-- 크리에이터인 경우-->
+				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'C'}" th:href="@{/creators/creator_main(key=${session.session})}">
+					<th:block th:text="${session.creatorInfoSession.getCiPageNm()}"></th:block> &nbsp;<span>&gt;</span>
+				</a>
+				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'C'}" th:href="@{/creators/creator_mypage(key=${session.session})}">
+					크리에이터 &nbsp;&nbsp;<img src="/img/icon_mypage.png" />
+				</a>
+
+				<!-- 구독자인 경우-->
+				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/subs/main(key=${session.session})}">
+					<th:block th:text="${session.memberInfoSession.getMiNick()}"></th:block> &nbsp;<span>&gt;</span>
+				</a>
+				<a class="fb_cc" th:if="${session.memberInfoSession.getMiKind() == 'V'}" th:href="@{/subs/mypage(key=${session.session})}">
+					구독자 &nbsp;&nbsp;<img src="/img/icon_mypage.png" />
+				</a>
+			</th:block>
+		</div>
+
+		<!-- 모바일 환경에서만 보여지는 마이페이지 이동 아이콘 -->
+		<a href="subscr_mypage.html"><img src="/img/icon_mypage.png" /></a>
+	</section>
+</th:block>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/admin_layout}">
+
+
+<!-- head -->
+<?php include "inc/admin_head.html"; ?>
+
+<th:block layout:fragment="adminContent">
+<body>
+	<article class="admin_container">
+		<?php include "inc/admin_menus.html"; ?>
+
+		<div class="admin_contents_area">
+			<!-- 타이틀 및 서포팅메뉴 -->
+			<div class="fb_cc admin_contnets_head">
+				<p>1:1 게시판 &nbsp; > &nbsp; <span>답글달기</span></p>
+				<!-- 서포팅 메뉴 -->
+				<?php include "inc/admin_public_menu.html"; ?>
+			</div>
+			
+			<table class="admin_info_tb">
+				<tr>
+					<td>문의내용</td>
+					<td class="txt_align_left">
+						<p><span>아이디 :</span> &nbsp;&nbsp; hentai</p>
+						<p><span>닉네임 :</span> &nbsp;&nbsp; 헨타이</p>
+						<p><span>등록일 :</span> &nbsp;&nbsp; 2022-06-13 22:30</p>
+						<br />
+						<p><span>내용 :</span></p>
+						<p>너의 온몸을 내 빼따구 속 까지 깊수키 느끼고 퐈~<br> ㅗㅜㅑ~!!!!!!</p>
+					</td>
+				</tr>
+			</table>
+
+			<table class="admin_info_tb">
+				<tr>
+					<td>답글</td>
+					<td >
+						<textarea>이런 미췬~ dog baby shake it ya~! 유 다이 하고싶냐.?	</textarea>
+					</td>
+				</tr>
+			</table>
+			
+			<!-- 하단 버튼 영역 -->
+			<div class="fb_cc admin_bottom_btns">
+				<button type="button" class="w150 h35 default" onclick="location.href='one_board_list.html'"
+						th:onclick="|location.href='@{/admin/one_board_list}'|">목록으로</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="button" class="w150 h35 default" onclick="location.href='one_board_list.html'"
+						th:onclick="|location.href='@{/admin/one_board_list}'|">확인</button>
+			</div>
+		</div>
+	</article>
+
+	<!-- FOOTER -->
+	<?php include "../static/inc/footer.html"; ?>
+</body>
+</th:block>
+</html>

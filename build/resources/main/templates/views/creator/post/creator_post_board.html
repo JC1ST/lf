@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_post.png" /> &nbsp;&nbsp; <b>포스트</b>
+			</div>
+
+			<div class="fb_cc" style="width:800px; height:500px; margin: auto; background-color: #e4eaef; font-size:1.6rem; text-align:center;">
+				포스트 대시보드<br>(프로그램 단에서 처리)
+			</div>
+
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>

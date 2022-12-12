@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_post.png" /> &nbsp;&nbsp; <b>포스트</b>
+			</div>
+
+			<div class="fb_sc container_top_explain">
+				<img src="/img/icon_post_temp.png" />
+				<div>
+					<span><b>Temporary strorage : &nbsp;</b></span>
+					총&nbsp; <span>00</span> &nbsp;건 임시 보관중.
+				</div>
+			</div>
+
+			<!-- 보관리스트 -->
+			<article class="aritcle_border_container boxShadow">
+				<div class="fb_sc post_keep">
+					<img src="/img/sample_post_img.jpg" />
+					<div class="fb_c_cs">
+						<span>포스트 제목</span>
+						<p>포스트 내용</p>
+					</div>
+				</div>
+				<div class="fb_sc post_keep">
+					<p>2022년 04월11일 PM 07:10 에 최종 수정</p>
+					<section class="fb_cc modifies_btns">
+						<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+					</section>
+				</div>
+			</article>
+			<br /><br />
+
+			<!-- 보관리스트 -->
+			<article class="aritcle_border_container boxShadow">
+				<div class="fb_sc post_keep">
+					<img src="/img/sample_post_img.jpg" />
+					<div class="fb_c_cs">
+						<span>포스트 제목</span>
+						<p>포스트 내용</p>
+					</div>
+				</div>
+				<div class="fb_sc post_keep">
+					<p>2022년 04월11일 PM 07:10 에 최종 수정</p>
+					<section class="fb_cc modifies_btns">
+						<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+					</section>
+				</div>
+			</article>
+			<br /><br />
+
+			<!-- 보관리스트 -->
+			<article class="aritcle_border_container boxShadow">
+				<div class="fb_sc post_keep">
+					<img src="/img/sample_post_img.jpg" />
+					<div class="fb_c_cs">
+						<span>포스트 제목</span>
+						<p>포스트 내용</p>
+					</div>
+				</div>
+				<div class="fb_sc post_keep">
+					<p>2022년 04월11일 PM 07:10 에 최종 수정</p>
+					<section class="fb_cc modifies_btns">
+						<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+					</section>
+				</div>
+			</article>
+			<br /><br />
+
+			<div class="fb_cc container_bottom_btn">
+				<button type="button" class="w200 h35 lightBlue">더보기</button>
+			</div>
+
+		</section>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>

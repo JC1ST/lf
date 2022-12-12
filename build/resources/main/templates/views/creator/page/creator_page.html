@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container_nopad">
+			<div class="cpage_head">
+				<div><img src="/img/sample_bg.jpg" /></div>
+				<div>
+					<figure>
+						<img src="/img/sample_img.jpg" />
+					</figure>
+					<div th:text="${session.creator.getCiPageNm()}"></div>
+					<div>창작분야 : <th:block th:text="${session.creator.getCiTheme()}" /> </div>
+					<div>구독자 : 100</div> <!--구독자 수 데이터 긁어오기 필요-->
+				</div>
+			</div>
+
+			<article class="fb_c_cs cpage_body_post">
+				<div class="fb_cs tab_area">
+					<span>Post</span>
+				</div>
+
+				<div class="fb_bs cpage_body_group">
+					<section class="post_area">
+						<!-- 포스트 검색조건 -->
+						<div class="fb_ss post_select_boxs">
+							<select><option>최신순</option></select>
+							<select><option>유형</option></select>
+							<select><option>등급</option></select>
+							<select><option>월</option></select>
+						</div>
+
+						<!-- 포스트 태그 / 더보기 기능 필요-->
+						<div class="fb_bs post_tag_box">
+							<p class="fb_c_cc"><span>TagName</span>포스트00개</p>
+							<p class="fb_c_cc"><span>TagName</span>포스트00개</p>
+							<p class="fb_c_cc"><span>TagName</span>포스트00개</p>
+							<p class="fb_c_cc">태그 00개<span>더보기<img src="/img/arrow.png" /></span></p>
+						</div>
+
+						<!-- 포스트 수량정보 받아오는 기능 필요-->
+						<div class="fb_vc post_quantity">
+							<div><span>100</span><br>이미지</div>
+							<div><span>100</span><br>동영상</div>
+							<div><span>100</span><br>링크</div>
+						</div>
+
+						<!------ 포스트 리스트 영역 ------>
+						<!-- 포스트 -->
+						<article class="post">
+							<figure><img src="/img/sample_post_img.jpg" /></figure>
+							<section class="post_slider_screen">
+								<div class="post_slider_body">
+									<img src="/img/mainPic_positive.jpg" />
+									<img src="/img/sample_creator1.jpg" />
+									<img src="/img/sample_post_img.jpg" />
+									<img src="/img/sample_bg2.jpg" />
+									<img src="/img/sample_post_img.jpg" />
+								</div>
+								<!--화살표 기능 필요-->
+								<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+								<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+							</section>
+							<!--작성시간 저장 기능 필요-->
+							<div class="post_date_area">2022년 4월5일 오전 1:16</div>
+
+							<!--포스트 전체가 링크 상태 / 더읽기 기능으로 분리 필요-->
+							<section class="linker" onclick="location.href='creator_page_detail';">
+								<p class="post_title_area">포스트 제목</p>
+								<p class="post_txt_area">
+									오늘은 CSS의 display   x라는 속성에 대해 알아보겠습니다.
+									코딩을 나름 오래하신 분들조차 의외로 이 속성은 잘 모르고 안쓰시는데 그럴 법도 한 게 예전에는
+								</p>
+								<div class="post_read_more">더읽기</div>
+							</section>
+
+							<!--설정한 tag 받아오는 기능 필요-->
+							<div class="post_tag_area">
+								<span>#TAG</span>
+								<span>#TAG</span>
+								<span>#TAG</span>
+							</div>
+							<div class="post_like_area fb_sc">
+								
+								<!-- 페이지를 운영하는 크리에이터가 접속 하였을 때는 수정 삭제 버튼이 나타난다-->
+								<!-- <section class="fb_sc modifies_btns">
+									<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+								</section> -->
+
+								<!-- 페이지 운영 크리에이터 이외의 접속자는 Like 버튼이 나타난다 -->
+								<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+								
+								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+							</div>
+						</article>
+
+						<!-- 포스트 더보기 버튼 -->
+						<div class="fb_cc container_bottom_btn">
+							<button type="button" class="lightBlue w200 h40" onclick="">더보기</button>
+						</div>
+					</section>
+
+					<div class="cpage_side">
+						<!-- 등급안내 -->
+						<!--크리에이터 페이지에 나의 등급이 필요한가-->
+						<section class="tier_info">
+							<div class="fb_cc">나의등급</div>
+							<article>
+								<div>무료 구독자(Free)</div>
+								<div><span>₩ 0</span> / 월</div>
+								<div>기본 사진을 무료로 마음껏 감상 하세요.</div>	
+							</article>
+						</section>
+					</div>
+				</div>
+			</article>
+
+		</section>
+	</article>
+
+	<article id="viewer_container">
+		<div class="viewer_imgArea"></div>
+		<div class="viewer_numArea"><span class="viewer_nowNum">1</span> / <span class="viewer_totalNum">6</span></div>
+		<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
+		<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+		<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>
+
+<script>
+	// 포스트 이미지 클릭시 이미지 보기 화면
+	// 이미지 띄우는 것 까지만 구현 세부 동작은 구현 하지 않았음.
+	$(function() {
+		$(".post > figure > img, .post_slider_body img").on("click", function() {
+			$(".body_container").hide();
+			$("footer").hide();
+			$("#viewer_container").css("display", "flex");
+
+			var test = [];
+			$(".viewer_imgArea").empty();
+
+			test.push($(".post > figure > img").attr("src"));
+			if($(".post_slider_body img").length) {
+				$(".post_slider_body img").each(function(){
+					test.push($(this).attr("src"));
+				});
+			}
+			let imgSrc = "<img src='" + $(this).attr("src") + "'>";
+			$(".viewer_imgArea").append(imgSrc);
+		});
+
+		$("#viewer_container .close").on("click", function() {
+			$("#viewer_container").hide();
+			$(".body_container").show();
+			$("footer").show();
+		});
+	});
+</script>

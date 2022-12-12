@@ -1,0 +1,92 @@
+
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<!--headerFragment 선언-->
+<th:block th:fragment="topperFragment">
+
+<header class="fb_bc">
+
+	<a href="/"><img src="/img/logo.png" /></a>
+	
+	<!-- 크리에이터 검색 -->
+	<div class="fb_cc">
+		<form action="/search" method="get">
+			<input name="keyword" type="text" class="search" placeholder="크리에이터 찾기" />
+
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="submit" class="w80 h35 default">찾기</button>
+		</form>
+	</div>
+
+	<h5>세션확인용 회원번호 <span th:text="${session.session}"></span></h5><br>
+	<th:block th:if="${session.session != null}">
+		<button type="button" onclick="location.href='/members/logout';">로그아웃</button> <!--로그인 버튼 만들기-->
+	</th:block>
+	<th:block th:if="${session.session == null}">
+		<button type="button" onclick="location.href='/login';">로그인</button>
+	</th:block>
+	<!-- 로그인 전 -->
+	<!-- <div><a href="login.html">로그인</a></div> -->
+
+	<!-- 로그인 후 -->
+	<div class="fb_sc web_header_btns">
+		<th:block th:if="${session.kind == 'C'}">
+		<a th:href="@{/creators/creator_mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
+		</th:block>
+		<th:block th:if="${session.kind == 'V'}">
+			<a href="/subs/mypage" th:href="@{/subs/mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
+		</th:block>
+		<figure class="fb_cc profile">
+			<!-- 프로필 이미지가 없을 때 -->
+			<span> S </span>
+			
+			<!-- 프로필 이미지가 있을 때 -->
+			<img src="/img/sample_img.jpg">
+		</figure>
+	</div>
+	
+	<div class="fb_sc mob_header_btns">
+		<img src="/img/icon_mob_menu.png" />
+	</div>
+</header>
+
+
+
+<!-------------------------------------------모바일용 메뉴화면 로그인 전----------------------------------------------->
+<!-- <article class="mob_m_area">
+	<div style="height:20px;"></div> -->
+
+	<!-- 검색영역 -->
+	<!-- <div class="fb_bs searcher">
+		<input class="sech" placeholder="크리에이터 찾기">
+		<button class="h35 point">찾기</button>
+	</div> -->
+
+	<!-- 로그인 이동 버튼 -->	
+	<!-- <div class="fb_c_cc mob_go_log">
+		<span class="txt_align_center">러브팬스 서비스를 이용 하시려면<br>로그인이 필요 합니다.</span>
+		<br><br>
+		<a href="login.html"><button class="h35 default" type="button">로그인 이동</button></a>
+	</div>
+</article> -->
+<!-------------------------------------------모바일용 메뉴화면 로그인 전----------------------------------------------->
+
+
+<!-------------------------------------------모바일용 메뉴화면 로그인 후----------------------------------------------->
+<article class="mob_m_area">
+	<!-- 프로필 영역 -->
+	<?php include "static/inc/profile.html"; ?>
+
+	<!-- 검색영역 -->
+	<div class="fb_bs searcher">
+		<input class="sech" placeholder="크리에이터 찾기">
+		<button class="h35 point">찾기</button>
+	</div>
+
+	<!-- 메뉴 영역 -->
+	<?php include "static/inc/menus_creator.html"; ?> <!-- 크리에이터 전용 메뉴 -->
+	<!--?php include "static/inc/menus_subscr.html"; ?--> <!-- 구독자 전용 메뉴 -->
+</article>
+<!-------------------------------------------모바일용 메뉴화면 로그인 후----------------------------------------------->
+
+</th:block>
+</html>

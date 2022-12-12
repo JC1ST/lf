@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/admin_login_layout}">
+
+
+<!-- head -->
+<?php include "inc/admin_head.html"; ?>
+
+<th:block layout:fragment="adminContent">
+<body>
+	<article class="fb_c_cc admin_log_area">
+		<img src="/img/logo.png" >
+		<div class="log_box1">
+			<p class="fb_cc">Admin ID&nbsp;&nbsp;<b>Login</b></p>
+			<section>
+				<input type="text" placeholder="아이디" />
+				<input type="password" placeholder="암호" />
+			</section>
+			<button type="button" class="h35 default" onclick="location.href='mem_all_list.html';"
+					th:onclick="|location.href='@{/admin/mem_all_list}'|">로그인</button>
+		</div>
+	</article>
+
+	<!-- FOOTER -->
+	<?php include "../static/inc/footer.html"; ?>
+</body>
+</th:block>
+</html>

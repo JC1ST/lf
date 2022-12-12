@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/admin_layout}">
+
+
+<!-- head -->
+<?php include "inc/admin_head.html"; ?>
+
+<th:block layout:fragment="adminContent">
+<body>
+	<article class="admin_container">
+		<?php include "inc/admin_menus.html"; ?>
+
+		<div class="admin_contents_area">
+			<!-- 타이틀 및 서포팅메뉴 -->
+			<div class="fb_cc admin_contnets_head">
+				<p>회원관리 &nbsp; > &nbsp; 전체 회원 리스트 &nbsp; > &nbsp; <span>상세보기</span></p>
+				<!-- 서포팅 메뉴 -->
+				<?php include "inc/admin_public_menu.html"; ?>
+			</div>
+			
+			<table class="admin_profile_tb">
+				<tr>
+					<!-- 구독자일 경우 예시 화면 , 크리에이터는 크리에이터 상세보기서 구성함 -->
+					<td><div class="nopic">S</div></td>
+					<td>구독자 페이지는 운영되지 않습니다.</td>
+				</tr>
+			</table>
+
+			<table class="admin_info_tb">
+				<tr>
+					<td>회원아이디</td>
+					<td>aa@aa.net</td>
+
+					<td>비밀번호</td>
+					<td><input type="text" /></td>
+					
+					<td>닉네임</td>
+					<td>
+						<select>
+							<option>기존 닉네임</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>가입계정</td>
+					<td>구글</td>
+
+					<td>회원상태</td>
+					<td>
+						<select>
+							<option>정상</option>
+							<option>정지</option>
+							<option>삭제</option>
+						</select>
+					</td>
+					
+					<td>활동상태</td>
+					<td>
+						<select>
+							<option>크리에이터</option>
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td>가입일시</td>
+					<td>2022-01-01 22:22</td>
+
+					<td>회원등급</td>
+					<td>기본</td>
+					
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			
+			<!-- 하단 버튼 영역 -->
+			<div class="fb_cc admin_bottom_btns">
+				<button type="button" class="w150 h35 default" onclick="location.href='mem_all_list.html'"
+						th:onclick="|location.href='@{/admin/mem_all_list}'|">목록으로</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="button" class="w150 h35 default">수정</button>
+			</div>
+		</div>
+	</article>
+
+	<!-- FOOTER -->
+	<?php include "../static/inc/footer.html"; ?>
+</body>
+</th:block>
+</html>

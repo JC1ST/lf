@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container">
+		<form>
+			<div class="fb_bs post_makePage">
+				<article class="post_make_container">
+					<div class="fb_sc head">
+						<img src="/img/icon_post_link.png" />
+						링크
+						<div class="fb_cc" th:onclick="|location.href='@{/creators/post/creator_post_new(key=${session.session})}'|"><img src="/img/icon_x_close.png" /></div>
+					</div>
+					<section>
+						<div class="fb_sc link_container">
+							<input type="text" id="link_postContent" name="link_postContent" placeholder="link 또는 URL 붙여넎기" />
+						</div>
+					</section>
+					<input type="text" placeholder="포스트 제목 입력" />
+					<textarea placeholder="포스트 내용 입력"></textarea>
+					<div class="fb_sc tail">
+						<div class="fb_sc">
+							<img src="/img/icon_file.png" />
+							<span>첨부파일</span>
+						</div>
+						<div class="fileN fb_sc">
+							<p></p>
+							<div>
+								<img src="/img/icon_x_close_whiteSmall.png" />
+							</div>
+							<button type="button" id="chumbu" class="w80 h30 defaultLight">업로드</button>
+							<input type="file" id="chumbu_file" name="chumbu_file" />
+						</div>
+					</div>
+					<div class="fb_sc tail">
+						<div class="fb_cc">
+							<img src="/img/icon_tag.png" />
+							<span>태그추가</span>
+						</div>
+						<input type="text" placeholder="추가할 태그 입력" />
+					</div>
+				</article>
+
+				<div class="cpage_side">
+					<!-- 공개여부설정 -->
+					<section class="post_openType">
+						<div class="fb_cc"><img src="/img/icon_lock.png" />공개여부 설정</div>
+						<section>
+							<div class="fb_sc">
+								<div class="radio_clone"></div>
+								<input type="radio" name="openType_radio" />
+								전체 공개
+							</div>
+							<div class="fb_sc">
+								<div class="radio_clone"></div>
+								<input type="radio" name="openType_radio" />
+								구독자 전용
+							</div>
+							<div class="fb_sc">
+								<div class="radio_clone"></div>
+								<input type="radio" name="openType_radio" />
+								등급 선택
+							</div>
+						</section>
+						<section>
+							<div>
+								<div class="fb_sc"><div class="fb_cc checkBox_clone"><img src="/img/icon_check.png" /></div>무료 구독자 (Free)</div>
+								<input type="checkbox" />
+								<p>월당 ₩0 &nbsp;&nbsp; 구독자 0명</p>
+							</div>
+							<div>
+								<div class="fb_sc"><div class="fb_cc checkBox_clone"><img src="/img/icon_check.png" /></div>공식 구독자 (Official)</div>
+								<input type="checkbox" />
+								<p>월당 ₩10,000 &nbsp;&nbsp; 구독자 0명</p>
+							</div>
+							<div>
+								<div class="fb_sc"><div class="fb_cc checkBox_clone"><img src="/img/icon_check.png" /></div>VIP 구독자 (VIP)</div>
+								<input type="checkbox" />
+								<p>월당 ₩100,000 &nbsp;&nbsp; 구독자 0명</p>
+							</div>
+						</section>
+						<div class="fb_vc">
+							<button type="button" class="w100 h30 defaultLight" disabled>지금게시</button>
+							<button type="button" class="w100 h30 lightBlue" disabled>일정예약</button>
+						</div>
+					</section>
+				</div>
+
+				<!-- 포스트 삭제 버튼 -->
+				<div class="fb_cc container_bottom_btn modifies_btns">
+					<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>현재 포스트 삭제
+				</div>
+			</div>
+		</form>
+		</section>
+
+	</article>
+
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>
+
+<script>
+	$(function() {
+		
+		/*첨부파일 버튼*/
+		$("#chumbu").on("click", function() {
+			$("#chumbu_file").trigger("click");
+		});
+		$("#chumbu_file").on("change", function() {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var filePath = $("#chumbu_file").val();
+				var filePathLen = filePath.length;
+				var lastDot = filePath.lastIndexOf(".");
+				var fileExt = filePath.substring(lastDot, filePathLen);
+
+				$("#chumbu").text("파일변경");
+				$("#chumbu_file").siblings("p").show();
+				$("#chumbu_file").siblings("p + div").show();
+				$("#chumbu_file").siblings("p").text("file" + fileExt);
+			}
+			reader.readAsDataURL(this.files[0]);
+		});
+
+		/*첨부파일 삭제*/
+		$(".tail p + div").on("click", function() {
+			$("#chumbu_file").val("");
+			$("#chumbu").text("업로드");
+			$(this).siblings("p").text("");
+			$(this).siblings("p").hide();
+			$(this).hide();
+		});
+
+		/*라디오 버튼 체크*/
+		$(".radio_clone").parent().on("click", function() {
+			if($(this).index() == 2) {
+				$(".post_openType > section:last-of-type").slideDown();
+			}
+			else {
+				$(".post_openType > section:last-of-type").slideUp();
+				$("input[type='checkbox']").prop("checked", false);
+				$(".checkBox_clone").css({"background-color" : "white", "border" : "1px solid #c4cad1"});
+			}
+			$(".radio_clone").css("border", "1px solid #c4cad1");
+			$("input[type='radio']").prop("checked", false);
+			$(this).children(".radio_clone").css("border", "5px solid #26c5ff");
+			$(this).children("input[type='radio']").prop("checked", true);
+		});
+
+		/*체크박스 체크*/
+		$(".checkBox_clone").parent().on("click", function() {
+			var checker = $(this).siblings("input[type='checkbox']").prop("checked");
+			if(checker) {
+				$(this).children(".checkBox_clone").css({"background-color" : "white", "border" : "1px solid #c4cad1"})
+				$(this).siblings("input[type='checkbox']").prop("checked", false);
+			}
+			else {
+				$(this).children(".checkBox_clone").css({"background-color" : "#26c5ff", "border" : "0"});
+				$(this).siblings("input[type='checkbox']").prop("checked", true);
+			}
+		});
+
+		/*입력란의 내용 입력 확인*/
+		$("input[type='text'], textarea").on("change paste input", function() {
+			required_inp_check();
+		});
+		$(document).on("click", ".post_openType section div", function() {
+			required_inp_check();
+		});
+		function required_inp_check() {
+			if($(".post_make_container > input[type='text']").val().trim() == "") {
+				$(".post_openType div > button").prop("disabled", true);
+				return false;
+			}
+			
+			if($("textarea").val().trim() == "") {
+				$(".post_openType div > button").prop("disabled", true);
+				return false;
+			}
+			
+			if($("#link_postContent").val().trim() == "") {
+				$(".post_openType div > button").prop("disabled", true);
+				return false;
+			}
+
+			if($("input[type='radio']:checked").length < 1) {
+				$(".post_openType div > button").prop("disabled", true);
+				return false;
+			} else {
+				var radioNum = $("input[type='radio']:checked").parent().index();
+				if(radioNum == 2 && $("input[type='checkbox']:checked").length < 1) {
+					$(".post_openType div > button").prop("disabled", true);
+					return false;
+				}
+			}
+			
+			$(".post_openType div > button").prop("disabled", false);
+		}
+		
+	});
+</script>

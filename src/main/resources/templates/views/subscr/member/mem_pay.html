@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<section class="contents_container">
+			<br><br>
+			<div class="fb_cc container_top_title">
+				<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+			</div>
+
+			<div class="fb_cc container_top_explain">
+				<span><b>Creator Page Name</b></span>에 대한 구독회원 등록 결재하기
+			</div>
+
+			<div class="fb_cc mem_pay_area">결재모듈 붙이는 곳</div>
+
+			<div class="fb_cs men_pay_btm_text">lovefans는 크리에이터를 대신해 결제 금액을 환불하지 않습니다</div>
+
+			<div class="fb_cs container_bottom_btn">
+				<button type="button" class="w200 h35 default"; th:onclick="|location.href='@{/subs/mem/be(key=${cSeq})}'|">등급보기</button>
+
+			</div>
+			<section class="fb_cc mem_be_btns">
+				<form method="post" th:action="@{/members/subsJoin}">
+					<input type="hidden" th:name="cSeq" th:value="${cSeq}">
+					<input type="hidden" th:name="cslSeq" th:value="${cslSeq}">
+					<button type="submit" class="w150 h35 lightBlue">가입하기</button>
+				</form>
+			</section>
+		</section>
+	</article>
+
+</body>
+</th:block>
+</html>

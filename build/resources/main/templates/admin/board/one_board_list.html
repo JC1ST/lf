@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/admin_layout}">
+
+
+<!-- head -->
+<?php include "inc/admin_head.html"; ?>
+
+<th:block layout:fragment="adminContent">
+<body>
+	<article class="admin_container">
+		<?php include "inc/admin_menus.html"; ?>
+
+		<div class="admin_contents_area">
+			<!-- 타이틀 및 서포팅메뉴 -->
+			<div class="fb_cc admin_contnets_head">
+				<p>1:1 게시판 &nbsp; > &nbsp; <span>목록</span></p>
+				<!-- 서포팅 메뉴 -->
+				<?php include "inc/admin_public_menu.html"; ?>
+			</div>
+			
+			<!-- 검색영역 -->
+			<div class="fb_ec admin_search_area">
+				<select>
+					<option>-선택-</option>
+				</select>
+				<input type="text" />
+				<button type="button" class="w100 h35 point">검색</button>
+			</div>
+			
+			<!-- 내용 목록 테이블  -->
+			<table class="admin_list_tb">
+				<tr>
+					<th>번호</th>
+					<th>아이디</th>
+					<th>제목</th>
+					<th>등록일</th>
+					<th>처리상태</th>
+					<th>처리일시</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>hentai</td>
+					<td><a href="one_board_view.html" th:href="@{/admin/one_board_view}">eimi 의 온몸을 느끼...</a></td>
+					<td>2022-06-13 22:30</td>
+					<td>미친 shake it</td>
+					<td>2022-06-13 22:30</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+
+			<!-- 페이징 -->
+			<div class="fb_cc paging_area">
+				<a href="#">&lt;</a>
+				&nbsp;&nbsp;&nbsp;
+				<span>1</span>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a href="#">6</a>
+				<a href="#">7</a>
+				<a href="#">8</a>
+				<a href="#">9</a>
+				<a href="#">10</a>
+				&nbsp;&nbsp;&nbsp;
+				<a href="#">&gt;</a>
+			</div>
+		</div>
+	</article>
+
+	<!-- FOOTER -->
+	<?php include "../static/inc/footer.html"; ?>
+</body>
+</th:block>
+</html>

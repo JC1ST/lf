@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+	<?php include "/inc/head"; ?>
+<body>
+	<?php include "/inc/topper"; ?>
+
+	<article class="body_container">
+		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
+		<?php include "/inc/side"; ?>
+		
+		<section class="contents_container_nopad">
+			<article class="fb_c_cs cpage_body_post">
+				<div class="fb_cc profile_tab">
+					<div class="fb_c_cc">
+						<figure class="profile">
+							<img src="/img/sample_img.jpg" />
+						</figure>
+						<span th:text="${session.creator.getCiPageNm()}">Creaotr Page Name</span>
+					</div>
+				</div>
+
+				<div class="fb_bs cpage_body_group">
+					<section class="post_area">
+						<!-- 포스트 내용 detail-->
+						<!--<th:block th:each="model:${postList}">-->
+						<th:block th:each="i:${#numbers.sequence(1, postList.size())}">
+						<article class="post">
+							<!-- 사진들 --><!--한번에 올린 사진을 같이 나오게까지는 구현되지 않음-->
+							<figure class="detail"><img th:src="${postList.get(postList.size() - i).getCpImg()}" /></figure>
+							<!--<figure class="detail"><img th:src="${model.getCpImg()}" /></figure>-->
+							
+							<div class="post_date_area" th:text="${#dates.format(postList.get(postList.size() - i).getCpRegdt(), 'yyyy년 MM월 dd일 HH:mm')}">2022년 4월5일 오전 1:16</div>
+
+							<p class="post_title_area" th:text="${postList.get(postList.size() - i).getCpTitle()}">포스트 제목</p>
+							<p class="post_txt_area" th:text="${postList.get(postList.size() - i).getCpContent()}">
+								포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 포스트내용 스트내용
+							</p>
+							<div class="fb_sc post_read_more"><img src="/img/icon_file.png" /><a href="">chumbu_file.jpg</a></div>
+							
+							<div class="post_tag_area">
+								<span>#TAG</span>
+								<span>#TAG</span>
+								<span>#TAG</span>
+							</div>
+							<div class="post_like_area fb_sc">
+								
+								<!-- 페이지를 운영하는 크리에이터가 접속 하였을 때는 수정 삭제 버튼이 나타난다-->
+								<section class="fb_sc modifies_btns">
+									<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button" class="fb_cc"><img src="/img/icon_del_opacity.png" /></button>
+								</section>
+
+								<!-- 페이지 운영 크리에이터 이외의 접속자는 Like 버튼이 나타난다 -->
+								<!-- <button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button> -->
+								
+								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 <th:block th:text="${postList.get(postList.size() - i).getCpVoteCnt()}"/> 개</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+							</div>
+
+							<section class="post_reply_area">
+								<!-- 댓글 1 --><!--댓글 부분 미구현-->
+								<article class="fb_bs">
+									<figure class="profile"><span>N</span></figure>
+									<div>
+										<div class="fb_bc">작성자 닉네임<span>2022-12-25</span></div>
+										<p class="fb_sc">댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다.</p>
+										<button type="button" class="like_reply"><img src="/img/icon_heart_color.png" />1</button>
+										<button type="button" class="like_reply"><img src="/img/icon_reply_color.png" />답글</button>
+
+										<!-- 댓글에 대한 답글 1 -->
+										<article class="fb_bs">
+											<figure class="profile"><span>김</span></figure>
+											<div>
+												<div class="fb_bc">작성자 닉네임<span>2022-12-25</span></div>
+												<p class="fb_sc">댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다. 댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다.</p>
+											</div>
+											<section></section>
+										</article>
+
+										<!-- 댓글에 대한 답글 2 -->
+										<article class="fb_bs">
+											<figure class="profile"><span>S</span></figure>
+											<div>
+												<div class="fb_bc">작성자 닉네임<span>2022-12-25</span></div>
+												<p class="fb_sc">댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다.</p>
+											</div>
+											<section></section>
+										</article>
+									</div>
+								</article>
+
+								<!-- 댓글 2 -->
+								<article class="fb_bs">
+									<figure class="profile"><span>이</span></figure>
+									<div>
+										<div class="fb_bc">작성자 닉네임<span>2022-12-25</span></div>
+										<p class="fb_sc">댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다 댓글 내용 입니다.</p>
+										<button type="button" class="like_reply"><img src="/img/icon_heart_color.png" />1</button>
+										<button type="button" class="like_reply"><img src="/img/icon_reply_color.png" />답글</button>
+									</div>
+								</article>
+
+								<div class="fb_sc reply_inp">
+									<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
+									<input type="text" placeholder="포스트에 댓글 달기" />
+									<button type="button" class="w80 h35 defaultLight">확인</button>
+								</div>
+							</section>
+						</article>
+						</th:block>
+
+						<!-- 포스트 목록 버튼 -->
+						<div class="fb_cc container_bottom_btn">
+							<button type="button" class="lightBlue w200 h40" onclick="location.href='creator_page';">포스트 목록 보기</button>
+						</div>
+					</section>
+
+					<div class="cpage_side">
+						<!-- 등급안내 -->
+						<section class="tier_info">
+							<div class="fb_cc">나의등급</div>
+							<article th:switch="${session.creator.getCiPriceKind()}">
+								<th:block th:case="'1'">
+									<div>Lite</div>
+									<div><span>₩ 10000</span> / 월</div>
+									<div>기본 기능</div>
+								</th:block>
+								<th:block th:case="'2'">
+									<div>Pro</div>
+									<div><span>₩ 20000</span> / 월</div>
+									<div>멤버쉽 관리 지원</div>
+								</th:block>
+								<th:block th:case="'3'">
+									<div>Premium</div>
+									<div><span>₩ 30000</span> / 월</div>
+									<div>크리에이티브 비즈니스 전용</div>
+								</th:block>
+							</article>
+						</section>
+						<!--<section class="tier_info">
+							<div class="fb_cc">나의등급</div>
+							<article>
+								<div>무료 구독자(Free)</div>
+								<div><span>₩ 0</span> / 월</div>
+								<div>기본 사진을 무료로 마음껏 감상 하세요.</div>
+							</article>
+						</section>-->
+
+						<!-- 최근포스트 -->
+						<section class="recent_post">
+							<div class="fb_cc">최근 포스트</div>
+							<!-- 최근 포스트 목록 -->
+							<th:block th:with="count = ${count}"></th:block>
+							<th:block th:each="i:${#numbers.sequence(1, count)}">
+								<article class="fb_sc">
+									<img th:src="${postList.get(postList.size() - i).getCpImg()}" />
+									<!--<img src="/img/sample_post_img.jpg" />-->
+									<div>
+										<div th:text="${postList.get(postList.size() - i).getCpTitle()}">포스트 제목</div>
+										<span th:text="${#dates.format(postList.get(postList.size() - i).getCpRegdt(), 'yyyy년 MM월 dd일 HH:mm')}">2022년 12월 15일 오후 08:09</span>
+									</div>
+								</article>
+							</th:block>
+
+							<!--<article class="fb_sc">
+								<img src="/img/sample_post_img.jpg" />
+								<div>
+									<div>포스트 제목</div>
+									<span>2022년 12월 15일 오후 08:09</span>
+								</div>
+							</article>
+
+							<article class="fb_sc">
+								<img src="/img/sample_post_img.jpg" />
+								<div>
+									<div>포스트 제목</div>
+									<span>2022년 12월 15일 오후 08:09</span>
+								</div>
+							</article>
+
+							<article class="fb_sc">
+								<img src="/img/sample_post_img.jpg" />
+								<div>
+									<div>포스트 제목</div>
+									<span>2022년 12월 15일 오후 08:09</span>
+								</div>
+							</article>
+
+							<article class="fb_sc">
+								<img src="/img/sample_post_img.jpg" />
+								<div>
+									<div>포스트 제목</div>
+									<span>2022년 12월 15일 오후 08:09</span>
+								</div>
+							</article>-->
+						</section>
+					</div>
+				</div>
+			</article>
+
+		</section>
+	</article>
+
+	<article id="viewer_container">
+		<div class="viewer_imgArea"></div>
+		<div class="viewer_numArea"><span class="viewer_nowNum">1</span> / <span class="viewer_totalNum">6</span></div>
+		<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
+		<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+		<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+	</article>
+
+	<article id="reply_write_container">
+		<div class="fb_c_cc reply_write_body">
+			<div class="fb_cc close"><img src="/img/icon_x_close_whiteSmall.png" /></div>
+			<figure class="fb_cc profile"><img src="/img/sample_img.jpg" /></figure>
+			<input type="text" placeholder="답글 작성하기" />
+			<div class="fb_ac">
+				<button type="button" class="like_reply"><span>등록</span></button>
+				<button type="button" class="like_reply">취소</button>
+			</div>
+		</div>
+	</article>
+	
+	<!-- FOOTER -->
+	<?php include_once "/inc/footer"; ?>
+</body>
+</th:block>
+</html>
+
+<script>
+	// 포스트 이미지 클릭시 이미지 보기 화면
+	// 이미지 띄우는 것 까지만 구현 세부 동작은 구현 하지 않았음.
+	$(function() {
+		$(".post > figure > img, .post_slider_body img").on("click", function() {
+			$(".body_container").hide();
+			$("footer").hide();
+			$("#viewer_container").css("display", "flex");
+
+			var test = [];
+			$(".viewer_imgArea").empty();
+
+			test.push($(".post > figure > img").attr("src"));
+			if($(".post_slider_body img").length) {
+				$(".post_slider_body img").each(function(){
+					test.push($(this).attr("src"));
+				});
+			}
+			let imgSrc = "<img src='" + $(this).attr("src") + "'>";
+			$(".viewer_imgArea").append(imgSrc);
+		});
+
+		$("#viewer_container .close").on("click", function() {
+			$("#viewer_container").hide();
+			$(".body_container").show();
+			$("footer").show();
+		});
+
+		/*댓글에 대한 답글달기 버튼 */
+		$(".post_reply_area > article button:nth-of-type(2)").on("click", function() {
+			$("#reply_write_container").show();
+
+			var scrH = $("body").prop("scrollHeight");
+			var bodyW = $(".reply_write_body").width();
+			var bodyH = $(".reply_write_body").height();
+			var trgTop = "calc(50% - " + bodyH / 2 + "px)";
+			var trgLeft = "calc(50% - " + bodyW / 2 + "px)";
+
+			console.log("scrH : " + scrH);
+			console.log("bodyW : " + bodyW);
+			console.log("bodyH : " + bodyH);
+
+			
+			$("#reply_write_container").css("height", scrH + "px");
+			$(".reply_write_body").css({"top" : trgTop, "left" : trgLeft});
+		});
+
+		/*답글창 닫기*/
+		$(".reply_write_body .close, .reply_write_body button:nth-of-type(2)").on("click", function() {
+			$("#reply_write_container").hide();
+			$(".reply_write_body input").val("");
+		});
+	});
+</script>

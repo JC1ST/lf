@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_payment.png" /> &nbsp;&nbsp; <b>결재</b>
+			</div>
+
+			<div class="fb_ss tab_area">
+				<a href="subscr_payment.html" th:href="@{/subs/payment(key=${session.session})}" class="selected">귀하의 카드</a>
+				<a href="subscr_payment_detail.html" th:href="@{/subs/payment/detail(key=${session.session})}">거래 내역</a>
+			</div>
+
+			<article class="card">
+				<p>카드사명</p>
+				<p>카드번호&nbsp;:&nbsp;<span>0000 0000 0000 0000</span></p>
+				<section class="fb_sc">
+					<img src="/img/arrow.png" />
+					<div><img src="/img/card_chip.png" /></div>
+					<hr>
+				</section>
+			</article>
+
+			<div class="fb_cc container_bottom_btn">
+				<button type="button" class="w200 h35 defaultLight">신규카드 등록</button>
+			</div>
+		</section>
+	</article>
+
+</body>
+</th:block>
+</html>

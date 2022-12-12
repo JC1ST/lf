@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<section class="contents_container">
+			<div class="fb_cc container_top_title">
+				<img src="/img/icon_subscr.png" /> &nbsp;&nbsp; <b>구독자</b>
+			</div>
+
+			<div class="fb_bc subscr_find">
+				<section class="fb_sc">
+					<input type="text" class="sech2" placeholder="닉네임 또는 이메일 검색" />
+					<button type="button" class="w80 h35 point"><img src="/img/icon_down.png" /> CSV</button><!--CSV???-->
+				</section>
+				
+				<section class="fb_ec">
+					<button type="button" class="w80 h35 default">전체</button>
+					<button type="button" class="w80 h35 cancel">구독중</button>
+					<button type="button" class="w80 h35 cancel">신규회원</button>
+					<button type="button" class="w80 h35 cancel">구독만료</button>
+				</section>
+			</div>
+
+			<div class="fb_sc container_top_explain">
+				<img src="/img/icon_level_top.png" />
+				<div>
+					<span><b>Subscriber : &nbsp;</b></span>
+					<span>0</span> / <span th:text="${#numbers.formatInteger(numOfSub, 1)}"></span>
+				</div>
+			</div>
+
+			<!-- 목록표 -->
+			<article class="subscr_table">
+				<!-- 목록이 없을때 -->
+				<th:block th:if="${subList.size()} == 0">
+				<section>
+					<div>
+						<article class="fb_c_cc">
+							<div class="fb_cc">!</div>
+							선택 내용과 일치하는 사용자가 없습니다.
+						</article>
+					</div>
+				</section>
+				</th:block>
+
+				<!-- 목록이 있을때 -->
+				<th:block th:if="${subList.size()} != 0">
+					<section class="th_sec">
+						<div>
+							<input type="checkbox" id="chkAll" name="all"/>
+						</div>
+						<div>닉네임</div>
+						<div>이메일</div>
+						<div>등급</div>
+						<div>총후원액</div>
+						<div>가입일</div>
+						<div>구독만료일</div>
+					</section>
+
+					<th:block th:each="s: ${subList.iterator()}">
+						<section>
+							<div class="blockCheck">
+								<input type="checkbox" id="chkSub" name="sub"/>
+								<button type="button" class="w200 h30 default" onclick="confirm('이 회원을 구독 차단 합니다.');">이 회원을 구독차단</button>
+							</div>
+							<div class="nickName" th:text="${s.getMiNick()}">nickName</div>
+							<div class="email" th:text="${s.getMiId()}">nickName@nick.com</div>
+							<div class="tierLevel">공식 구독자 (Official)</div>
+							<div class="totalPay">₩ 1,000,000</div>
+							<div class="joinDay" th:text="${#dates.format(s.getSlRegdt(), 'yyyy-MM-dd HH:mm:ss')}">2022-12-25</div>
+							<div class="endDay">2022-12-25</div>
+						</section>
+					</th:block>
+				</th:block>
+			</article>
+
+			<br />
+			
+			<div class="fb_ss container_bottom_btn" style="height:35px;">
+				<button type="button" id="btn_check" class="w200 h35 default" disabled="disabled"
+						th:onclick="|location.href='@{/creators/subscr/creator_subscr_mng(key=${session.session})}'|">선택된 목록 구독차단</button>
+
+			</div>
+		</section>
+	</article>
+
+</body>
+</th:block>
+</html>
+
+
+<script>
+	$(function() {
+		// 전체 체크박스 선택 시
+		$("#chkAll").click(function() {
+			if ($("#chkAll").is(":checked")) {
+				$("input[name=sub]").prop("checked", true);
+				// 버튼 활성화
+				$("#btn_check").css({"background-color":"#00b0f0"}).prop("disabled",false);
+			}
+			else {
+				$("input[name=sub]").prop("checked", false);
+				$("#btn_check").css({"background-color":"white"}).prop("disabled",true);
+			}
+		});
+
+		// 하위 체크박스 선택 시
+		$("input[name=sub]").click(function() {
+			var tmpp = $(this).prop('checked');
+			var total = $("input[name=sub]").length;
+			var checked = $("input[name=sub]:checked").length;
+
+			if(total != checked) $("#chkAll").prop("checked", false);
+			else $("#chkAll").prop("checked", true);
+
+			// 선택한 체크박스 값이 true 이거나 체크박스 1개 이상 선택 시 버튼 활성화
+			if(tmpp == true || checked > 0){
+				// 버튼 활성화
+				$("#btn_check").css({"background-color":"#00b0f0"}).prop("disabled",false);
+			}
+			else{
+				$("#btn_check").css({"background-color":"white"}).prop("disabled",true);
+			}
+		});
+	});
+</script>

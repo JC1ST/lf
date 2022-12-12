@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/subs_layout}">
+
+<th:block layout:fragment="content">
+<body>
+	<article class="body_container">
+		<section class="contents_container">
+			<div class="contents_box fb_cs">
+
+				<!-- 구독중인 크리에이터 목록 -->
+				<article class="creator_banner_area subscribe">
+					<div class="creator_banner_area_title fb_cc">구독중인 크리에이터</div>
+					<div class="creator_banner_group">
+						
+						<!-- 베너 -->
+						<article class="creator_banner" th:style="'background-image:url(' + ${c.getCiCPhoto()} + ');'" onclick="location.href='creator_page.html';"
+								 th:onclick="|location.href='@{/subs/creatorpage(key=${c.getCiMiSeq()})}'|" th:each="c: ${creList.iterator()}">
+							<div>
+								<figure class="profile"><img src="/img/sample_img.jpg" th:src="${c.getMiPhoto()}"/></figure>
+								<section>
+									<span class="fb_sc"><img src="/img/icon_channel.png" /></span>
+									<span class="fb_sc" th:text="${c.getMiNick()}">
+										Nick Name
+									</span>
+									<span class="fb_sc" th:text="${c.getCiPageNm()}">
+										Creator Page Name
+									</span>
+								</section>
+							</div>
+						</article>
+
+					</div>
+				</article>
+				
+				<!-- 포스트 영역 -->
+				<section class="post_area">
+					<br>
+					<article class="post">
+						<th:block th:each="p : ${postList.iterator()}">
+							<figure><img src="/img/sample_post_img.jpg" th:src="${p.getCpImg()}"/></figure>
+							<section class="post_slider_screen">
+								<div class="post_slider_body">
+									<img src="/img/mainPic_positive.jpg" />
+									<img src="/img/sample_creator1.jpg" />
+									<img src="/img/sample_post_img.jpg" />
+									<img src="/img/sample_bg2.jpg" />
+									<img src="/img/sample_post_img.jpg" />
+								</div>
+								<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+								<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+							</section>
+							<div class="post_date_area" th:text="${p.getCpRegdt()}"></div>
+
+							<section class="linker" onclick="location.href='creator_page_detail.html';"
+									 th:onclick="|location.href='@{/creator/page/creator_page_detail}'|">
+								<p class="post_title_area" th:text="${p.getCpTitle()}"></p>
+								<p class="post_txt_area" th:text="${p.getCpContent()}">
+								</p>
+								<div class="post_read_more">더읽기</div>
+							</section>
+
+							<div class="post_tag_area">
+								<span>#TAG</span>
+								<span>#TAG</span>
+								<span>#TAG</span>
+							</div>
+							<div class="post_like_area fb_sc">
+								<button type="button" class="fb_cc like"><img src="/img/icon_heart_fill.png" />Like</button>
+								<div class="fb_sc"><img src="/img/icon_heart.png" />&nbsp; 좋아요 00개</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="fb_sc"><img src="/img/icon_reply" /> &nbsp;&nbsp; 댓글 00개</div>
+							</div>
+						</th:block>
+					</article>
+				</section>
+				
+				<!-- 추천 크리에이터 목록 -->
+				<article class="creator_banner_area recommand" id="reload">
+					<div class="creator_banner_area_title fb_cc">추천 크리에이터</div>
+					<div class="creator_banner_control fb_sc">
+						<img src="/img/icon_reload.png" />
+						<img src="/img/arrow.png" />
+						<img src="/img/arrow.png" />
+					</div>
+
+					<div class="creator_banner_group">
+						<!-- 베너 -->
+						<article class="creator_banner" th:style="'background-image:url(' + ${m.getCiCPhoto()} + ');'"
+								 th:onclick="|location.href='@{/subs/creatorpage/mode0(key=${m.getCiMiSeq()})}'|" th:each="m : ${creatorList.iterator()}">
+							<div>
+								<figure class="profile"><img src="/img/sample_img.jpg" th:src="${m.getMiPhoto()}"/></figure>
+								<section>
+									<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>
+									<span class="fb_sc" th:text="${m.getMiNick()}">Nick Name</span>
+									<span class="fb_sc" th:text="${m.getCiPageNm()}">Creator Page Name</span>
+								</section>
+							</div>
+						</article>
+					</div>
+
+					<!-- 베너 페이징 -->
+					<div class="creator_banner_paging fb_cc">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</article>
+			</div>		
+		</section>
+	</article>
+
+	<article id="viewer_container">
+		<div class="viewer_imgArea"></div>
+		<div class="viewer_numArea"><span class="viewer_nowNum">1</span> / <span class="viewer_totalNum">6</span></div>
+		<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
+		<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+		<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>
+	</article>
+
+</body>
+</th:block>
+</html>
+
+<script>
+	// 포스트 이미지 클릭시 이미지 보기 화면
+	// 이미지 띄우는 것 까지만 구현 세부 동작은 구현 하지 않았음.
+	$(function() {
+		$(".post > figure > img, .post_slider_body img").on("click", function() {
+			$(".body_container").hide();
+			$("footer").hide();
+			$("#viewer_container").css("display", "flex");
+
+			var test = [];
+			$(".viewer_imgArea").empty();
+
+			test.push($(".post > figure > img").attr("src"));
+			if($(".post_slider_body img").length) {
+				$(".post_slider_body img").each(function(){
+					test.push($(this).attr("src"));
+				});
+			}
+			let imgSrc = "<img src='" + $(this).attr("src") + "'>";
+			$(".viewer_imgArea").append(imgSrc);
+		});
+
+		$("#viewer_container .close").on("click", function() {
+			$("#viewer_container").hide();
+			$(".body_container").show();
+			$("footer").show();
+		});
+
+		// 페이지 내 특정 영역 새로고침
+		$("#reload").on('click', function() {
+			$("#reload").load(location.href + " #reload");
+		})
+	});
+</script>
