@@ -34,31 +34,31 @@
 							<span>10<br>링크</span>
 						</div>
 
-						<th:block th:if="${checkDate == true}">
+						<th:block th:if="${checks.get(listStat.index) == true}">
 							<p><span>구독만료</span></p>
 						</th:block>
 
-						<th:block th:if="${checkDate == false}">
+						<th:block th:if="${checks.get(listStat.index) == false}">
 							<p><span class="channel_subscr">구독중</span></p>
 						</th:block>
 						<div class="fb_c_ss channel_info">
 							<div>
 								<div class="fb_ss"><span>등급 :</span><span th:text="${list.getCslNm()}"></span></div>
 								<div class="fb_ss"><span>가격 :</span><span>₩</span><span th:text="${list.getCslPrice()}">/ 월</span></div>
-								<div class="fb_ss"><span>구독만료일 :</span><span th:text="${endSubs}"></span></div>
+								<div class="fb_ss"><span>구독만료일 :</span><span th:text="${list.getSlRegdt()}"></span></div>
 							</div>
 						</div>
 
 						<div class="channel_btns">
 
-							<th:block th:if="${checkDate == false}">
+							<th:block th:if="${checks.get(listStat.index) == false}">
 								<form id="delete_form" class="del_form" th:action="@{/subs/cancel/{cSeq}(cSeq = ${list.getCiMiSeq()})}" method="post">
 									<button type="button" class="w100 h35 cancel">구독취소</button>
 									<input type="hidden" name="_method" value="delete"/>
 								</form>
 							</th:block>
 
-							<th:block th:if="${checkDate == true}">
+							<th:block th:if="${checks.get(listStat.index) == true}">
 								<button type="button" class="w100 h35 lightBlue">재구독</button>
 							</th:block>
 						</div>

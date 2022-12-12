@@ -102,7 +102,6 @@ public class MemberControrller {
             memberInfoSession.setAttribute("memberInfoSession",memberInfo.get());
 
             Optional<CreatorInfoDto> creatorInfo = creatorService.findOne(memberInfo.get().getMiSeq());
-            System.out.println("멤 멤 멤 멤ㅁ ㅔㅁ ㅁ메 메 = " + creatorInfo);
             if(memberInfo.get().getMiKind().equals("C")) {
                 HttpSession creatorInfoSession = request.getSession();
                 creatorInfoSession.setAttribute("creatorInfoSession", creatorInfo.get());
