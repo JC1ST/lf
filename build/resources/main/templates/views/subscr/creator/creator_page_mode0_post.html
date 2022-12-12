@@ -104,7 +104,7 @@
 									<th:block th:case="'2'" >
 										<article th:if="${checkSubs==1}" class="post">
 											<!--구독자에게 공개-->
-											<figure><img src="/img/sample_post_img.jpg" /></figure>
+											<figure><img src="/img/sample_post_img.jpg" th:src="${model.getCpImg()}"/></figure>
 											<section class="post_slider_screen">
 												<div class="post_slider_body">
 													<img src="/img/mainPic_positive.jpg" />
@@ -140,7 +140,7 @@
 										<article th:unless="${checkSubs==1}" class="post">
 											<!--구독하면 보여줌-->
 											<section class="wrap" style="position: relative;  cursor: pointer;" th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
-												<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" /></figure>
+												<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" th:src="${model.getCpImg()}"/></figure>
 
 												<div style="position: absolute; top:40%; left:50%; width:100%; transform: translate(-50%,-50%);">
 													<div class="fb_c_cc">
@@ -157,8 +157,6 @@
 														<img src="/img/sample_bg2.jpg" />
 														<img src="/img/sample_post_img.jpg" />
 													</div>
-													<!--																<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
-													<!--																<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
 												</section>
 
 											</section>
@@ -188,7 +186,7 @@
 										<th:block th:if="${checkSubs==1}" >
 											<article th:if="${#strings.contains(model.getCpOpenCslSeq(),cslSeq)}" class="post">
 												<!--돈냈네 보여줌-->
-												<figure><img src="/img/sample_post_img.jpg" /></figure>
+												<figure><img src="/img/sample_post_img.jpg" th:src="${model.getCpImg()}"/></figure>
 												<section class="post_slider_screen">
 													<div class="post_slider_body">
 														<img src="/img/mainPic_positive.jpg" />
@@ -241,8 +239,6 @@
 															<img src="/img/sample_bg2.jpg" />
 															<img src="/img/sample_post_img.jpg" />
 														</div>
-														<!--																<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
-														<!--																<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
 													</section>
 
 												</section>
@@ -272,7 +268,7 @@
 										<article th:unless="${checkSubs==1}" class="post">
 											<!--일단 구독부터 해-->
 											<section class="wrap" style="position: relative;  cursor: pointer;" th:onclick="|location.href='@{/subs/mem/be(key=${creator.getCiMiSeq()})}'|">
-												<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" /></figure>
+												<figure><img style="-webkit-filter: blur(7px); width: 100%;" src="/img/sample_post_img.jpg" th:src="${model.getCpImg()}"/></figure>
 
 												<div style="position: absolute; top:40%; left:50%; width:100%; transform: translate(-50%,-50%);">
 													<div class="fb_c_cc">
@@ -289,8 +285,6 @@
 														<img src="/img/sample_bg2.jpg" />
 														<img src="/img/sample_post_img.jpg" />
 													</div>
-													<!--																<div id="slide_btn_left" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
-													<!--																<div id="slide_btn_right" class="fb_cc slide_btn"><img src="/img/arrow.png" /></div>-->
 												</section>
 
 											</section>
@@ -405,14 +399,14 @@
 							<div class="creator_banner_group">
 
 								<!-- 베너 -->
-								<article class="creator_banner" style="background-image:url('/img/sample_bg.jpg')" onclick="location.href='creator_page_mode0.html';"
-										 th:onclick="|location.href='@{/subs/creatorpage/mode0}'|">
+								<article class="creator_banner" th:style="'background-image:url(' + ${m.getCiCPhoto()} + ');'"
+										 th:onclick="|location.href='@{/subs/creatorpage/mode0(key=${m.getCiMiSeq()})}'|" th:each="m : ${creatorList.iterator()}">
 									<div>
-										<figure class="profile"><img src="/img/sample_img.jpg" /></figure>
+										<figure class="profile"><img src="/img/sample_img.jpg" th:src="${m.getMiPhoto()}"/></figure>
 										<section>
 											<span class="fb_sc"><img src="/img/icon_creator.png" />&nbsp;&nbsp;Creator</span>
-											<span class="fb_sc">Nick Name</span>
-											<span class="fb_sc">Creator Page Name</span>
+											<span class="fb_sc" th:text="${m.getMiNick()}">Nick Name</span>
+											<span class="fb_sc" th:text="${m.getCiPageNm()}">Creator Page Name</span>
 										</section>
 									</div>
 								</article>
