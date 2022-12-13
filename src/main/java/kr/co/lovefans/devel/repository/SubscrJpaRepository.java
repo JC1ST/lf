@@ -76,10 +76,10 @@ public class SubscrJpaRepository implements SubscrRepository{
         QSubscr qSubscr = QSubscr.subscr;
 
         List<MemberDto> result = query
-                .select(Projections.bean(MemberDto.class, qMember.miId, qMember.miNick, qSubscr.slRegdt))
+                .select(Projections.bean(MemberDto.class, qMember.miId, qMember.miNick, qSubscr.slRegdt, qSubscr.slState))
                 .from(qSubscr)
                 .join(qMember).on(qSubscr.slvMiSeq.eq(qMember.miSeq))
-                .where(qSubscr.slcMiSeq.eq(slcMiSeq))
+                .where(qSubscr.slcMiSeq.eq(slcMiSeq), qSubscr.slState.eq("Y"))
 
                 .fetch();
 

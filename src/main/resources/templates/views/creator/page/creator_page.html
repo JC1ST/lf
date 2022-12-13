@@ -13,10 +13,10 @@
 		
 		<section class="contents_container_nopad">
 			<div class="cpage_head">
-				<div><img src="/img/sample_bg.jpg" /></div>
+				<div><img src="/img/sample_bg.jpg" th:src="${session.creator.getCiCPhoto()}"/></div>
 				<div>
 					<figure>
-						<img src="/img/sample_img.jpg" />
+						<img src="/img/sample_img.jpg" th:src="${session.creator.getCiPPhoto()}"/>
 					</figure>
 					<div th:text="${session.creator.getCiPageNm()}"></div>
 					<div>창작분야 : <th:block th:text="${session.creator.getCiTheme()}" /> </div>

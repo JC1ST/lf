@@ -89,6 +89,9 @@ public class CreatorController {
         model.addAttribute("member", memberInfo.get());
         model.addAttribute("postList", postList);
 
+        // 사이드 메뉴 관련
+        model.addAttribute("creMainMenu", true);
+
         if(postList.size() < 5) {
             model.addAttribute("count", postList.size());
         } else {
@@ -162,18 +165,29 @@ public class CreatorController {
 
         model.addAttribute("subList", subList);
 
+        // 사이드 메뉴 관련
+        model.addAttribute("creAlarmMenu", true);
+
         return "views/creator/creator_alarm";
     }
 
     /*creator post*/
     @GetMapping("creators/post/creator_post_new")
-    public String creator_post_new(@RequestParam("key") Long key) {
+    public String creator_post_new(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("crePostNewMenu", true);
 
         return "views/creator/post/creator_post_new";
     }
 
     @GetMapping("creators/post/creator_post_make_img")
-    public String creator_post_make_img(@RequestParam("key") Long key) {
+    public String creator_post_make_img(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("crePostNewMenu", true);
 
         return "views/creator/post/creator_post_make_img";
     }
@@ -190,37 +204,61 @@ public class CreatorController {
     }
 
     @GetMapping("creators/post/creator_post_make_mov")
-    public String creator_post_make_mov(@RequestParam("key") Long key) {
+    public String creator_post_make_mov(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("crePostNewMenu", true);
 
         return "views/creator/post/creator_post_make_mov";
     }
 
     @GetMapping("creators/post/creator_post_make_link")
-    public String creator_post_make_link(@RequestParam("key") Long key) {
+    public String creator_post_make_link(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("crePostNewMenu", true);
 
         return "views/creator/post/creator_post_make_link";
     }
 
     @GetMapping("creators/post/creator_post_temp")
-    public String creator_post_temp(@RequestParam("key") Long key) {
+    public String creator_post_temp(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("creTempMenu", true);
 
         return "views/creator/post/creator_post_temp";
     }
 
     @GetMapping("creators/post/creator_post_scheduled")
-    public String creator_post_scheduled(@RequestParam("key") Long key) {
+    public String creator_post_scheduled(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("creScheduledMenu", true);
 
         return "views/creator/post/creator_post_scheduled";
     }
 
     @GetMapping("creators/post/creator_post_ing")
-    public String creator_post_ing(@RequestParam("key") Long key) {
+    public String creator_post_ing(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("creIngMenu", true);
 
         return "views/creator/post/creator_post_ing";
     }
 
     @GetMapping("creators/post/creator_post_board")
-    public String creator_post_board(@RequestParam("key") Long key) {
+    public String creator_post_board(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("crePostMenu", true);
+        model.addAttribute("creBoardMenu", true);
 
         return "views/creator/post/creator_post_board";
     }
@@ -254,37 +292,55 @@ public class CreatorController {
 
     /*creator message*/
     @GetMapping("creators/message/creator_message_c_list")
-    public String creator_message_c_list(@RequestParam("key") Long key) {
+    public String creator_message_c_list(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creMsgMenu", true);
 
         return "views/creator/message/creator_message_c_list";
     }
 
     @GetMapping("creators/message/creator_message_c_select")
-    public String creator_message_c_select(@RequestParam("key") Long key) {
+    public String creator_message_c_select(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creMsgMenu", true);
 
         return "views/creator/message/creator_message_c_select";
     }
 
     @GetMapping("creators/message/creator_message_c_view")
-    public String creator_message_c_view(@RequestParam("key") Long key) {
+    public String creator_message_c_view(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creMsgMenu", true);
 
         return "views/creator/message/creator_message_c_view";
     }
 
     @GetMapping("creators/message/creator_message_s_list")
-    public String creator_message_s_list(@RequestParam("key") Long key) {
+    public String creator_message_s_list(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creMsgMenu", true);
 
         return "views/creator/message/creator_message_s_list";
     }
 
     @GetMapping("creators/message/creator_message_s_select")
-    public String creator_message_s_select(@RequestParam("key") Long key) {
+    public String creator_message_s_select(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creMsgMenu", true);
 
         return "views/creator/message/creator_message_s_select";
     }
 
     @GetMapping("creators/message/creator_message_s_view")
-    public String creator_message_s_view(@RequestParam("key") Long key) {
+    public String creator_message_s_view(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creMsgMenu", true);
 
         return "views/creator/message/creator_message_s_view";
     }
@@ -292,7 +348,10 @@ public class CreatorController {
 
     /*creator page*/
     @GetMapping("creators/page/creator_page")
-    public String creator_page(@RequestParam("key") Long key) {
+    public String creator_page(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creatorPageMenu", true);
 
         return "views/creator/page/creator_page";
     }
@@ -362,12 +421,20 @@ public class CreatorController {
 
         model.addAttribute("numOfSub", numOfSub);
 
+        // 사이드 메뉴 관련
+        model.addAttribute("creSubsMenu", true);
+        model.addAttribute("creMngMenu", true);
+
 
         return "views/creator/subscr/creator_subscr_mng";
     }
     
     @GetMapping("creators/subscr/creator_subscr_block")
-    public String creator_subscr_block(@RequestParam("key") Long key) {
+    public String creator_subscr_block(@RequestParam("key") Long key, Model model) {
+
+        // 사이드 메뉴 관련
+        model.addAttribute("creSubsMenu", true);
+        model.addAttribute("creBlockMenu", true);
 
         return "views/creator/subscr/creator_subscr_block";
     }

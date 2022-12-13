@@ -37,11 +37,14 @@ public class MemberDto {
     // 구독자 등록일
     private Date slRegdt;
 
+    // 구독 상태
+    private String slState;
+
     public MemberDto() {
 
     }
 
-    public MemberDto(Long miSeq, Long ciMiSeq, String ciPageNm, Long slcMiSeq, Long slvMiSeq, String miNick, String miPhoto, String ciCPhoto, String miId, Date slRegdt) {
+    public MemberDto(Long miSeq, Long ciMiSeq, String ciPageNm, Long slcMiSeq, Long slvMiSeq, String miNick, String miPhoto, String ciCPhoto, String miId, Date slRegdt, String slState) {
         this.miSeq = miSeq;
         this.ciMiSeq = ciMiSeq;
         this.ciPageNm = ciPageNm;
@@ -52,5 +55,6 @@ public class MemberDto {
         this.ciCPhoto = ciCPhoto;
         this.miId = miId;
         this.slRegdt = slRegdt;
+        this.slState = slState;
     }
 }

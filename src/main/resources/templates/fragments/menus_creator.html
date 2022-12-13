@@ -8,14 +8,25 @@
 
 	<ul class="menu_group">
 		<li>
-			<a href="#" th:href="@{/creators/creator_main(key=${session.session})}">
+			<!-- main 페이지인 경우-->
+			<a th:href="@{/creators/creator_main(key=${session.session})}" th:if="${creMainMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				<img src="/img/icon_home.png" style="filter: hue-rotate(0deg) saturate(100%);"/>
+				<span>HOME</span>
+			</a>
+			<!-- 그 외 페이지인 경우-->
+			<a th:href="@{/creators/creator_main(key=${session.session})}" th:unless="${creMainMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_home.png" />
 				<span>HOME</span>
 			</a>
 		</li>
 
 		<li>
-			<a href="#" th:href="@{/creators/creator_alarm(key=${session.session})}" >
+			<a th:href="@{/creators/creator_alarm(key=${session.session})}" th:if="${creAlarmMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				<img src="/img/icon_alarm.png" style="filter: hue-rotate(0deg) saturate(100%);"/>
+				<span>알림</span>
+				<!-- 숫자 뱃지 --><div class="fb_cc badge">3</div>
+			</a>
+			<a th:href="@{/creators/creator_alarm(key=${session.session})}" th:unless="${creAlarmMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_alarm.png" />
 				<span>알림</span>
 				<!-- 숫자 뱃지 --><div class="fb_cc badge">3</div>
@@ -23,7 +34,12 @@
 		</li>
 
 		<li>
-			<a href="#" th:href="@{/creators/message/creator_message_c_list(key=${session.session})}" >
+			<a th:href="@{/creators/message/creator_message_c_list(key=${session.session})}" th:if="${creMsgMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				<img src="/img/icon_message.png" style="filter: hue-rotate(0deg) saturate(100%);"/>
+				<span>메세지</span>
+				<!-- 숫자 뱃지 --><div class="fb_cc badge">99</div>
+			</a>
+			<a th:href="@{/creators/message/creator_message_c_list(key=${session.session})}" th:unless="${creMsgMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_message.png" />
 				<span>메세지</span>
 				<!-- 숫자 뱃지 --><div class="fb_cc badge">99</div>
@@ -31,43 +47,70 @@
 		</li>
 
 		<li>
-			<a href="#" th:href="@{/creators/post/creator_post_new(key=${session.session})}">
+			<a th:href="@{/creators/post/creator_post_new(key=${session.session})}" th:if="${crePostMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				<img src="/img/icon_post.png" style="filter: hue-rotate(0deg) saturate(100%);"/>
+				<span>포스트</span>
+				<img src="/img/arrow_m.png">
+			</a>
+			<a th:href="@{/creators/post/creator_post_new(key=${session.session})}" th:unless="${crePostMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_post.png" />
 				<span>포스트</span>
 				<img src="/img/arrow_m.png">
 			</a>
 			<ul>
-				<li><a href="#" th:href="@{/creators/post/creator_post_new(key=${session.session})}">새로운 포스트</a></li>
-				<li><a href="#" th:href="@{/creators/post/creator_post_temp(key=${session.session})}">임시보관함</a></li>
-				<li><a href="#" th:href="@{/creators/post/creator_post_scheduled(key=${session.session})}">예정된 포스트</a></li>
-				<li><a href="#" th:href="@{/creators/post/creator_post_ing(key=${session.session})}">게시된 포스트</a></li>
-				<li><a href="#" th:href="@{/creators/post/creator_post_board(key=${session.session})}">포스트 대시보드</a></li>
+				<li>
+					<a th:href="@{/creators/post/creator_post_new(key=${session.session})}" th:if="${crePostNewMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">새로운 포스트</a>
+					<a th:href="@{/creators/post/creator_post_new(key=${session.session})}" th:unless="${crePostNewMenu}" th:style="${'color: #828ea0; font-weight: bold'}">새로운 포스트</a>
+				</li>
+				<li>
+					<a th:href="@{/creators/post/creator_post_temp(key=${session.session})}" th:if="${creTempMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">임시보관함</a>
+					<a th:href="@{/creators/post/creator_post_temp(key=${session.session})}" th:unless="${creTempMenu}" th:style="${'color: #828ea0; font-weight: bold'}">임시보관함</a>
+				</li>
+				<li>
+					<a th:href="@{/creators/post/creator_post_scheduled(key=${session.session})}" th:if="${creScheduledMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">예정된 포스트</a>
+					<a th:href="@{/creators/post/creator_post_scheduled(key=${session.session})}" th:unless="${creScheduledMenu}" th:style="${'color: #828ea0; font-weight: bold'}">예정된 포스트</a>
+				</li>
+				<li>
+					<a th:href="@{/creators/post/creator_post_ing(key=${session.session})}" th:if="${creIngMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">게시된 포스트</a>
+					<a th:href="@{/creators/post/creator_post_ing(key=${session.session})}" th:unless="${creIngMenu}" th:style="${'color: #828ea0; font-weight: bold'}">게시된 포스트</a>
+				</li>
+				<li>
+					<a th:href="@{/creators/post/creator_post_board(key=${session.session})}" th:if="${creBoardMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">포스트 대시보드</a>
+					<a th:href="@{/creators/post/creator_post_board(key=${session.session})}" th:unless="${creBoardMenu}" th:style="${'color: #828ea0; font-weight: bold'}">포스트 대시보드</a>
+				</li>
 			</ul>
 		</li>
-		<!--<li class="selected"><a href="creator_post_new">새로운 포스트</a></li>
-		<li><a href="creator_post_temp">임시보관함</a></li>
-		<li><a href="creator_post_scheduled">예정된 포스트</a></li>
-		<li><a href="creator_post_ing">게시된 포스트</a></li>
-		<li><a href="creator_post_board">포스트 대시보드</a></li>-->
 
 		<li>
-			<a href="#" th:href="@{/creators/subscr/creator_subscr_mng(key=${session.session})}">
+			<a th:href="@{/creators/subscr/creator_subscr_mng(key=${session.session})}" th:if="${creSubsMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				<img src="/img/icon_subscr.png" style="filter: hue-rotate(0deg) saturate(100%);" />
+				<span>구독자</span>
+				<img src="/img/arrow_m.png">
+			</a>
+			<a th:href="@{/creators/subscr/creator_subscr_mng(key=${session.session})}" th:unless="${creSubsMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_subscr.png" />
 				<span>구독자</span>
 				<img src="/img/arrow_m.png">
 			</a>
 			<ul>
-				<li><a href="#" th:href="@{/creators/subscr/creator_subscr_mng(key=${session.session})}">관리도구</a></li>
-				<li><a href="#" th:href="@{/creators/subscr/creator_subscr_block(key=${session.session})}">차단된 구독자</a></li>
+				<li>
+					<a th:href="@{/creators/subscr/creator_subscr_mng(key=${session.session})}" th:if="${creMngMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">관리도구</a>
+					<a th:href="@{/creators/subscr/creator_subscr_mng(key=${session.session})}" th:unless="${creMngMenu}" th:style="${'color: #828ea0; font-weight: bold'}">관리도구</a>
+				</li>
+				<li>
+					<a th:href="@{/creators/subscr/creator_subscr_block(key=${session.session})}" th:if="${creBlockMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">차단된 구독자</a>
+					<a th:href="@{/creators/subscr/creator_subscr_block(key=${session.session})}" th:unless="${creBlockMenu}" th:style="${'color: #828ea0; font-weight: bold'}">차단된 구독자</a>
+				</li>
 			</ul>
 		</li>
-		<!--<div>
-            <li><a href="creator_subscr_mng">관리도구</a></li>
-            <li><a href="creator_subscr_block">차단된 구독자</a></li>
-        </div>-->
 
 		<li>
-			<a href="creator_page">
+			<a th:href="@{/creators/page/creator_page(key=${session.session})}" th:if="${creatorPageMenu}" th:style="${'color: #00b0f0; font-weight: bold'}">
+				<img src="/img/icon_page.png" style="filter: hue-rotate(0deg) saturate(100%);" />
+				<span>페이지</span>
+				<img src="/img/arrow_m.png">
+			</a>
+			<a th:href="@{/creators/page/creator_page(key=${session.session})}" th:unless="${creatorPageMenu}" th:style="${'color: #828ea0; font-weight: bold'}">
 				<img src="/img/icon_page.png" />
 				<span>페이지</span>
 				<img src="/img/arrow_m.png">
