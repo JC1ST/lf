@@ -3,18 +3,9 @@
 	  layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
-	<body>
-
+<body>
 	<article class="body_container">
-
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-
 		<section class="contents_container">
-			<!-- SEARCH -->
-			<!--			<div class="fb_bc searcher">-->
-			<!--				<input class="sech" placeholder="크리에이터 찾기">-->
-			<!--				<button type="button" class="h35 default">찾기</button>-->
-			<!--			</div>-->
 
 			<!-- RESULT -->
 			<div class="search_result_container">
@@ -26,11 +17,16 @@
 					<th:block th:each="list:${result.iterator()}">
 						<th:block th:each="subs:${subsCount.iterator()}">
 
-
-
 							<!-- Creaotr List -->
 							<article class="fb_sc creator_list">
-								<figure class="fb_cc profile"><img src="static/img/sample_img.jpg" /></figure>
+								<figure class="fb_cc profile">
+									<th:block th:if="${list.getCiPPhoto() != null}">
+										<img src="static/img/sample_img.jpg" th:src="${list.getCiPPhoto()}"/>
+									</th:block>
+									<th:block th:if="${list.getCiPPhoto() == null}">
+										<span th:text="${#strings.substring(list.getCiPageNm(), 0, 1)}"></span>
+									</th:block>
+								</figure>
 								<div class="fb_c_ss">
 									<a th:href="@{/subs/creatorpage/mode0(key=${list.getCiMiSeq()})}"><h2 th:text="${list.getCiPageNm()}"> </h2></a>
 									<p>
@@ -59,10 +55,10 @@
 					</div>
 
 				</th:block>
+			</div>
 		</section>
 	</article>
 
-	<!-- FOOTER -->
-	</body>
+</body>
 </th:block>
 </html>

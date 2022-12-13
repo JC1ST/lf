@@ -44,7 +44,8 @@
 				<tbody>
 					<tr th:each="p : ${pageList}">
 						<td th:text="${p.getMiSeq()}"></td>
-						<td class="tdLink"><a th:href="@{/admin/mem_all_view/{id}(id=${p.getMiSeq()})}" th:text="${p.getMiId()}"></a></td>
+						<td class="tdLink"><a th:href="@{/admin/mem_all_view}" th:text="${p.getMiId()}"></a></td>
+<!--						<td class="tdLink"><a th:href="@{/admin/mem_all_view/{id}(id=${p.getMiSeq()})}" th:text="${p.getMiId()}"></a></td>-->
 						<td class="tdLlink"><a th:href="@{/admin/mem_all_view}" th:text="${p.getMiNick()}"></a></td>
 						<td>
 							<div th:switch="${p.getMiState()}">

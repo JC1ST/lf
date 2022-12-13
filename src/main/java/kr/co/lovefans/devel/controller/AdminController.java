@@ -59,7 +59,7 @@ public class AdminController {
     @GetMapping("/mem_all_view")
     public String view(Model model) {
 
-        model.addAttribute("memAllView", true);
+        model.addAttribute("memAllList", true);
 
         return "admin/member/mem_all_view";
     }
@@ -77,7 +77,7 @@ public class AdminController {
     @GetMapping("/mem_c_view")
     public String cview(Model model) {
 
-        model.addAttribute("memCView", true);
+        model.addAttribute("memCList", true);
 
         return "admin/member/mem_c_view";
     }
@@ -113,7 +113,7 @@ public class AdminController {
     @GetMapping("/post_view")
     public String pview(Model model) {
 
-        model.addAttribute("postView", true);
+        model.addAttribute("postList", true);
 
         return "admin/post/post_view";
     }
@@ -131,7 +131,7 @@ public class AdminController {
     @GetMapping("/pay_view")
     public String payview(Model model) {
 
-        model.addAttribute("payView", true);
+        model.addAttribute("payList", true);
 
         return "admin/pay/payment_view";
     }
@@ -158,7 +158,7 @@ public class AdminController {
     @GetMapping("/deposit_view")
     public String dview(Model model) {
 
-        model.addAttribute("depositView", true);
+        model.addAttribute("depositList", true);
 
         return "admin/deposit/deposit_view";
     }
@@ -176,7 +176,7 @@ public class AdminController {
     @GetMapping("/one_board_view")
     public String bview(Model model) {
 
-        model.addAttribute("oneBoardView", true);
+        model.addAttribute("oneBoardList", true);
 
         return "admin/board/one_board_view";
     }
