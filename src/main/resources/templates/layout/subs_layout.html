@@ -22,8 +22,8 @@
     </div>
     </th:block>
 
-    <div style="flex-grow: 2">
-        <div>
+    <div style="flex-grow: 2; display: flex; flex-direction: column; height: 100vh;">
+        <div style="flex: 1">
             <th:block layout:fragment="content"></th:block>
         </div>
         <th:block th:replace="fragments/footer :: footerFragment"></th:block>

@@ -25,11 +25,19 @@
 
 	<!-- 로그인 후 -->
 	<div class="fb_sc web_header_btns">
+		<!-- 크리에이터인 경우-->
 		<th:block th:if="${session.kind == 'C'}">
-			<a th:href="@{/creators/creator_mypage(key=${session.session})}"></a>
+			<a th:href="@{/creators/creator_mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
 		</th:block>
+
+		<!-- 구독자인 경우 -->
 		<th:block th:if="${session.kind == 'V'}">
-			<a href="/subs/mypage" th:href="@{/subs/mypage(key=${session.session})}"></a>
+			<a th:href="@{/subs/mypage(key=${session.session})}"><img src="/img/icon_mypage.png" /></a>
+		</th:block>
+
+		<!-- 비로그인일 경우 -->
+		<th:block th:if="${session.session == null}">
+			<a th:href="@{/login}"><img src="/img/icon_mypage.png" /></a>
 		</th:block>
 	</div>
 	
@@ -70,7 +78,7 @@
 	</div>
 
 	<!-- 메뉴 영역 -->
-	<?php include "static/inc/menus_creator.html"; ?> <!-- 크리에이터 전용 메뉴 -->
+	<?php include "/inc/menus_creator.html"; ?> <!-- 크리에이터 전용 메뉴 -->
 	<!--?php include "static/inc/menus_subscr.html"; ?--> <!-- 구독자 전용 메뉴 -->
 </article>
 <!-------------------------------------------모바일용 메뉴화면 로그인 후----------------------------------------------->
