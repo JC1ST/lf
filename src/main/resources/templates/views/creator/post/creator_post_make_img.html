@@ -3,14 +3,11 @@
 	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
-	<?php include "/inc/head"; ?>
+
 <body>
-	<?php include "/inc/topper"; ?>
 
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "/inc/side"; ?>
-		
+
 		<section class="contents_container">
 		<form th:action="@{/creators/post/creator_post_make_img(key=${session.session})}" method="post" enctype="multipart/form-data">
 			<div class="fb_bs post_makePage">
@@ -29,52 +26,13 @@
 						<input type="file" id="fileUpload" name="file" style="display: none;">
 						<!--위 input의 id는 script를 부르기 위한 id이고, name은 controller의 multipartfile과 연결되는 name-->
 
-						<!--<div class="fb_c_cc img_inp_btn">
-							<button type="button" id="imgUp" class="w150 h30 defaultLight" onclick="fileUpload()">이미지 업로드</button>
-							<input type="file" id="file" name="file">
-						</div>
-						<script>
-							function fileUpload() {
-								let fileInput = document.getElementById("file")
-								fileInput.click();
-							}
-						</script>-->
 						<div id="img_inp_area">
 							<div class="fb_sc img_infos">
 								총 &nbsp; <span>00</span> &nbsp; 개의 이미지
 								<button type="button" class="w100 h30 lightBlue">전체삭제</button>
 							</div>
 							<div class="fb_ss img_container">
-								<!-- <figure>
-									<img src="/img/sample_bg.jpg" />
-									<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
-									<input type="file" name="postImg" />
-								</figure>
-								<figure>
-									<img src="/img/sample_creator1.jpg" />
-									<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
-									<input type="file" name="postImg" />
-								</figure>
-								<figure>
-									<img src="/img/sample_creator2.jpg" />
-									<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
-									<input type="file" name="postImg" />
-								</figure>
-								<figure>
-									<img src="/img/sample_creator3.jpg" />
-									<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
-									<input type="file" name="postImg" />
-								</figure>
-								<figure>
-									<img src="/img/sample_bg.jpg" />
-									<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
-									<input type="file" name="postImg" />
-								</figure>
-								<figure>
-									<img src="/img/sample_bg2.jpg" />
-									<div class="fb_cc close"><img src="/img/icon_x_close.png" /></div>
-									<input type="file" name="postImg" />
-								</figure> -->
+
 							</div>
 							<button type="button" class="img_add">+ 이미지 추가</button>
 						</div>
@@ -92,8 +50,6 @@
 								<img src="/img/icon_x_close_whiteSmall.png" />
 							</div>
 							<button type="button" id="chumbu" class="w80 h30 defaultLight">업로드</button>
-							<!--<input type="file" id="cpFile" name="cpFile"/>-->
-							<!--<input type="file" id="chumbu_file" name="chumbu_file" />-->
 						</div>
 					</div>
 					<div class="fb_sc tail">
@@ -124,7 +80,6 @@
 							</div>
 							<div class="fb_sc">
 								<div class="radio_clone"></div>
-								<!--<input type="radio" name="openType_radio" />-->
 								등급 선택
 							</div>
 						</section>
@@ -162,9 +117,6 @@
 
 	</article>
 
-
-	<!-- FOOTER -->
-	<?php include_once "/inc/footer"; ?>
 </body>
 </th:block>
 </html>

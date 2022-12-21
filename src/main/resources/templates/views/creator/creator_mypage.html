@@ -3,13 +3,10 @@
 	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
-	<!--<?php include "/inc/head.html"; ?>-->
+
 <body>
-	<!--<?php include "/inc/topper.html"; ?>-->
 
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "/inc/side.html"; ?>
 		
 		<section class="contents_container">
 			<div class="fb_cc container_top_title">
@@ -57,9 +54,6 @@
 								<p th:case="'1'">완료</p>
 								<p th:case="'2'">정지</p>
 							</div>
-							<!--<div class="context" th:if="${creator.getCiState() == '0'}">신청</div>
-							<div class="context" th:if="${creator.getCiState() == '1'}">완료</div>
-							<div class="context" th:if="${creator.getCiState() == '2'}">정지</div>-->
 							<div class="fb_cc modifies_btns">
 								<button type="button" class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
 							</div>
@@ -183,9 +177,6 @@
 								<p th:case="'2'">현재 사용하는 요금제 : <span>Pro</span> &nbsp; <span>(수수료 11%)</span></p>
 								<p th:case="'3'">현재 사용하는 요금제 : <span>Premium</span> &nbsp; <span>(수수료 12%)</span></p>
 							</div>
-							<!--<div th:if="${creator.ciPriceKind == '1'}">현재 사용하는 요금제 : <span>Lite</span> &nbsp; <span>(수수료 5%)</span></div>
-							<div th:if="${creator.ciPriceKind == '2'}">현재 사용하는 요금제 : <span>Pro</span> &nbsp; <span>(수수료 11%)</span></div>
-							<div th:if="${creator.ciPriceKind == '3'}">현재 사용하는 요금제 : <span>Premium</span> &nbsp; <span>(수수료 12%)</span></div>-->
 							<div class="fb_cc modifies_btns">
 								<button class="fb_cc"><img src="/img/icon_write_opacity.png" /></button>
 							</div>
@@ -227,9 +218,7 @@
 			</article>
 		</section>
 	</article>
-	
-	<!-- FOOTER -->
-	<!--<?php include_once "/inc/footer.html"; ?>-->
+
 </body>
 </th:block>
 </html>

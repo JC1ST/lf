@@ -33,15 +33,6 @@ public class SpringConfig {
         this.subsCustomRepository = subsCustomRepository;
         this.adminRepository = adminRepository;
     }
-//    private DataSource dataSource;
-
-
-//    private EntityManager em;
-//
-//    @Autowired
-//    public SpringConfig(EntityManager em){
-//        this.em = em;
-//    }
 
     @Bean
     public MemberService memberService(){
@@ -70,28 +61,4 @@ public class SpringConfig {
         return new SubListService(subListRepository);
     }
 
-//    @Bean
-//    public MemberRepository memberRepository(){
-
-    //return new MemoryMemberRepository();
-    //return new JdbcTemplateMemberRepository(dataSource);
-//        return new JpaMemberRepository(em);
-//    }
-
-
-//    private final MemberRepository memberRepository;
-//
-//    public SpringConfig(MemberRepository memberRepository) {
-//        this.memberRepository = memberRepository;
-//    }
-//
-//    @Bean
-//    public MemberService memberService(){
-//        return new MemberService(memberRepository);
-//    }
-//
-//    @Bean
-//    public MemberRepository memberRepository(){
-//        return new MemoryMemberRepository();
-//    }
 }

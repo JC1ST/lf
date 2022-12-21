@@ -3,14 +3,10 @@
 	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
-	<?php include "/inc/head"; ?>
 <body>
-	<?php include "/inc/topper"; ?>
 
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "/inc/side"; ?>
-		
+
 		<section class="contents_container_nopad">
 			<article class="fb_c_cs cpage_body_post">
 				<div class="fb_cc profile_tab">
@@ -25,12 +21,10 @@
 				<div class="fb_bs cpage_body_group">
 					<section class="post_area">
 						<!-- 포스트 내용 detail-->
-						<!--<th:block th:each="model:${postList}">-->
 						<th:block th:each="i:${#numbers.sequence(1, postList.size())}">
 						<article class="post">
 							<!-- 사진들 --><!--한번에 올린 사진을 같이 나오게까지는 구현되지 않음-->
 							<figure class="detail"><img th:src="${postList.get(postList.size() - i).getCpImg()}" /></figure>
-							<!--<figure class="detail"><img th:src="${model.getCpImg()}" /></figure>-->
 							
 							<div class="post_date_area" th:text="${#dates.format(postList.get(postList.size() - i).getCpRegdt(), 'yyyy년 MM월 dd일 HH:mm')}">2022년 4월5일 오전 1:16</div>
 
@@ -142,14 +136,6 @@
 								</th:block>
 							</article>
 						</section>
-						<!--<section class="tier_info">
-							<div class="fb_cc">나의등급</div>
-							<article>
-								<div>무료 구독자(Free)</div>
-								<div><span>₩ 0</span> / 월</div>
-								<div>기본 사진을 무료로 마음껏 감상 하세요.</div>
-							</article>
-						</section>-->
 
 						<!-- 최근포스트 -->
 						<section class="recent_post">
@@ -167,37 +153,6 @@
 								</article>
 							</th:block>
 
-							<!--<article class="fb_sc">
-								<img src="/img/sample_post_img.jpg" />
-								<div>
-									<div>포스트 제목</div>
-									<span>2022년 12월 15일 오후 08:09</span>
-								</div>
-							</article>
-
-							<article class="fb_sc">
-								<img src="/img/sample_post_img.jpg" />
-								<div>
-									<div>포스트 제목</div>
-									<span>2022년 12월 15일 오후 08:09</span>
-								</div>
-							</article>
-
-							<article class="fb_sc">
-								<img src="/img/sample_post_img.jpg" />
-								<div>
-									<div>포스트 제목</div>
-									<span>2022년 12월 15일 오후 08:09</span>
-								</div>
-							</article>
-
-							<article class="fb_sc">
-								<img src="/img/sample_post_img.jpg" />
-								<div>
-									<div>포스트 제목</div>
-									<span>2022년 12월 15일 오후 08:09</span>
-								</div>
-							</article>-->
 						</section>
 					</div>
 				</div>
@@ -225,9 +180,7 @@
 			</div>
 		</div>
 	</article>
-	
-	<!-- FOOTER -->
-	<?php include_once "/inc/footer"; ?>
+
 </body>
 </th:block>
 </html>

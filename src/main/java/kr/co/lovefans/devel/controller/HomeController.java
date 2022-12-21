@@ -69,9 +69,7 @@ public class HomeController {
         for (CreatorInfoDto x : result) {
             subsCount.add(subListService.count(x.getCiMiSeq()));
         }
-//        for(Long x : subsCount){
-//            System.out.println("subsCount  = = = " + x.longValue());
-//        }
+
         model.addAttribute("result",result);
         model.addAttribute("totalPage",totalPage);
         model.addAttribute("subsCount",subsCount);

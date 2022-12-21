@@ -386,24 +386,6 @@ public class CreatorController {
     /*creator subscr*/
     @GetMapping("creators/subscr/creator_subscr_mng")
     public String creator_subscr_mng(@RequestParam("key") Long key, Model model, HttpSession session) {
-//        List<SubListTempDto> subList = subscrService.findSubBySlCMiSeq(key);
-//
-//        System.out.println(subList.size());
-//
-//        if(subList.size() != 0) {
-//            List<Member> subMemberInfoList = new ArrayList<>();
-//            for (int i = 0; i < subList.size(); i++) {
-//                subMemberInfoList.add(memberService.findOne(subList.get(i).getSlVMiSeq()).get());
-//            }
-//
-//            model.addAttribute("subList", subList);
-//            model.addAttribute("subMemberInfoList", subMemberInfoList);
-//        } else {
-//            model.addAttribute("subList", subList);
-//        }
-//
-//        int numOfSub = subList.size();
-//        model.addAttribute("numOfSub", numOfSub);
 
         Optional<Member> memberInfo = memberService.findOne((Long) session.getAttribute("session"));
         List<MemberDto> subList = subscrService.findSub((Long) session.getAttribute("session"));

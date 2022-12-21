@@ -128,19 +128,6 @@ public class MemberService {
             return false;
         }
 
-        //        id.orElseThrow(()->new IllegalStateException("아이디 존재하지 않음"));
-//
-//
-//
-//        if(passwordEncoder.matches(member.getMiPwd(),id.get().getMiPwd())){
-//
-//            return true;
-//        }else {
-//
-//            return false;
-//        }
-
-
     }
 
     public Optional<Member> findOne(Long memberSeq){

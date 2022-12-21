@@ -93,8 +93,6 @@ public class MemberControrller {
             Optional<Member> memberInfo = memberService.findById(form.getMi_id());
             System.out.println("회원닉 = " + memberInfo.get().getMiNick());
 
-//            model.addAttribute("model", memberInfo.get());
-
             HttpSession session = request.getSession();
             session.setAttribute("session",memberInfo.get().getMiSeq());
             session.setAttribute("kind",memberInfo.get().getMiKind());

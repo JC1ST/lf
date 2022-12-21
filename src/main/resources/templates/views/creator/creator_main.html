@@ -3,13 +3,10 @@
 	  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/subs_layout}">
 
 <th:block layout:fragment="content">
-	<?php include "/inc/head.html"; ?>
-	<body>
-	<?php include "/inc/topper.html"; ?>
+
+<body>
 
 	<article class="body_container">
-		<!-- SIDE MENU 로그인 하지 않으면 보여지지 않는다. -->
-		<?php include "/inc/side.html"; ?>
 
 		<section class="contents_container">
 			<h3 class="fb_sc cMain_header"><span><th:block th:text="${member.getMiNick()}"></th:block></span> &nbsp; 님 안녕하세요</h3>
@@ -118,73 +115,6 @@
 								</div>
 							</article>
 						</th:block>
-						<!--<th:block th:each="model:${postList}">
-							<article class="fb_sc" th:onclick="|location.href='@{/creators/page/creator_page_detail(key=${session.session})}'|">
-								&lt;!&ndash;<figure><img th:src="${model.getCpImg()}" /></figure>&ndash;&gt;&lt;!&ndash;정식 버전&ndash;&gt;
-								<figure><img src="/img/sample_post_img.jpg" /></figure>
-								<div>
-									&lt;!&ndash;제목, 일자, 좋아요/댓글 개수 긁어오기 필요&ndash;&gt;
-									<h5 th:text="${model.getCpTitle()}">포스트 제목</h5>
-									<p th:text="${model.getCpRegdt()}">2022년 12월 15일 오후 08:09</p>
-									<div class="fb_sc likeArea">
-										<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 <th:block th:text="${model.getCpVoteCnt()}" /> 개</div>
-										<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
-									</div>
-								</div>
-							</article>
-						</th:block>-->
-
-						<!--&lt;!&ndash; 포스트 목록 &ndash;&gt;
-						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
-							<div>
-								<h5>포스트 제목</h5>
-								<p>2022년 12월 15일 오후 08:09</p>
-								<div class="fb_sc likeArea">
-									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 0 개</div>
-									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
-								</div>
-							</div>
-						</article>
-
-						&lt;!&ndash; 포스트 목록 &ndash;&gt;
-						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
-							<div>
-								<h5>포스트 제목</h5>
-								<p>2022년 12월 15일 오후 08:09</p>
-								<div class="fb_sc likeArea">
-									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 0 개</div>
-									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
-								</div>
-							</div>
-						</article>
-
-						&lt;!&ndash; 포스트 목록 &ndash;&gt;
-						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
-							<div>
-								<h5>포스트 제목</h5>
-								<p>2022년 12월 15일 오후 08:09</p>
-								<div class="fb_sc likeArea">
-									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 0 개</div>
-									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
-								</div>
-							</div>
-						</article>
-
-						&lt;!&ndash; 포스트 목록 &ndash;&gt;
-						<article class="fb_sc" onclick="location.href='creator_page_detail.html';">
-							<figure><img src="/img/sample_post_img.jpg" /></figure>
-							<div>
-								<h5>포스트 제목</h5>
-								<p>2022년 12월 15일 오후 08:09</p>
-								<div class="fb_sc likeArea">
-									<div class="fb_sc"><img src="/img/icon_heart.png" />좋아요 0 개</div>
-									<div class="fb_sc"><img src="/img/icon_reply.png" />댓글 0 개</div>
-								</div>
-							</div>
-						</article>-->
 
 					</div>
 				</section>
@@ -192,9 +122,8 @@
 		</section>
 	</article>
 
-	<!-- FOOTER -->
-	<?php include_once "/inc/footer.html"; ?>
-	</body>
+
+</body>
 </th:block>
 </html>
 

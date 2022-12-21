@@ -81,8 +81,6 @@ public class JpaCreatorRepository implements CreatorRepository {
 
         return result;
 
-//        return em.createQuery("select c from CreatorPostDto c", CreatorPostDto.class)
-//                .getResultList();
     }
 
     @Override
